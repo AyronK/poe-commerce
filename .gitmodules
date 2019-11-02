@@ -1,0 +1,3 @@
+[submodule "watchers-eye"]
+	path = src/submodules/path-of-exile/watchers-eye
+	url = ../../ayronk-path-of-exile/watchers-eye.git
