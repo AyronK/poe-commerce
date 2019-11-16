@@ -1,0 +1,36 @@
+image: mcr.microsoft.com/dotnet/core-nightly/sdk:3.1-alpine3.10
+
+stages:
+    - build
+    - test
+    
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+    - "dotnet restore"
+    
+build:        
+    stage: build
+    before_script:
+        - "apk add --update npm"                        # install npm
+        - "dotnet tool install ElectronNET.CLI -g"      # install ElectronNET.CLI
+        - "export PATH=\"$PATH:/root/.dotnet/tools\""   # add dotnet tools to PATH
+    script:
+        - "cd ./src/PoECommerce.Client"
+        - "dotnet publish -r win-x64 -c Release --output \"./obj/desktop/win/bin\"" # electronize build does it, remove this line once it starts to work
+        # - "electronize build /target win" not working on linux at the moment
+       
+    only:
+    - merge_requests
+    - master
+    - develop
+    
+test:
+    stage: test
+    script: 
+        - "dotnet test"
+    only:
+    - merge_requests
+    - master
+    - develop
