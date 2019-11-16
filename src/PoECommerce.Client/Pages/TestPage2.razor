@@ -1,0 +1,23 @@
+﻿@page "/TestPage2"
+@using PoECommerce.Client.Shared.Display
+@inject IWindowManager WindowManager
+
+<h1>TestPage2</h1>
+<button @onclick="@(async()=>await Show(0))">0</button>
+<button @onclick="@(async()=>await Show(1))">1</button>
+<button @onclick="@(async()=>await Show(2))">2</button>
+<button @onclick="@(async()=>await Hide(0))">H0</button>
+<button @onclick="@(async()=>await Hide(1))">H1</button>
+<button @onclick="@(async()=>await Hide(2))">H2</button>
+
+@functions {
+    private async Task Show(int id)
+    {
+        await WindowManager.Show(id);
+    }
+
+    private async Task Hide(int id)
+    {
+        await WindowManager.Hide(id);
+    }
+}
