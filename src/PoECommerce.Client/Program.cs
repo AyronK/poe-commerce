@@ -31,10 +31,18 @@ namespace PoECommerce.Client
             catch (Exception ex)
             {
                 logger.Error(ex, "PoE Commerce start up error");
+                if (HybridSupport.IsElectronActive)
+                {
+                    ElectronNET.API.Electron.App.Exit(1);
+                }
             }
             finally
             {
                 LogManager.Shutdown();
+                if (HybridSupport.IsElectronActive)
+                {
+                    ElectronNET.API.Electron.App.Exit();
+                }
             }
         }
     }

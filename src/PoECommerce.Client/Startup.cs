@@ -1,4 +1,4 @@
-using ElectronNET.API;
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
+using PoECommerce.Client.StartupExtensions.Electron;
 
 namespace PoECommerce.Client
 {
@@ -26,35 +27,12 @@ namespace PoECommerce.Client
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddElectronHybrid();
+            services.AddSingleton(_logger);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)
         {
-            appLifetime.ApplicationStarted.Register(async () =>
-            {
-                _logger.Debug("PoE Commerce started.");
-
-                if (HybridSupport.IsElectronActive)
-                {
-                    _logger.Debug("Electron mode is active.");
-                    _logger.Debug("Opening main window...");
-
-                    await Electron.WindowManager.CreateWindowAsync();
-                    _logger.Debug("Main window opened.");
-                }
-            });
-
-            appLifetime.ApplicationStopped.Register(() =>
-            {
-                if (HybridSupport.IsElectronActive)
-                {
-                    Electron.App.Exit();
-                    _logger.Debug("PoE Commerce called electron an exit request.");
-                }
-
-                _logger.Debug("PoE Commerce exited with exit code 0.");
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,6 +53,8 @@ namespace PoECommerce.Client
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+            app.UseElectronHybrid(appLifetime, serviceProvider);
         }
     }
 }
