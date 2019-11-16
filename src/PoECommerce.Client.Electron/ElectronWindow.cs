@@ -22,8 +22,7 @@ namespace PoECommerce.Client.Electron
         public string LoadPath { get; }
         public BrowserWindowOptions WindowOptions { get; }
         public IBrowserWindow BrowserWindow { get; private set; }
-
-
+        
         internal async Task InitializeWindow(Func<Task<IBrowserWindow>> asyncInitializer)
         {
             BrowserWindow = await asyncInitializer();
