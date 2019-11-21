@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
 using PoECommerce.Client.StartupExtensions.Electron;
+using PoECommerce.TradeService.Extensions;
 
 namespace PoECommerce.Client
 {
@@ -29,6 +30,9 @@ namespace PoECommerce.Client
             services.AddServerSideBlazor();
             services.AddElectronHybrid();
             services.AddSingleton(_logger);
+
+            // PoE related registrations
+            services.AddPathOfExileTradeService(() => "Blight");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

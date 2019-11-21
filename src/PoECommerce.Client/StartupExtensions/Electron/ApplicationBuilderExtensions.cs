@@ -25,12 +25,7 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                 {
                     logger.Debug("Electron mode is active.");
                     logger.Debug("Opening main window...");
-                }
-
-                applicationBuilder.ApplicationServices.GetService<IWindowManager>().Show(0).Wait();
-
-                if (HybridSupport.IsElectronActive)
-                {
+                    applicationBuilder.ApplicationServices.GetService<IWindowManager>().Show(0).Wait();
                     logger.Debug("Main window opened.");
                 }
             });

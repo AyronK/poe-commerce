@@ -1,6 +1,39 @@
 ﻿@page "/TestPage2"
+@using System.Text.Json
 @using PoECommerce.Client.Shared.Display
+@using PoECommerce.TradeService
+@using PoECommerce.TradeService.Models.Enums
+@using PoECommerce.TradeService.Models.TradeAPI
+@using PoECommerce.TradeService.Models.TradeAPI.Items
 @inject IWindowManager WindowManager
+@inject ITradeService TradeService
+
+<style>
+    .text-format-white {
+        color: white;
+    }
+
+    .text-format-blue-augmented {
+        color: cornflowerblue;
+        font-weight: 600;
+    }
+
+    .text-format-red-fire {
+        color: firebrick;
+    }
+
+    .text-format-blue-cold {
+        color: deepskyblue;
+    }
+
+    .text-format-yellow-lightning {
+        color: yellow;
+    }
+
+    .text-format-red-violet {
+        color: darkmagenta;
+    }
+</style>
 
 <h1>TestPage2</h1>
 <button @onclick="@(async()=>await Show(0))">0</button>
@@ -10,7 +43,102 @@
 <button @onclick="@(async()=>await Hide(1))">H1</button>
 <button @onclick="@(async()=>await Hide(2))">H2</button>
 
+@if (FetchResult?.Result != null)
+{
+    @foreach (FetchResultItem resultItem in FetchResult.Result)
+    {
+        <div>
+            Id: @resultItem.Id
+            <div>
+                <div>
+                    Player: @resultItem.Listing.Account.LastCharacterName (@resultItem.Listing.Account.Name)
+                    <br />
+                </div>
+                Listed: @resultItem.Listing.Indexed
+                <br />
+                PM: @resultItem.Listing.Whisper
+                <br />
+                @if (resultItem.Listing.Price != null)
+                {
+                    <div>
+                        @resultItem.Listing.Price.Type @resultItem.Listing.Price.Amount @resultItem.Listing.Price.Currency
+                        <br />
+                    </div>
+                }
+                <div>
+                    Stash: @resultItem.Listing.Stash.Name (@resultItem.Listing.Stash.X\@resultItem.Listing.Stash.Y)
+                    <br />
+                </div>
+                <div>
+                    @resultItem.Item.Name
+                    <br />
+                    @resultItem.Item.TypeName
+                    <br />
+                    -------------------------------
+                    <br />
+
+                    @foreach (Property property in resultItem.Item.Properties)
+                    {
+                        @property.Name
+                        @if (property.Values != null && property.Values.Any())
+                        {
+                            @::
+                            <span class="@GetCssClass(property.Values[0].Format)">@property.Values[0].Value</span>
+                        }
+                        <br />
+                    }
+                    -------------------------------
+                    <br />
+                    Item Level: @resultItem.Item.ItemLevel
+                    <br />
+                    -------------------------------
+                    <br />
+                    @resultItem.Item.Note
+                    <br />
+                    -------------------------------
+                    <br />
+                    <div>
+                        <ul>
+                            @foreach (string mod in resultItem.Item.ExplicitMods)
+                            {
+                                <li>@mod</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <img src="@resultItem.Item.Icon" alt="item" />
+
+                    <br />
+
+                    =================================
+
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
 @functions {
+
+    public FetchResult FetchResult = new FetchResult();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" });
+
+        FetchResult = await TradeService.Fetch(queryResult.Id, queryResult.Result.Take(5).ToArray());
+
+        StateHasChanged();
+    }
+
     private async Task Show(int id)
     {
         await WindowManager.Show(id);
@@ -19,5 +147,26 @@
     private async Task Hide(int id)
     {
         await WindowManager.Hide(id);
+    }
+
+    public string GetCssClass(TextFormat textFormat)
+    {
+        switch (textFormat)
+        {
+            case TextFormat.Simple:
+                return "text-format-white";
+            case TextFormat.Augmented:
+                return "text-format-blue-augmented";
+            case TextFormat.FireDamage:
+                return "text-format-red-fire";
+            case TextFormat.ColdDamage:
+                return "text-format-blue-cold";
+            case TextFormat.LightningDamage:
+                return "text-format-yellow-lightning";
+            case TextFormat.ChaosDamage:
+                return "text-format-red-violet";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(textFormat), textFormat, null);
+        }
     }
 }
