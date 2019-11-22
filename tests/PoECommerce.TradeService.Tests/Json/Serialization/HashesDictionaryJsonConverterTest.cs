@@ -5,7 +5,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.TradeService.Json.Serialization;
 using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Models.TradeAPI.Items;
+using PoECommerce.TradeService.Models.Trade.Items;
 
 namespace PoECommerce.TradeService.Tests.Json.Serialization
 {

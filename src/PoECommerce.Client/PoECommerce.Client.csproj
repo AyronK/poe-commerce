@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PoECommerce.Client.Cache\PoECommerce.Client.Cache.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.Components.Common\PoECommerce.Client.Components.Common.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.Components.Trade\PoECommerce.Client.Components.Trade.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.Electron\PoECommerce.Client.Electron.csproj" />

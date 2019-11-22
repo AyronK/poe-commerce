@@ -17,20 +17,24 @@ namespace System.Text.Json.Serialization
             foreach (T value in Enum.GetValues(typeof(T)))
             {
                 string valueName = value.ToString();
-                valueName = GetEnumMemberAttributeValue(valueName) ?? value.ToString("D");
+                string[] valueNames = GetEnumMemberAttributeValue(valueName) ?? new[] { value.ToString("D") };
 
-                EnumValueJsonNames.Add(value, valueName);
-                JsonNamesEnumValues.Add(valueName, value);
+                EnumValueJsonNames.Add(value, valueNames.First());
+
+                foreach (string name in valueNames)
+                {
+                    JsonNamesEnumValues.Add(name, value);
+                }
             }
 
-            static string GetEnumMemberAttributeValue(string valueName)
+            static string[] GetEnumMemberAttributeValue(string valueName)
             {
                 return typeof(T).GetMember(valueName)
                     .FirstOrDefault(m => m.DeclaringType == typeof(T))
                     ?.GetCustomAttributes(typeof(JsonEnumNameAttribute), false)
                     .OfType<JsonEnumNameAttribute>()
                     .FirstOrDefault()
-                    ?.Name;
+                    ?.Names;
             }
         }
 
@@ -39,11 +43,16 @@ namespace System.Text.Json.Serialization
             string value = reader.TokenType switch
             {
                 JsonTokenType.String => reader.GetString(),
+                JsonTokenType.PropertyName => reader.GetString(),
                 JsonTokenType.Number when reader.TryGetInt32(out int intValue) => intValue.ToString(CultureInfo.InvariantCulture),
                 _ => throw new NotSupportedException($"Enum value can only be either {JsonTokenType.String} or {JsonTokenType.Number}, but was {reader.TokenType}"),
             };
-
-            return JsonNamesEnumValues.TryGetValue(value, out T enumValue) ? enumValue : Enum.Parse<T>(value);
+            
+            return JsonNamesEnumValues.TryGetValue(value, out T enumValue)
+                ? enumValue
+                : Enum.TryParse(value, true, out enumValue)
+                    ? enumValue
+                    : throw new JsonException($"Key '{value}' cannot be converted to enum of type '{typeof(T)}'.");
         }
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
