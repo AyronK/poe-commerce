@@ -1,6 +1,10 @@
 ﻿@page "/TestPage1"
 @using PoECommerce.Client.Shared.Display
+@using PoECommerce.TradeService
+@using PoECommerce.TradeService.Models.Data
+@using PoECommerce.TradeService.Models.Enums
 @inject IWindowManager WindowManager
+@inject IPoEDataService DataService
 
 <h1>TestPage1</h1>
 <button @onclick="@(async()=>await Show(0))">0</button>
@@ -9,6 +13,23 @@
 <button @onclick="@(async()=>await Hide(0))">H0</button>
 <button @onclick="@(async()=>await Hide(1))">H1</button>
 <button @onclick="@(async()=>await Hide(2))">H2</button>
+
+@if (Items != null)
+{
+    foreach (KeyValuePair<ItemCategory, Item[]> valuePair in Items)
+    {
+        <h5>@valuePair.Key</h5>
+
+        <ul>
+            @foreach (Item item in valuePair.Value)
+            {
+                <li>
+                    @item.Name @item.Type @item.Text
+                </li>
+            }
+        </ul>
+    }
+}
 
 @functions {
     private async Task Show(int id)
@@ -20,4 +41,22 @@
     {
         await WindowManager.Hide(id);
     }
+
+    public IReadOnlyDictionary<ItemCategory, Item[]> Items;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        Items = await DataService.GetItems();
+        await DataService.GetLeagues();
+        await DataService.GetModifiers();
+        await DataService.GetStaticData();
+
+        StateHasChanged();
+    }
+
 }

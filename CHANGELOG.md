@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   _There is a high possibility that not everything was covered, but at this point of the project it's difficult to judge._
 - Basic item filters: name and type name
 - Simple quasi-text fetched items rendering
+- PoE official trade API static content download (items, modifiers, static data and leagues)
 
 ## 0.1.0-alpha - 2019-11-16
 ### Added

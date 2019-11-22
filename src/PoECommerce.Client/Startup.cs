@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
+using PoECommerce.Client.Cache.TradeService;
 using PoECommerce.Client.StartupExtensions.Electron;
 using PoECommerce.TradeService.Extensions;
 
@@ -32,7 +33,12 @@ namespace PoECommerce.Client
             services.AddSingleton(_logger);
 
             // PoE related registrations
-            services.AddPathOfExileTradeService(() => "Blight");
+            services.AddPathOfExileServices((cfg) =>
+            {
+                cfg.LeagueNameFactory = () => "Blight";
+                cfg.DataServiceSettings.Scope = RegistrationType.Singleton;
+                cfg.DataServiceSettings.Factory = factory => new CachedDataService(factory);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

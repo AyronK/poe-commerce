@@ -4,7 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.TradeService.Models.Enums;
 
-namespace PoECommerce.TradeService.Tests.Models.Enums
+namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Enums
 {
     [TestFixture]
     public class SocketColourTest

@@ -5,6 +5,8 @@ namespace System.Text.Json.Serialization
 {
     public class EnumKeyDictionaryJsonConverter<TKey, TValue> : JsonConverter<IDictionary<TKey, TValue>> where TKey : struct, Enum
     {
+        EnumJsonConverter<TKey> _converter = new EnumJsonConverter<TKey>();
+
         public override IDictionary<TKey, TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -16,12 +18,7 @@ namespace System.Text.Json.Serialization
 
             while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
             {
-                string key = reader.GetString();
-
-                if (!Enum.TryParse(key, true, out TKey enumKey))
-                {
-                    throw new JsonException($"Key '{key}' cannot be converted to enum of type '{typeof(TKey)}'.");
-                }
+                TKey enumKey = _converter.Read(ref reader, typeof(TKey), options);
 
                 reader.Read();
 

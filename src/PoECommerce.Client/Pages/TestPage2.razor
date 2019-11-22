@@ -1,12 +1,11 @@
 ﻿@page "/TestPage2"
-@using System.Text.Json
 @using PoECommerce.Client.Shared.Display
 @using PoECommerce.TradeService
 @using PoECommerce.TradeService.Models.Enums
-@using PoECommerce.TradeService.Models.TradeAPI
-@using PoECommerce.TradeService.Models.TradeAPI.Items
+@using PoECommerce.TradeService.Models.Trade
+@using PoECommerce.TradeService.Models.Trade.Items
 @inject IWindowManager WindowManager
-@inject ITradeService TradeService
+@inject IPoETradeService TradeService
 
 <style>
     .text-format-white {
@@ -43,9 +42,9 @@
 <button @onclick="@(async()=>await Hide(1))">H1</button>
 <button @onclick="@(async()=>await Hide(2))">H2</button>
 
-@if (FetchResult?.Result != null)
+@if (ListedItems != null)
 {
-    @foreach (FetchResultItem resultItem in FetchResult.Result)
+    @foreach (ListedItem resultItem in ListedItems)
     {
         <div>
             Id: @resultItem.Id
@@ -123,7 +122,7 @@
 
 @functions {
 
-    public FetchResult FetchResult = new FetchResult();
+    public ListedItem[] ListedItems;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -134,7 +133,7 @@
 
         QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" });
 
-        FetchResult = await TradeService.Fetch(queryResult.Id, queryResult.Result.Take(5).ToArray());
+        ListedItems = await TradeService.Fetch(queryResult.Id, queryResult.Result.Take(5).ToArray());
 
         StateHasChanged();
     }

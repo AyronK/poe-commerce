@@ -7,17 +7,31 @@ namespace PoECommerce.TradeService.Models.Enums
     /// </summary>
     public enum ModifierType
     {
-        [JsonEnumName("implicit")]
+        [JsonEnumName("implicit", "Implicit")]
         Implicit,
-        [JsonEnumName("explicit")]
+
+        [JsonEnumName("explicit", "Explicit")]
         Explicit,
-        [JsonEnumName("crafted")]
+
+        [JsonEnumName("crafted", "Crafted")]
         Crafted,
-        [JsonEnumName("enchant")]
+
+        [JsonEnumName("fractured", "Fractured")]
+        Fractured,
+
+        [JsonEnumName("veiled", "Veiled")]
+        Veiled,
+
+        [JsonEnumName("monster", "Monster")]
+        Monster,
+
+        [JsonEnumName("enchant", "Enchant")]
         Enchant,
-        [JsonEnumName("delve")]
+
+        [JsonEnumName("delve", "Delve")]
         Delve,
-        [JsonEnumName("pseudo")]
-        Pseudo,
+
+        [JsonEnumName("pseudo", "Pseudo")]
+        Pseudo
     }
 }

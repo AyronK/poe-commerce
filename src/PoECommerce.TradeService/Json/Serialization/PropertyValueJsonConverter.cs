@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Models.TradeAPI.Items;
+using PoECommerce.TradeService.Models.Trade.Items;
 
 namespace PoECommerce.TradeService.Json.Serialization
 {
