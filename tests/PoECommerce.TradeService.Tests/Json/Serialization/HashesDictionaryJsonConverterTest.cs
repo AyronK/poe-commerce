@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Json.Serialization;
-using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Models.Trade.Items;
+using PoECommerce.PathOfExile.Json.Serialization;
+using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Items;
 
-namespace PoECommerce.TradeService.Tests.Json.Serialization
+namespace PoECommerce.PathOfExile.Tests.Json.Serialization
 {
     [TestFixture]
     public class HashesDictionaryJsonConverterTest

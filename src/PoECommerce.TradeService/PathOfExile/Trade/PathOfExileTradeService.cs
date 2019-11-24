@@ -5,31 +5,29 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using PoECommerce.TradeService.Extensions.Internal;
-using PoECommerce.TradeService.Models;
-using PoECommerce.TradeService.Models.Search;
-using PoECommerce.TradeService.Models.Trade;
+using PoECommerce.PathOfExile.Extensions.Internal;
+using PoECommerce.PathOfExile.Models;
+using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Trade;
 
-namespace PoECommerce.TradeService.PathOfExile.Trade
+namespace PoECommerce.PathOfExile.PathOfExile.Trade
 {
-    internal class PathOfExileTradeService : PathOfExileHttpServiceBase, IPoETradeService
+    internal class PathOfExileTradeService : PathOfExileHttpServiceBase, IPathOfExileTradeService
     {
         private const string FetchEndpoint = "/api/trade/fetch/";
         private const string SearchEndpoint = "/api/trade/search/";
 
-        internal PathOfExileTradeService(IHttpClientFactory httpClient, string league) : base(httpClient)
+        internal PathOfExileTradeService(IHttpClientFactory httpClient) : base(httpClient)
         {
-            League = !string.IsNullOrWhiteSpace(league) ? league : throw new ArgumentException($"'{nameof(PathOfExileTradeService)} argument {nameof(league)} is null/empty/whitespace.", nameof(league));
+
         }
 
-        public string League { get; }
-
-        public async Task<QueryResult> Search(Query query)
+        public async Task<QueryResult> Search(Query query, string league)
         {
             string queryJson = JsonSerializer.Serialize(new QueryCommand(query), JsonOptions);
             StringContent body = new StringContent(queryJson, Encoding.UTF8, MediaTypeNames.Application.Json);
 
-            HttpResponseMessage response = await HttpClient.PostAsync(SearchEndpoint + League, body);
+            HttpResponseMessage response = await HttpClient.PostAsync(SearchEndpoint + league, body);
             response.EnsureSuccessStatusCode();
 
             return await response.DeserializeResponseBody<QueryResult>(JsonOptions);

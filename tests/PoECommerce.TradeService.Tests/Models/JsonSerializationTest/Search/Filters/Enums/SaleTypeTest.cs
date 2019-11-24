@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Search.Enums;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Search.Filters.Enums
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Search.Filters.Enums
 {
     [TestFixture]
     public class SaleTypeTest

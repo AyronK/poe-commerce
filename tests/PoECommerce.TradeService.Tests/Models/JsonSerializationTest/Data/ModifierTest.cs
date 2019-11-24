@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Data;
-using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Data
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data
 {
     [TestFixture]
     public class ModifierTest

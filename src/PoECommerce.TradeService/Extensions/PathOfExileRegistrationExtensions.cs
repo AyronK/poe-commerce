@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using PoECommerce.TradeService.PathOfExile;
-using PoECommerce.TradeService.PathOfExile.Data;
-using PoECommerce.TradeService.PathOfExile.Trade;
+using PoECommerce.PathOfExile.PathOfExile;
+using PoECommerce.PathOfExile.PathOfExile.Data;
+using PoECommerce.PathOfExile.PathOfExile.Trade;
 
-namespace PoECommerce.TradeService.Extensions
+namespace PoECommerce.PathOfExile.Extensions
 {
     public static class PathOfExileRegistrationExtensions
     {
-        public static void AddPathOfExileServices(this IServiceCollection services, Action<RegistrationConfiguration> configure)
+        /// <summary>
+        ///     Registers official Path of Exile API services for low level data operations.
+        /// </summary>
+        public static void AddPathOfExileApiServices(this IServiceCollection services, Action<RegistrationConfiguration> configure)
         {
             RegistrationConfiguration configuration = new RegistrationConfiguration();
             configure?.Invoke(configuration);
@@ -47,7 +50,7 @@ namespace PoECommerce.TradeService.Extensions
             services.AddTransient(provider =>
             {
                 IHttpClientFactory httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-                return new PathOfExileTradeService(httpClientFactory, configuration.LeagueNameFactory());
+                return new PathOfExileTradeService(httpClientFactory);
             });
 
             // register interface with configurable scope and implementation decorator

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Trade.Enums;
-using PoECommerce.TradeService.Models.Trade.Items;
+using PoECommerce.PathOfExile.Models.Trade.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Items;
 
-namespace PoECommerce.TradeService.Json.Serialization
+namespace PoECommerce.PathOfExile.Json.Serialization
 {
     public sealed class PropertyValueJsonConverter : JsonConverter<PropertyValue>
     {

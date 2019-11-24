@@ -2,11 +2,11 @@
 using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Models.Trade.Items;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Items;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade.Items
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
 {
     [TestFixture]
     public class ExtendedMetadataTest

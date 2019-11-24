@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Data.Enums;
+using PoECommerce.PathOfExile.Models.Data.Enums;
 
-namespace PoECommerce.TradeService.Models.Data
+namespace PoECommerce.PathOfExile.Models.Data
 {
     public class Item
     {

@@ -1,12 +1,15 @@
 ﻿@page "/TestPage1"
 @using PoECommerce.Client.Shared.Display
-@using PoECommerce.TradeService
-@using PoECommerce.TradeService.Models.Data
-@using PoECommerce.TradeService.Models.Enums
+@using PoECommerce.PathOfExile
+@using PoECommerce.PathOfExile.Models.Data
+@using PoECommerce.PathOfExile.Models.Enums
 @inject IWindowManager WindowManager
-@inject IPoEDataService DataService
+@inject IPathOfExileDataService DataService
 
 <h1>TestPage1</h1>
+
+<TradeContainer></TradeContainer>
+
 <button @onclick="@(async()=>await Show(0))">0</button>
 <button @onclick="@(async()=>await Show(1))">1</button>
 <button @onclick="@(async()=>await Show(2))">2</button>
@@ -52,9 +55,6 @@
         }
 
         Items = await DataService.GetItems();
-        await DataService.GetLeagues();
-        await DataService.GetModifiers();
-        await DataService.GetStaticData();
 
         StateHasChanged();
     }

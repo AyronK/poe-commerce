@@ -1,0 +1,12 @@
+﻿@inherits TextFieldBase
+
+<div class="text-field">
+    <input style="@InputStyle" type="@Type" placeholder="@PlaceHolder" required=@Required class="text-field__input" id="@Id" @bind="Value" aria-label="@Label" disabled=@Disabled readonly="@ReadOnly" />
+
+    @if (Label != null)
+    {
+        <label class="text-field__label" for="@Id">@Label</label>
+    }
+
+    <div class="line-ripple"></div>
+</div>

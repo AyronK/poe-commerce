@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Trade.Items
+namespace PoECommerce.PathOfExile.Models.Trade.Items
 {
     /// <summary>
     ///     Metadata of the item modifier.

@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Client.Electron
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Client.Shared", "src\PoECommerce.Client.Shared\PoECommerce.Client.Shared.csproj", "{5790D8B6-C428-49A0-9B6A-E00786A3F89E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.TradeService", "src\PoECommerce.TradeService\PoECommerce.TradeService.csproj", "{26132681-B42C-43D7-B8CB-0AA63DB721F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.PathOfExile", "src\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj", "{26132681-B42C-43D7-B8CB-0AA63DB721F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3538DC26-D0FC-44FB-B833-CFE6B49864DD}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Client.WebBrows
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Client.Components.Common", "src\PoECommerce.Client.Components.Common\PoECommerce.Client.Components.Common.csproj", "{7F969262-0949-4FDE-8909-825BA8AAEB6E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.TradeService.Tests", "tests\PoECommerce.TradeService.Tests\PoECommerce.TradeService.Tests.csproj", "{42719837-8CA8-4073-9909-2A0CB1B8C10D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.PathOfExile.Tests", "tests\PoECommerce.TradeService.Tests\PoECommerce.PathOfExile.Tests.csproj", "{42719837-8CA8-4073-9909-2A0CB1B8C10D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.System.Text.Json", "src\PoECommerce.System.Text.Json\PoECommerce.System.Text.Json.csproj", "{534D2A58-5A2D-4F93-893E-70D7FB1C95D4}"
 EndProject
@@ -46,6 +46,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{9FFE4923-A
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Client.Cache", "src\PoECommerce.Client.Cache\PoECommerce.Client.Cache.csproj", "{DC6250E4-8926-4646-BF96-B02D3AD7429B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.Core", "src\PoECommerce.Client.Model\PoECommerce.Core.csproj", "{D70FDBC2-43DA-4992-92E6-E685847A35AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.TradeService.PathOfExile", "src\PoECommerce.TradeService.PathOfExile\PoECommerce.TradeService.PathOfExile.csproj", "{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{DB356FAA-85FE-471D-A861-DF7B2568C1E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,6 +219,30 @@ Global
 		{DC6250E4-8926-4646-BF96-B02D3AD7429B}.Release|x64.Build.0 = Release|Any CPU
 		{DC6250E4-8926-4646-BF96-B02D3AD7429B}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC6250E4-8926-4646-BF96-B02D3AD7429B}.Release|x86.Build.0 = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|x64.Build.0 = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA}.Release|x86.Build.0 = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|x64.Build.0 = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Debug|x86.Build.0 = Debug|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|x64.ActiveCfg = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|x64.Build.0 = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|x86.ActiveCfg = Release|Any CPU
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,9 +261,12 @@ Global
 		{6D0E78B7-5F53-46B4-9EA0-DEFF2E59875C} = {14F4BB1F-936E-409D-8E0B-094920E7C3D7}
 		{7F969262-0949-4FDE-8909-825BA8AAEB6E} = {5B7FD540-8AD6-435D-8D6D-1CFFFE97DFAF}
 		{42719837-8CA8-4073-9909-2A0CB1B8C10D} = {3538DC26-D0FC-44FB-B833-CFE6B49864DD}
-		{534D2A58-5A2D-4F93-893E-70D7FB1C95D4} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
+		{534D2A58-5A2D-4F93-893E-70D7FB1C95D4} = {DB356FAA-85FE-471D-A861-DF7B2568C1E7}
 		{69254BF7-FCF5-4F49-9E2B-5147A9A2DC16} = {3538DC26-D0FC-44FB-B833-CFE6B49864DD}
 		{DC6250E4-8926-4646-BF96-B02D3AD7429B} = {B4C01F99-26BB-4671-B618-6E96FDAB6278}
+		{D70FDBC2-43DA-4992-92E6-E685847A35AA} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
+		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
+		{DB356FAA-85FE-471D-A861-DF7B2568C1E7} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DECAB490-F8DC-49BD-84C4-7EB8C2793BA3}

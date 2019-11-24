@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models
+namespace PoECommerce.PathOfExile.Models
 {
     public class ResponseResult<T>
     {

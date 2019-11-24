@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Json.Serialization;
-using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.PathOfExile.Json.Serialization;
+using PoECommerce.PathOfExile.Models.Enums;
 
-namespace PoECommerce.TradeService.Models.Trade.Items
+namespace PoECommerce.PathOfExile.Models.Trade.Items
 {
     /// <summary>
     ///     A set of additional metadata of an item. Can contain emulated values for maximum quality

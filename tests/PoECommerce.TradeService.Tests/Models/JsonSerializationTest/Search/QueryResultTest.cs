@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Search;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Search
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Search
 {
     [TestFixture]
     public class QueryResultTest

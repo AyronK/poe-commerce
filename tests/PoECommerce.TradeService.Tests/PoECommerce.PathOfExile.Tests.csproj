@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\PoECommerce.TradeService\PoECommerce.TradeService.csproj" />
+    <ProjectReference Include="..\..\src\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
   </ItemGroup>
 
 </Project>

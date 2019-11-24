@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Search.Enums;
-using PoECommerce.TradeService.Models.Search.Filters.Wrappers;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Search.Enums;
+using PoECommerce.PathOfExile.Models.Search.Filters.Wrappers;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Search.Filters.Wrappers
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Search.Filters.Wrappers
 {
     [TestFixture]
     public class OnlineStatusOptionTest

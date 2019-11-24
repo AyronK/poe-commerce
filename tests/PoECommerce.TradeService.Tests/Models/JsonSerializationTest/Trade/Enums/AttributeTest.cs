@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Trade.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Enums;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade.Enums
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Enums
 {
     [TestFixture]
     public class AttributeTest

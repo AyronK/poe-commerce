@@ -1,0 +1,27 @@
+﻿@using System.Text.Json
+@using PoECommerce.Core.Model.Search
+@inherits SearchContainerBase
+
+<h3>Search:</h3>
+
+<div>
+    <TextField Label="Search items..." @bind-Value="@SearchText"></TextField>
+</div>
+<div>
+    <TextField Label="League" @bind-Value="@League"></TextField>
+</div>
+
+<div>
+    <label>Status</label>
+    <select @bind="@Status">
+        <option value="@OnlineStatus.Any">Any</option>
+        <option value="@OnlineStatus.Online">Online</option>
+    </select>
+</div>
+
+<button @onclick="@Search">Search</button>
+<button @onclick="@Clear">Clear</button>
+<button>Show filters</button>
+
+
+@JsonSerializer.Serialize(Query);

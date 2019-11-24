@@ -3,28 +3,21 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Search;
-using PoECommerce.TradeService.Models.Trade;
-using PoECommerce.TradeService.PathOfExile.Trade;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Trade;
+using PoECommerce.PathOfExile.PathOfExile.Trade;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.PathOfExile.Trade
+namespace PoECommerce.PathOfExile.Tests.PathOfExile.Trade
 {
     [TestFixture]
     public class PathOfExileTradeServiceTest : HttpClientTestBase
     {
-        protected string League { get; private set; }
-
         private PathOfExileTradeService _tradeService;
-
-        public void With_League(string league)
-        {
-            League = league;
-        }
 
         public void With_Service()
         {
-            _tradeService = new PathOfExileTradeService(HttpClientFactory.Object, League);
+            _tradeService = new PathOfExileTradeService(HttpClientFactory.Object);
         }
 
         [Test]
@@ -32,7 +25,6 @@ namespace PoECommerce.TradeService.Tests.PathOfExile.Trade
         {
             // Given
             With_Response("{\"result\":[]}");
-            With_League("Delve");
             With_HttpClient();
             With_Service();
 
@@ -58,14 +50,13 @@ namespace PoECommerce.TradeService.Tests.PathOfExile.Trade
             Query query = new Query {Name = "Name", Type = "Type"};
 
             With_Response("{\"id\":\"queryId\",\"total\":0,\"result\":[]}");
-            With_League("Delve");
             With_HttpClient();
             With_Service();
 
-            string expectedUrl = $"api/trade/search/{League}";
+            string expectedUrl = $"api/trade/search/Delve";
 
             // When
-            QueryResult result = await _tradeService.Search(query);
+            QueryResult result = await _tradeService.Search(query, "Delve");
 
             // Then;
             Then_HttpMethod(HttpMethod.Post);

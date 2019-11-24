@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Trade.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Enums;
 
-namespace PoECommerce.TradeService.Models.Trade.Listings
+namespace PoECommerce.PathOfExile.Models.Trade.Listings
 {
     public class Listing
     {

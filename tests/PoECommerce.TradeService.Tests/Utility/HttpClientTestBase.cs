@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Moq.Protected;
-using PoECommerce.TradeService.PathOfExile;
+using PoECommerce.PathOfExile.PathOfExile;
 
-namespace PoECommerce.TradeService.Tests.Utility
+namespace PoECommerce.PathOfExile.Tests.Utility
 {
     public class HttpClientTestBase
     {

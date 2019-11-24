@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoECommerce.TradeService.Extensions
+namespace PoECommerce.PathOfExile.Extensions
 {
     public class ServiceSettings<T>
     {

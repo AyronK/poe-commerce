@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.Models.Trade.Items;
+using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Items;
 
-namespace PoECommerce.TradeService.Json.Serialization
+namespace PoECommerce.PathOfExile.Json.Serialization
 {
     public sealed class HashesDictionaryJsonConverter : EnumKeyDictionaryJsonConverter<ModifierType, Hash[]>
     {

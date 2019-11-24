@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Trade.Enums
+namespace PoECommerce.PathOfExile.Models.Trade.Enums
 {
     /// <summary>
     ///     Type of item listing method.

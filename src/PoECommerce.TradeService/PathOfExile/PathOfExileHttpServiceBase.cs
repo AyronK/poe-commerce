@@ -4,7 +4,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.PathOfExile
+namespace PoECommerce.PathOfExile.PathOfExile
 {
     internal abstract class PathOfExileHttpServiceBase
     {

@@ -1,6 +1,6 @@
-﻿using PoECommerce.TradeService.Models.Trade.Enums;
+﻿using PoECommerce.PathOfExile.Models.Trade.Enums;
 
-namespace PoECommerce.TradeService.Models.Trade.Items
+namespace PoECommerce.PathOfExile.Models.Trade.Items
 {
     // This model is not serialized directly from json but using custom converter,
     // thus it does not need json related attributes.

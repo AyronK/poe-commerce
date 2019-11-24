@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Data
+namespace PoECommerce.PathOfExile.Models.Data
 {
     public class StaticData
     {

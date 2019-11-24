@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Enums
+namespace PoECommerce.PathOfExile.Models.Enums
 {
     public enum ItemCategory
     {

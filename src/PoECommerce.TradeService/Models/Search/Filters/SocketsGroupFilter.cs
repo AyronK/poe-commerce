@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Search.Filters
+namespace PoECommerce.PathOfExile.Models.Search.Filters
 {
     public class SocketsGroupFilter
     {
