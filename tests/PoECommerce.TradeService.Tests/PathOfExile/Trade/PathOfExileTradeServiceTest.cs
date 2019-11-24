@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using PoECommerce.TradeService.Models.Search;
 using PoECommerce.TradeService.Models.Trade;
 using PoECommerce.TradeService.PathOfExile.Trade;
 using PoECommerce.TradeService.Tests.Utility;

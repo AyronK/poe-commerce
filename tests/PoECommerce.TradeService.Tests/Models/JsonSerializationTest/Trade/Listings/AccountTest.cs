@@ -4,7 +4,7 @@ using NUnit.Framework;
 using PoECommerce.TradeService.Models.Trade.Listings;
 using PoECommerce.TradeService.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.TradeAPI.Listings
+namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade.Listings
 {
     [TestFixture]
     public class AccountTest

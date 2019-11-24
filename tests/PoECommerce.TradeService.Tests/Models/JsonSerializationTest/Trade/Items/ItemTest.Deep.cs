@@ -3,11 +3,12 @@ using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.TradeService.Models.Trade.Enums;
 using PoECommerce.TradeService.Models.Trade.Items;
 using PoECommerce.TradeService.Models.Trade.Items.Enums;
 using PoECommerce.TradeService.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.TradeAPI.Items
+namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade.Items
 {
     public partial class ItemTest
     {

@@ -3,8 +3,8 @@ using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.TradeService.Models;
-using PoECommerce.TradeService.Models.Enums;
 using PoECommerce.TradeService.Models.Trade;
+using PoECommerce.TradeService.Models.Trade.Enums;
 using PoECommerce.TradeService.Models.Trade.Listings;
 using PoECommerce.TradeService.Tests.Utility;
 

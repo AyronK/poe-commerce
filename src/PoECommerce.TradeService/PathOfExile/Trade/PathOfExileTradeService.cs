@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using PoECommerce.TradeService.Extensions.Internal;
 using PoECommerce.TradeService.Models;
+using PoECommerce.TradeService.Models.Search;
 using PoECommerce.TradeService.Models.Trade;
 
 namespace PoECommerce.TradeService.PathOfExile.Trade
