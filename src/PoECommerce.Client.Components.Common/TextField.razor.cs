@@ -16,12 +16,6 @@ namespace PoECommerce.Client.Components.Common
         public string Label { get; set; }
 
         [Parameter]
-        public string Icon { get; set; }
-
-        [Parameter]
-        public bool TextArea { get; set; }
-
-        [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
