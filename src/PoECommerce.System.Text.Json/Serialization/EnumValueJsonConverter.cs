@@ -6,6 +6,7 @@ namespace System.Text.Json.Serialization
 {
     public class EnumJsonConverter<T> : JsonConverter<T> where T : struct, Enum, IConvertible
     {
+        private readonly bool _isObjectProperty;
         private static readonly Dictionary<T, string> EnumValueJsonNames;
         private static readonly Dictionary<string, T> JsonNamesEnumValues;
 
@@ -38,6 +39,16 @@ namespace System.Text.Json.Serialization
             }
         }
 
+        public EnumJsonConverter(bool isObjectProperty)
+        {
+            _isObjectProperty = isObjectProperty;
+        }
+
+        public EnumJsonConverter()
+        {
+            _isObjectProperty = false;
+        }
+
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string value = reader.TokenType switch
@@ -47,12 +58,12 @@ namespace System.Text.Json.Serialization
                 JsonTokenType.Number when reader.TryGetInt32(out int intValue) => intValue.ToString(CultureInfo.InvariantCulture),
                 _ => throw new NotSupportedException($"Enum value can only be either {JsonTokenType.String} or {JsonTokenType.Number}, but was {reader.TokenType}"),
             };
-            
+
             return JsonNamesEnumValues.TryGetValue(value, out T enumValue)
                 ? enumValue
                 : Enum.TryParse(value, true, out enumValue)
                     ? enumValue
-                    : throw new JsonException($"Key '{value}' cannot be converted to enum of type '{typeof(T)}'.");
+                    : throw new JsonException($"Value '{value}' cannot be converted to enum of type '{typeof(T)}'.");
         }
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
@@ -61,16 +72,40 @@ namespace System.Text.Json.Serialization
             {
                 if (int.TryParse(enumJsonName, out int number))
                 {
-                    writer.WriteNumberValue(number);
+                    if (!_isObjectProperty)
+                    {
+                        writer.WriteNumberValue(number);
+                    }
+                    else
+                    {
+                        enumJsonName = value.ToString();
+                        enumJsonName = options.DictionaryKeyPolicy?.ConvertName(enumJsonName) ?? options.PropertyNamingPolicy?.ConvertName(enumJsonName) ?? enumJsonName;
+                        writer.WritePropertyName(enumJsonName);
+                    }
                 }
                 else
                 {
-                    writer.WriteStringValue(enumJsonName);
+                    if (_isObjectProperty)
+                    {
+                        enumJsonName = options.DictionaryKeyPolicy?.ConvertName(enumJsonName) ?? options.PropertyNamingPolicy?.ConvertName(enumJsonName) ?? enumJsonName;
+                        writer.WritePropertyName(enumJsonName);
+                    }
+                    else
+                    {
+                        writer.WriteStringValue(enumJsonName);
+                    }
                 }
             }
             else
             {
-                writer.WriteNumberValue(value.ToInt32(CultureInfo.InvariantCulture));
+                if (_isObjectProperty)
+                {
+                    writer.WritePropertyName(value.ToString());
+                }
+                else
+                {
+                    writer.WriteNumberValue(value.ToInt32(CultureInfo.InvariantCulture));
+                }
             }
         }
     }

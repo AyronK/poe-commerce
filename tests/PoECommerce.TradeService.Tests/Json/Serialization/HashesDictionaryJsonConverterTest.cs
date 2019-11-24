@@ -48,7 +48,7 @@ namespace PoECommerce.TradeService.Tests.Json.Serialization
             Func<IDictionary<ModifierType, Hash[]>> when = () => JsonSerializer.Deserialize<IDictionary<ModifierType, Hash[]>>(json, _jsonSerializerOptions);
 
             // Then
-            when.Should().Throw<JsonException>().And.Message.Should().Be($"Key 'notExisting' cannot be converted to enum of type '{typeof(ModifierType)}'.");
+            when.Should().Throw<JsonException>().And.Message.Should().Be($"Value 'notExisting' cannot be converted to enum of type '{typeof(ModifierType)}'.");
         }
 
         [Test]

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.TradeService.Models.Trade.Enums;
 
 namespace PoECommerce.TradeService.Models.Trade.Listings
 {

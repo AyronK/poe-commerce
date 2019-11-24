@@ -21,11 +21,10 @@ namespace System.Text.Json.Tests.Serialization
             MemberWithTwoCustomTexts = 2
         }
 
-        [SetUp]
-        public void SetUp()
+        protected void With_Converter(bool isDictionaryKey)
         {
-            _converter = new EnumJsonConverter<TestEnum>();
-            _jsonSerializerOptions = new JsonSerializerOptions {Converters = {_converter}, AllowTrailingCommas = true};
+            _converter = new EnumJsonConverter<TestEnum>(isDictionaryKey);
+            _jsonSerializerOptions = new JsonSerializerOptions { Converters = { _converter }, AllowTrailingCommas = true };
         }
 
         [TestCase("\"customText1\"")]
@@ -33,6 +32,9 @@ namespace System.Text.Json.Tests.Serialization
         [TestCase("2")]
         public void When_DeserializeEnumMember_WithTwoCustomTexts(string json)
         {
+            // Given
+            With_Converter(false);
+
             // When
             TestEnum result = JsonSerializer.Deserialize<TestEnum>(json, _jsonSerializerOptions);
 
@@ -44,6 +46,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_DeserializeEnumMember_WithCustomText()
         {
             // Given
+            With_Converter(false);
             string json = "\"customText\"";
 
             // When
@@ -57,6 +60,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_DeserializeEnumMember_WithCustomText_ButFromNumber()
         {
             // Given
+            With_Converter(false);
             string json = "0";
 
             // When
@@ -70,6 +74,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_DeserializeEnumMember_WithoutCustomText()
         {
             // Given
+            With_Converter(false);
             string json = "1";
 
             // When
@@ -83,6 +88,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_SerializeEnumMember_WithCustomText()
         {
             // Given
+            With_Converter(false);
             TestEnum enumMember = TestEnum.MemberWithCustomText;
 
             // When
@@ -96,6 +102,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_SerializeEnumMember_WithoutCustomText()
         {
             // Given
+            With_Converter(false);
             TestEnum enumMember = TestEnum.NormalMember;
 
             // When
@@ -109,6 +116,7 @@ namespace System.Text.Json.Tests.Serialization
         public void When_SerializeEnumMember_WithTwoCustomTexts()
         {
             // Given
+            With_Converter(false);
             TestEnum enumMember = TestEnum.MemberWithTwoCustomTexts;
 
             // When

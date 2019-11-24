@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using PoECommerce.TradeService.Models.Search;
 using PoECommerce.TradeService.Models.Trade;
 
 namespace PoECommerce.TradeService

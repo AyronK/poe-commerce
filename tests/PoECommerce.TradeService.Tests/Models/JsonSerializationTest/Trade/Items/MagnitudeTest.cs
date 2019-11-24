@@ -4,7 +4,7 @@ using NUnit.Framework;
 using PoECommerce.TradeService.Models.Trade.Items;
 using PoECommerce.TradeService.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.TradeAPI.Items
+namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade.Items
 {
     [TestFixture]
     public class MagnitudeTest

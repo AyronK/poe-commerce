@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -15,7 +16,8 @@ namespace PoECommerce.TradeService.PathOfExile
             Converters =
             {
                 new JsonStringEnumConverter()
-            }
+            },
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
         protected PathOfExileHttpServiceBase(IHttpClientFactory httpClient)
