@@ -26,7 +26,8 @@
     <ProjectReference Include="..\PoECommerce.Client.Electron\PoECommerce.Client.Electron.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.Shared\PoECommerce.Client.Shared.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.WebBrowser\PoECommerce.Client.WebBrowser.csproj" />
-    <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.TradeService.csproj" />
+    <ProjectReference Include="..\PoECommerce.TradeService.PathOfExile\PoECommerce.TradeService.PathOfExile.csproj" />
+    <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
   </ItemGroup>
 
 </Project>

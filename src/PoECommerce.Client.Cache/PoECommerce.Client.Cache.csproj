@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.TradeService.csproj" />
+    <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
   </ItemGroup>
 
 </Project>

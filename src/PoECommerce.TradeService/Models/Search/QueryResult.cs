@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Search
+namespace PoECommerce.PathOfExile.Models.Search
 {
     public class QueryResult
     {

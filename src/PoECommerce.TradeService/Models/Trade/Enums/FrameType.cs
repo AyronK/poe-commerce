@@ -1,4 +1,4 @@
-﻿namespace PoECommerce.TradeService.Models.Trade.Enums
+﻿namespace PoECommerce.PathOfExile.Models.Trade.Enums
 {
     /// <summary>
     ///     Frame type.

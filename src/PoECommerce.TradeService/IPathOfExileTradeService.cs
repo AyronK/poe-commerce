@@ -1,23 +1,20 @@
 ﻿using System.Threading.Tasks;
-using PoECommerce.TradeService.Models.Search;
-using PoECommerce.TradeService.Models.Trade;
+using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Trade;
 
-namespace PoECommerce.TradeService
+namespace PoECommerce.PathOfExile
 {
-    public interface IPoETradeService
+    public interface IPathOfExileTradeService
     {
         /// <summary>
-        ///     Name of the league the trade service is pointing to.
-        /// </summary>
-        string League { get; }
-
-        /// <summary>
-        ///     Performs a query on the trade service and returns a query result containing IDs of found items. To get item's details
+        ///     Performs a query on the trade service and returns a query result containing IDs of found items. To get item's
+        ///     details
         ///     call <see cref="Fetch" /> with its ID.
         /// </summary>
-        /// <param name="query">A set of filters to search items,</param>
+        /// <param name="query">A set of filters to search items.</param>
+        /// <param name="league">League the query points to.</param>
         /// <returns>Query result containing IDs of found items. To get item's details call <see cref="Fetch" /> with its ID.</returns>
-        Task<QueryResult> Search(Query query);
+        Task<QueryResult> Search(Query query, string league);
 
         /// <summary>
         ///     Fetches items' details by IDs obtained from <see cref="Search" /> call.

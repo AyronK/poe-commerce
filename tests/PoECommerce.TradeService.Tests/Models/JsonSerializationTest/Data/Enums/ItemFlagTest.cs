@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Data.Enums;
+using PoECommerce.PathOfExile.Models.Data.Enums;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Data.Enums
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data.Enums
 {
     [TestFixture]
     public class ItemFlagTest

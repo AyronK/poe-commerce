@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PoECommerce.TradeService.Extensions.Internal;
-using PoECommerce.TradeService.Models;
-using PoECommerce.TradeService.Models.Data;
-using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.PathOfExile.Extensions.Internal;
+using PoECommerce.PathOfExile.Models;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
 
-namespace PoECommerce.TradeService.PathOfExile.Data
+namespace PoECommerce.PathOfExile.PathOfExile.Data
 {
-    internal class PathOfExileDataService : PathOfExileHttpServiceBase, IPoEDataService
+    internal class PathOfExileDataService : PathOfExileHttpServiceBase, IPathOfExileDataService
     {
         private const string ItemsEndpoint = "/api/trade/data/items";
         private const string LeaguesEndpoint = "/api/trade/data/leagues";
@@ -65,7 +65,10 @@ namespace PoECommerce.TradeService.PathOfExile.Data
             {
                 foreach (StaticData staticData in keyValuePair.Value)
                 {
-                    staticData.Image = new Uri(PathOfExileConfiguration.BaseAddress + staticData.Image.TrimStart('/')).AbsoluteUri;
+                    if (!string.IsNullOrEmpty(staticData.Image))
+                    {
+                        staticData.Image = new Uri(PathOfExileConfiguration.BaseAddress + staticData.Image.TrimStart('/')).AbsoluteUri;
+                    }
                 }
             }
 

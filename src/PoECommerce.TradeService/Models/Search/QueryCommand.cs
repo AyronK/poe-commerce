@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Search.Enums;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 
-namespace PoECommerce.TradeService.Models.Search
+namespace PoECommerce.PathOfExile.Models.Search
 {
     public class QueryCommand
     {

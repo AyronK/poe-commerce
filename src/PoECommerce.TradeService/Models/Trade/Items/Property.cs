@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Json.Serialization;
-using PoECommerce.TradeService.Models.Trade.Items.Enums;
+using PoECommerce.PathOfExile.Json.Serialization;
+using PoECommerce.PathOfExile.Models.Trade.Items.Enums;
 
-namespace PoECommerce.TradeService.Models.Trade.Items
+namespace PoECommerce.PathOfExile.Models.Trade.Items
 {
     /// <summary>
     ///     Metadata of the property of the item.

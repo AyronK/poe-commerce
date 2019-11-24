@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Data.Enums
+namespace PoECommerce.PathOfExile.Models.Data.Enums
 {
     public enum ItemFlag
     {

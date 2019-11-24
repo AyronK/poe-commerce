@@ -1,4 +1,4 @@
-﻿namespace PoECommerce.TradeService.Tests.Utility
+﻿namespace PoECommerce.PathOfExile.Tests.Utility
 {
     public class ModelToJsonTestCase<T>
     {

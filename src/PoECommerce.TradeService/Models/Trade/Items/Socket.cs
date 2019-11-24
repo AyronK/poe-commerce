@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Trade.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Enums;
 
-namespace PoECommerce.TradeService.Models.Trade.Items
+namespace PoECommerce.PathOfExile.Models.Trade.Items
 {
     /// <summary>
     ///     Metadata of the socket of the item.

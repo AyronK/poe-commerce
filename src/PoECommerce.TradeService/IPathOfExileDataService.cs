@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PoECommerce.TradeService.Models.Data;
-using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
 
-namespace PoECommerce.TradeService
+namespace PoECommerce.PathOfExile
 {
-    public interface IPoEDataService
+    public interface IPathOfExileDataService
     {
         /// <summary>
         ///     Fetches all currently running leagues.

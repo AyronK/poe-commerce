@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Trade.Listings
+namespace PoECommerce.PathOfExile.Models.Trade.Listings
 {
     /// <summary>
     ///     Information about the position of the item in the player's stash.

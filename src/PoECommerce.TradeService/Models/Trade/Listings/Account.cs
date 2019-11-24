@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Trade.Listings
+namespace PoECommerce.PathOfExile.Models.Trade.Listings
 {
     public class Account
     {

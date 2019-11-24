@@ -1,13 +1,19 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Search.Filters;
-using PoECommerce.TradeService.Models.Search.Filters.Wrappers;
+using PoECommerce.PathOfExile.Models.Search.Filters;
+using PoECommerce.PathOfExile.Models.Search.Filters.Wrappers;
 
-namespace PoECommerce.TradeService.Models.Search
+namespace PoECommerce.PathOfExile.Models.Search
 {
     public class Query
     {
         [JsonPropertyName("status")]
         public OnlineStatusOption Status { get; set; }
+
+        /// <summary>
+        ///     Item's custom expression. Use if there is no known <see cref="Name"/> and <see cref="Type"/>
+        /// </summary>
+        [JsonPropertyName("term")]
+        public string Text { get; set; }
 
         /// <summary>
         ///     Item's name.

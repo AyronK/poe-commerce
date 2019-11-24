@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Trade.Items;
-using PoECommerce.TradeService.Models.Trade.Listings;
+using PoECommerce.PathOfExile.Models.Trade.Items;
+using PoECommerce.PathOfExile.Models.Trade.Listings;
 
-namespace PoECommerce.TradeService.Models.Trade
+namespace PoECommerce.PathOfExile.Models.Trade
 {
     public class ListedItem
     {

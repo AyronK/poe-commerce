@@ -1,13 +1,11 @@
 ﻿using System;
 
-namespace PoECommerce.TradeService.Extensions
+namespace PoECommerce.PathOfExile.Extensions
 {
     public class RegistrationConfiguration
     {
-        public ServiceSettings<IPoEDataService> DataServiceSettings { get; set; } = new ServiceSettings<IPoEDataService>();
+        public ServiceSettings<IPathOfExileDataService> DataServiceSettings { get; set; } = new ServiceSettings<IPathOfExileDataService>();
 
-        public ServiceSettings<IPoETradeService> TradeServiceSettings { get; set; } = new ServiceSettings<IPoETradeService>();
-
-        public Func<string> LeagueNameFactory { get; set; } = null;
+        public ServiceSettings<IPathOfExileTradeService> TradeServiceSettings { get; set; } = new ServiceSettings<IPathOfExileTradeService>();
     }
 }

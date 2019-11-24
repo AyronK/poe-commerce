@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoECommerce.TradeService.PathOfExile
+namespace PoECommerce.PathOfExile.PathOfExile
 {
     internal static class PathOfExileConfiguration
     {

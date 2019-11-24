@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Search.Filters.Wrappers
+namespace PoECommerce.PathOfExile.Models.Search.Filters.Wrappers
 {
     public class StringOption
     {

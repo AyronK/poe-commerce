@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Search.Filters.Wrappers;
+using PoECommerce.PathOfExile.Models.Search.Filters.Wrappers;
 
-namespace PoECommerce.TradeService.Models.Search.Filters
+namespace PoECommerce.PathOfExile.Models.Search.Filters
 {
     public class MapsFilter
     {

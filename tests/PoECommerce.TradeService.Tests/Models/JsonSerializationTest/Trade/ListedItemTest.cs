@@ -2,12 +2,12 @@
 using System.Text.Json;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Trade;
-using PoECommerce.TradeService.Models.Trade.Enums;
-using PoECommerce.TradeService.Models.Trade.Listings;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Trade;
+using PoECommerce.PathOfExile.Models.Trade.Enums;
+using PoECommerce.PathOfExile.Models.Trade.Listings;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.Models.JsonSerializationTest.Trade
+namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade
 {
     [TestFixture]
     public class ListedItemTest

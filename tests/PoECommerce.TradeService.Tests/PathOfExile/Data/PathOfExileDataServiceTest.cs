@@ -3,12 +3,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using PoECommerce.TradeService.Models.Data;
-using PoECommerce.TradeService.Models.Enums;
-using PoECommerce.TradeService.PathOfExile.Data;
-using PoECommerce.TradeService.Tests.Utility;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.PathOfExile.Data;
+using PoECommerce.PathOfExile.Tests.Utility;
 
-namespace PoECommerce.TradeService.Tests.PathOfExile.Data
+namespace PoECommerce.PathOfExile.Tests.PathOfExile.Data
 {
     [TestFixture]
     public class PathOfExileDataServiceTest : HttpClientTestBase

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PoECommerce.TradeService.Models.Search.Enums
+namespace PoECommerce.PathOfExile.Models.Search.Enums
 {
     public enum Indexed
     {

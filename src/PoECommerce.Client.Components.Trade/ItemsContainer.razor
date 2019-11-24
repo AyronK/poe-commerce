@@ -1,0 +1,41 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits ItemsContainerBase
+
+<h3>ItemsContainer</h3>
+
+@if (SearchResult != null)
+{
+
+    @if (ListedItems.Count == 0)
+    {
+        @:No results found
+    }
+    else
+    {
+        @:Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)
+        foreach (ListedItem resultItem in ListedItems)
+        {
+            <div>
+                Id: @resultItem.ListingId
+                <div>
+                    <div>
+                        @resultItem.Item.Name
+                        <br />
+                        @resultItem.Item.TypeName
+                        <br />
+                        Item Level: @resultItem.Item.ItemLevel
+                        <br />
+                        <img src="@resultItem.Item.Icon" alt="item" />
+
+                        <br />
+
+                        =================================
+
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

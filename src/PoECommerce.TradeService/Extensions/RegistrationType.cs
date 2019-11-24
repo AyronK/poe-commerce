@@ -1,4 +1,4 @@
-﻿namespace PoECommerce.TradeService.Extensions
+﻿namespace PoECommerce.PathOfExile.Extensions
 {
     public enum RegistrationType
     {

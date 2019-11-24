@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Search.Enums;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 
-namespace PoECommerce.TradeService.Models.Search.Filters.Wrappers
+namespace PoECommerce.PathOfExile.Models.Search.Filters.Wrappers
 {
     public class OnlineStatusOption
     {

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using PoECommerce.TradeService.Models.Enums;
+using PoECommerce.PathOfExile.Models.Enums;
 
-namespace PoECommerce.TradeService.Models.Data
+namespace PoECommerce.PathOfExile.Models.Data
 {
     internal class ItemsDataResult
     {

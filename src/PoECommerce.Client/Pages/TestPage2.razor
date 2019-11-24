@@ -1,12 +1,12 @@
 ﻿@page "/TestPage2"
 @using PoECommerce.Client.Shared.Display
-@using PoECommerce.TradeService
-@using PoECommerce.TradeService.Models.Search
-@using PoECommerce.TradeService.Models.Trade
-@using PoECommerce.TradeService.Models.Trade.Enums
-@using PoECommerce.TradeService.Models.Trade.Items
+@using PoECommerce.PathOfExile
+@using PoECommerce.PathOfExile.Models.Search
+@using PoECommerce.PathOfExile.Models.Trade
+@using PoECommerce.PathOfExile.Models.Trade.Enums
+@using PoECommerce.PathOfExile.Models.Trade.Items
 @inject IWindowManager WindowManager
-@inject IPoETradeService TradeService
+@inject IPathOfExileTradeService TradeService
 
 <style>
     .text-format-white {
@@ -132,7 +132,7 @@
             return;
         }
 
-        QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" });
+        QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" }, "Blight");
 
         ListedItems = await TradeService.Fetch(queryResult.Id, queryResult.Result.Take(5).ToArray());
 
