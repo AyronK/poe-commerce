@@ -4,6 +4,14 @@
     "inputFile": "TextField.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/select.css",
+    "inputFile": "Select.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/select-option.css",
+    "inputFile": "SelectOption.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/common.css",
     "inputFile": "Common/Common.scss"
   },

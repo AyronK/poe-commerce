@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Search;
@@ -9,7 +10,7 @@ namespace PoECommerce.Client.Components.Trade
     {
         private string _league;
         private string _searchText;
-        private OnlineStatus _status;
+        private string _status;
 
         [Inject]
         public ITradeService TradeService { get; set; }
@@ -39,13 +40,13 @@ namespace PoECommerce.Client.Components.Trade
             }
         }
 
-        public OnlineStatus Status
+        public string Status
         {
             get => _status;
             set
             {
                 _status = value;
-                Query.OnlineStatus = value;
+                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?) null;
             }
         }
 
@@ -54,7 +55,7 @@ namespace PoECommerce.Client.Components.Trade
             Query = new Query();
             SearchText = null;
             League = "Blight";
-            Status = OnlineStatus.Any;
+            Status = OnlineStatus.Any.ToString();
             StateHasChanged();
         }
 
@@ -62,6 +63,12 @@ namespace PoECommerce.Client.Components.Trade
         {
             SearchResult searchResult = await TradeService.Search(Query);
             OnSearch.InvokeAsync(searchResult).Wait();
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            Clear();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@inherits TextFieldBase
 
-<div class="poec-text-field @(State != null ? $"poec-text-field--{State}" : string.Empty)" style="@Style">
-    <input style="@InputStyle" type="@Type" placeholder="@PlaceHolder" required=@Required class="poec-text-field__input @(!string.IsNullOrEmpty(Value) ?  "poec-text-field__input--filled" : string.Empty) @(State != null ?  $"poec-text-field__input--{State}" : string.Empty)" id="@Id" @bind="Value" disabled=@Disabled readonly="@ReadOnly" onfocus="@OnFocus" onfocusout="@OnFocusOut"/>
-    <div class="poec-line-ripple @(State != null ?  $"poec-line-ripple--{State}" : string.Empty)"></div>
+<div class="@GetStateClass("poec-text-field")" style="@Style">
+    <input type="@Type" placeholder="@PlaceHolder" required=@Required class="@GetStateClass("poec-text-field__input")" id="@Id" @bind="Value" disabled=@Disabled readonly="@ReadOnly" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
+    <div class="@GetStateClass("poec-line-ripple")"></div>
 </div>

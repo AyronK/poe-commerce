@@ -1,0 +1,13 @@
+﻿@inherits SelectBase
+
+<CascadingValue Value="@this">
+    <div class="@GetStateClass("poec-select")">
+        <input type="text" readonly="readonly" placeholder="@PlaceHolder" class="@GetStateClass("poec-select__selected__input")" id="@Id" @bind="Value" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
+        <div class="@GetStateClass("poec-select__menu")">
+            <ul class="@GetStateClass("poec-select__menu__list")">
+                @ChildContent
+            </ul>
+        </div>
+        <div class="@GetStateClass("poec-line-ripple")"></div>
+    </div>
+</CascadingValue>

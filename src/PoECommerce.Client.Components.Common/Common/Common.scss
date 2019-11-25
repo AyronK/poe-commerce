@@ -25,3 +25,61 @@ body {
         opacity: 1;
     }
 }
+
+
+.poec-input {
+    background-color: $poec-theme-surface;
+    color: $poec-theme-on-surface;
+    display: inline-flex;
+    position: relative;
+    box-sizing: border-box;
+    height: 34px;
+    overflow: hidden;
+    border-bottom-color: rgba(0, 0, 0, 0.42);
+
+    &__input {
+        font-family: $poec-typography-font-family;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-size: 0.9rem;
+        line-height: 1.75rem;
+        font-weight: 400;
+        letter-spacing: 0.00937em;
+        text-decoration: inherit;
+        text-transform: inherit;
+        font-variant: inherit;
+        align-self: flex-end;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 5px 10px;
+        border: none;
+        border-bottom: 2px solid;
+        border-radius: 0;
+        background: none;
+        caret-color: $poec-theme-on-primary;
+        color: $poec-theme-on-primary;
+        border-bottom-color: rgba(0, 0, 0, 0.2);
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-input-placeholder {
+            opacity: 0.65;
+            font-size: 0.75rem;
+        }
+
+        &--focused {
+            &::-webkit-input-placeholder {
+                opacity: 0.25;
+                -webkit-transition: opacity $poec-animation-180bezier;
+            }
+        }
+
+        &--filled {
+            border-bottom-color: $poec-theme-on-primary;
+            border-bottom-style: outset;
+        }
+    }
+}
