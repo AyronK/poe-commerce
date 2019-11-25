@@ -24,9 +24,9 @@
 <br />
 <br />
 
-<button @onclick="@Search">Search</button>
-<button @onclick="@Clear">Clear</button>
-<button>Show filters</button>
+<Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary"></Button>
+<Button OnClick="@Clear" Value="Clear"  ElementType="@ElementType.Secondary"></Button>
+<Button OnClick="@Clear" Value="Show filters"  ElementType="@ElementType.Primary"></Button>
 
 
 @JsonSerializer.Serialize(Query);

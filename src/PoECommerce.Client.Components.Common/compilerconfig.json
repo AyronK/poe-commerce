@@ -12,6 +12,10 @@
     "inputFile": "SelectOption.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/button.css",
+    "inputFile": "Button.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/common.css",
     "inputFile": "Common/Common.scss"
   },
