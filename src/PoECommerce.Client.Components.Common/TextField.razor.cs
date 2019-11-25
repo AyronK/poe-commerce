@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace PoECommerce.Client.Components.Common
 {
@@ -9,11 +10,10 @@ namespace PoECommerce.Client.Components.Common
     {
         private string _value;
 
-        [Parameter]
-        public string Id { get; set; } = "id_" + Guid.NewGuid();
+        protected string State { get; set; }
 
         [Parameter]
-        public string Label { get; set; }
+        public string Id { get; set; } = "id_" + Guid.NewGuid();
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -55,9 +55,24 @@ namespace PoECommerce.Client.Components.Common
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
 
+        protected EventCallback<FocusEventArgs> OnFocus { get; set; }
+
+        protected EventCallback<FocusEventArgs> OnFocusOut { get; set; }
+
+        [Parameter]
+        public string Style { get; set; }
+
         protected void NotifyFieldChanged()
         {
             EditContext?.NotifyFieldChanged(FieldIdentifier);
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            OnFocus = new EventCallbackFactory().Create(this, (FocusEventArgs args) => State = "focused");
+            OnFocusOut = new EventCallbackFactory().Create(this, (FocusEventArgs args) => State = null);
         }
     }
 }

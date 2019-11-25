@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/text-field.css",
+    "inputFile": "TextField.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/common.css",
+    "inputFile": "Common/Common.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/variables.css",
+    "inputFile": "Common/Variables.scss"
+  }
+]
