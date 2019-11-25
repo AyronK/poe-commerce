@@ -1,57 +1,22 @@
 ﻿@import "Common/Variables";
+@import "Common/Common";
 
 .poec-text-field {
-    background-color: $poec-theme-surface;
-    color: $poec-theme-on-surface;
-    display: inline-flex;
-    position: relative;
-    box-sizing: border-box;
-    height: 34px;
-    overflow: hidden;
-    border-bottom-color: rgba(0, 0, 0, 0.42);
+    @extend .poec-input;
 
-    .poec-text-field__input {
-        font-family: $poec-typography-font-family;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        font-size: 0.85rem;
-        line-height: 1.75rem;
-        font-weight: 400;
-        letter-spacing: 0.00937em;
-        text-decoration: inherit;
-        text-transform: inherit;
-        font-variant: inherit;
-        align-self: flex-end;
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        padding: 5px 10px;
-        border: none;
-        border-bottom: 2px solid;
-        border-radius: 0;
-        background: none;
-        caret-color: $poec-theme-on-primary;
-        color: $poec-theme-on-primary;
-        border-bottom-color: rgba(0, 0, 0, 0.2);
+    &__input {
+        @extend .poec-input__input;
 
         &:focus {
-            outline: none;
-        }
-
-        &::placeholder {
-            opacity: 0.85;
+            @extend .poec-input__input:focus;
         }
 
         &--focused {
-            &::placeholder {
-                opacity: 0.35;
-                -webkit-transition: opacity $poec-animation-180bezier;
-            }
+            @extend .poec-input__input--focused;
         }
 
         &--filled {
-            border-bottom-color: $poec-theme-on-primary;
-            border-bottom-style: outset;
+            @extend .poec-input__input--filled;
         }
     }
 }

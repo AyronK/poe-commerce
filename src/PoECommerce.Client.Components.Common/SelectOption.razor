@@ -1,0 +1,5 @@
+﻿@inherits SelectOptionBase
+
+<li data-value="@Value" class="poec-select__menu__list__item" Id="@Id" onmousedown="@OnMouseDown" data-selected="@(Parent.Value == Value)">
+    @ChildContent
+</li>

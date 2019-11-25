@@ -8,16 +8,21 @@
     <TextField @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 100%"></TextField>
 </div>
 <div>
-    <TextField @bind-Value="@League" PlaceHolder="League"></TextField>
+    <Select @bind-Value="@League" PlaceHolder="League">
+        <SelectOption Value="Blight">Blight</SelectOption>
+        <SelectOption Value="Hardcore Blight">Hardcore Blight</SelectOption>
+    </Select>
+</div>
+<div>
+    <Select @bind-Value="@Status" PlaceHolder="Online Status">
+        <SelectOption Value="@OnlineStatus.Any.ToString()">Any</SelectOption>
+        <SelectOption Value="@OnlineStatus.Online.ToString()">Online Only</SelectOption>
+    </Select>
 </div>
 
-<div>
-    <label>Status</label>
-    <select @bind="@Status">
-        <option value="@OnlineStatus.Any">Any</option>
-        <option value="@OnlineStatus.Online">Online</option>
-    </select>
-</div>
+<br />
+<br />
+<br />
 
 <button @onclick="@Search">Search</button>
 <button @onclick="@Clear">Clear</button>

@@ -1,0 +1,55 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.poec-select {
+    @extend .poec-input;
+    overflow: initial;
+    cursor: pointer;
+
+    &__selected__input {
+        @extend .poec-input__input;
+        cursor: pointer;
+
+        &:focus {
+            @extend .poec-input__input:focus;
+        }
+
+        &--focused {
+            @extend .poec-input__input--focused;
+        }
+
+        &--filled {
+            @extend .poec-input__input--filled;
+        }
+    }
+
+    .poec-select__menu {
+        overflow: hidden;
+
+        .poec-select__menu__list {
+            z-index:100;
+            background-color: $poec-theme-surface;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            font-size: 1rem;
+            line-height: 1.75rem;
+            font-weight: 400;
+            letter-spacing: 0.00937em;
+            line-height: 1.5rem;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            transition: visibility 0s, opacity 0.25s ease-in;
+            visibility: hidden;
+            opacity: 0;
+
+            &--focused {
+                visibility: visible;
+                opacity: 1;
+                display: initial;
+            }
+        }
+    }
+}
