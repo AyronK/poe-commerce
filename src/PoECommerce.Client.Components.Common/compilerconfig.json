@@ -4,6 +4,10 @@
     "inputFile": "TextField.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/section.css",
+    "inputFile": "Section.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/select.css",
     "inputFile": "Select.razor.scss"
   },

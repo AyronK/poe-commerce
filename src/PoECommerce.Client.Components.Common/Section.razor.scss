@@ -1,0 +1,41 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.poec-section {
+
+    &__header {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        background-color: darken($poec-theme-background, 2%);
+        padding: 5px 7px;
+
+        .poec-line-ripple {
+            transform: scaleX(1);
+            opacity: 1;
+            background-color: $poec-theme-secondary;
+        }
+
+        .poec-checkbox__label {
+            font-weight: 600;
+            color: $poec-theme-on-background;
+        }
+    }
+
+    .poec-section__content__wrapper {
+        max-height: 0;
+        visibility: hidden;
+        transition: max-height 0.1s linear, visibility 0.1s linear;
+
+        &--open {
+            max-height: 500px;
+            visibility: visible;
+            transition: max-height 0.25s ease-in, visibility 0.25s ease-in;
+        }
+
+        .poec-section__content {
+            padding: 10px;
+        }
+    }
+}
