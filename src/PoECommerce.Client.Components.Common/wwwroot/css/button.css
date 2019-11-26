@@ -26,6 +26,7 @@
   display: inline-flex;
   position: relative;
   box-sizing: border-box;
+  margin: 3px 5px;
   height: 34px;
   overflow: hidden;
   border-bottom-color: rgba(0, 0, 0, 0.42); }
@@ -86,7 +87,8 @@
   line-height: 1.75rem;
   font-family: Verdana,Arial,Helvetica,sans-serif;
   text-transform: capitalize;
-  font-variant: small-caps; }
+  font-variant: small-caps;
+  margin: 0 4px; }
   .poec-button--primary {
     background-color: #0f304d;
     color: #e2e2e2; }

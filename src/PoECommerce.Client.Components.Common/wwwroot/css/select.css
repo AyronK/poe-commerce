@@ -26,6 +26,7 @@
   display: inline-flex;
   position: relative;
   box-sizing: border-box;
+  margin: 3px 5px;
   height: 34px;
   overflow: hidden;
   border-bottom-color: rgba(0, 0, 0, 0.42); }
@@ -75,7 +76,7 @@
       z-index: 100;
       background-color: #18181b;
       position: absolute;
-      top: 40px;
+      top: 34px;
       left: 0;
       width: 100%;
       font-size: 1rem;

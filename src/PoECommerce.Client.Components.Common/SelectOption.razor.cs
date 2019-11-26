@@ -20,7 +20,10 @@ namespace PoECommerce.Client.Components.Common
         {
             base.OnInitialized();
 
-            OnMouseDown = new EventCallbackFactory().Create(this, (MouseEventArgs args) => { Parent.SetValue(Value); });
+            OnMouseDown = new EventCallbackFactory().Create(this, (MouseEventArgs args) =>
+            {
+                Parent.SetValue(Value);
+            });
         }
     }
 }

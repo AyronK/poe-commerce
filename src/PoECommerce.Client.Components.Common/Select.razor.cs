@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace PoECommerce.Client.Components.Common
@@ -7,12 +8,18 @@ namespace PoECommerce.Client.Components.Common
     {
         private bool _isSectionOpen;
         private string _value;
-        
+
         [Parameter]
         public string PlaceHolder { get; set; }
 
         [Parameter]
+        public bool IsAutocomplete { get; set; }
+
+        [Parameter]
         public RenderFragment ChildContent { get; set; }
+
+        [Parameter]
+        public string Style { get; set; }
 
         [Parameter]
         public string Value
@@ -20,8 +27,14 @@ namespace PoECommerce.Client.Components.Common
             get => _value;
             set
             {
+                if (IsAutocomplete && Value?.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                {
+                    return;
+                }
+
                 if (value != _value)
                 {
+
                     _value = value;
                     States["filled"] = !string.IsNullOrEmpty(_value);
                     ValueChanged.InvokeAsync(value);
@@ -43,8 +56,13 @@ namespace PoECommerce.Client.Components.Common
             }
         }
 
+        protected EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
+        protected EventCallback<MouseEventArgs> OnClick { get; set; }
         protected EventCallback<FocusEventArgs> OnFocus { get; set; }
         protected EventCallback<FocusEventArgs> OnFocusOut { get; set; }
+
+        [Parameter]
+        public EventCallback<ChangeEventArgs> OnInput { get; set; }
 
         public void SetValue(string value)
         {
@@ -56,8 +74,26 @@ namespace PoECommerce.Client.Components.Common
             base.OnInitialized();
             EventCallbackFactory eventCallbackFactory = new EventCallbackFactory();
 
-            OnFocus = eventCallbackFactory.Create(this, (FocusEventArgs args) => IsSectionOpen = !IsSectionOpen);
-            OnFocusOut = eventCallbackFactory.Create(this, (FocusEventArgs args) => IsSectionOpen = !IsSectionOpen);
+            OnClick = eventCallbackFactory.Create(this, (MouseEventArgs args) => IsSectionOpen = true);
+            OnFocus = eventCallbackFactory.Create(this, (FocusEventArgs args) => IsSectionOpen = true);
+            OnFocusOut = eventCallbackFactory.Create(this, (FocusEventArgs args) => IsSectionOpen = false);
+            OnKeyDown = eventCallbackFactory.Create(this, (KeyboardEventArgs args) =>
+            {
+                if (args.Key == "Enter" || args.Key == "Escape")
+                {
+                    OnFocusOut.InvokeAsync(new FocusEventArgs());
+                }
+                else
+                {
+                    OnFocus.InvokeAsync(new FocusEventArgs());
+                }
+            });
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            States["autocomplete"] = IsAutocomplete;
         }
     }
 }
