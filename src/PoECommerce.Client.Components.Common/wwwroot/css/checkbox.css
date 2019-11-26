@@ -20,7 +20,7 @@
     transform: scaleX(1);
     opacity: 1; }
 
-.poec-input, .poec-text-field {
+.poec-input {
   background-color: #18181b;
   color: #e2e2e2;
   display: inline-flex;
@@ -30,9 +30,9 @@
   height: 34px;
   overflow: hidden;
   border-bottom-color: rgba(0, 0, 0, 0.42); }
-  .poec-input:hover, .poec-text-field:hover {
+  .poec-input:hover {
     filter: brightness(120%); }
-  .poec-input__input, .poec-text-field__input {
+  .poec-input__input {
     font-family: Verdana,Arial,Helvetica,sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -55,14 +55,52 @@
     caret-color: #e2e2e2;
     color: #e2e2e2;
     border-bottom-color: rgba(0, 0, 0, 0.2); }
-    .poec-input__input:focus, .poec-text-field__input:focus {
+    .poec-input__input:focus {
       outline: none; }
-    .poec-input__input::-webkit-input-placeholder, .poec-text-field__input::-webkit-input-placeholder {
+    .poec-input__input::-webkit-input-placeholder {
       opacity: 0.65;
       font-size: 0.75rem; }
-    .poec-input__input--focused::-webkit-input-placeholder, .poec-text-field__input--focused::-webkit-input-placeholder {
+    .poec-input__input--focused::-webkit-input-placeholder {
       opacity: 0.25;
       -webkit-transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1); }
-    .poec-input__input--filled, .poec-text-field__input--filled {
+    .poec-input__input--filled {
       border-bottom-color: #e2e2e2;
       border-bottom-style: outset; }
+
+.poec-checkbox {
+  display: block; }
+  .poec-checkbox .poec-checkbox__label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    user-select: none;
+    color: #5a3806;
+    font-size: 0.9rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.00937em; }
+    .poec-checkbox .poec-checkbox__label input {
+      display: none; }
+      .poec-checkbox .poec-checkbox__label input:checked ~ .poec-checkbox__check:after {
+        display: block; }
+    .poec-checkbox .poec-checkbox__label .poec-checkbox__check {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 15px;
+      width: 15px;
+      background: #18181b;
+      border: 2px solid #5a3806;
+      border-radius: 1px; }
+      .poec-checkbox .poec-checkbox__label .poec-checkbox__check:hover {
+        filter: brightness(135%); }
+      .poec-checkbox .poec-checkbox__label .poec-checkbox__check:after {
+        left: 3px;
+        top: 3px;
+        width: 9px;
+        height: 9px;
+        background-color: #e2e2e2;
+        content: "";
+        position: absolute;
+        display: none;
+        border-radius: 1px; }

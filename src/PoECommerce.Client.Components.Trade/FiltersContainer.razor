@@ -4,7 +4,6 @@
 
 <h3>Search:</h3>
 
-
 <div style="display: flex;flex-direction: row">
     <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
         @foreach (string value in SearchTooltipValues)
@@ -36,6 +35,10 @@
 <br />
 <br />
 <br />
+
+<Checkbox @bind-Checked="@Test"></Checkbox>
+
+@Test.ToString()
 
 
 
