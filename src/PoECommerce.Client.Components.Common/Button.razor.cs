@@ -14,6 +14,9 @@ namespace PoECommerce.Client.Components.Common
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
+        
+        [Parameter]
+        public string Style { get; set; }
 
         protected override void OnParametersSet()
         {

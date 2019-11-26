@@ -1,0 +1,42 @@
+﻿@using System.Text.Json
+@using PoECommerce.Core.Model.Search
+@inherits FiltersContainerBase
+
+<h3>Search:</h3>
+
+
+<div style="display: flex;flex-direction: row">
+    <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
+        @foreach (string value in SearchTooltipValues)
+        {
+            <SelectOption Value="@value">@value</SelectOption>
+        }
+    </Select>
+    <Select @bind-Value="@League" Style="width: 20%" PlaceHolder="League">
+        <SelectOption Value="Blight">Blight</SelectOption>
+        <SelectOption Value="Hardcore Blight">Hardcore Blight</SelectOption>
+    </Select>
+    <Select @bind-Value="@Status" Style="width: 20%" PlaceHolder="Online Status">
+        <SelectOption Value="@OnlineStatus.Online.ToString()">Online Only</SelectOption>
+        <SelectOption Value="@OnlineStatus.Any.ToString()">Any</SelectOption>
+    </Select>
+</div>
+<br />
+<div style="display: flex;flex-direction: row">
+    <div style="width: 60%; justify-content: center;display: flex">
+        <Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary" Style="width:80%"></Button>
+    </div>
+    <div style="width: 20%; justify-content: center;display: flex">
+        <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width:80%"></Button>
+    </div>
+    <div style="width: 20%; justify-content: center;display: flex">
+        <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width:80%"></Button>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+
+
+@JsonSerializer.Serialize(Query);

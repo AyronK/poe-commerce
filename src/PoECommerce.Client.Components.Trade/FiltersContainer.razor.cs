@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core;
@@ -6,7 +10,7 @@ using PoECommerce.Core.Model.Search;
 
 namespace PoECommerce.Client.Components.Trade
 {
-    public class SearchContainerBase : ComponentBase
+    public class FiltersContainerBase : ComponentBase
     {
         private string _league;
         private string _searchText;
@@ -19,6 +23,21 @@ namespace PoECommerce.Client.Components.Trade
         public EventCallback<SearchResult> OnSearch { get; set; }
 
         public Query Query { get; set; } = new Query();
+
+        public string[] SearchAutocompleteValues { get; set; } =
+        {
+            "Voideye Unset Ring",
+            "Voidheart Iron Ring",
+            "Null and Void Legion Gloves",
+            "Voidbringer Conjurer Gloves",
+            "Voidwalker Murder Boots",
+            "The Void",
+            "Voidforge Infernal Sword",
+            "Empower",
+            "Static Strike",
+        };
+
+        public IEnumerable<string> SearchTooltipValues { get; set; } = new List<string>();
 
         public string SearchText
         {
@@ -46,7 +65,7 @@ namespace PoECommerce.Client.Components.Trade
             set
             {
                 _status = value;
-                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?) null;
+                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?)null;
             }
         }
 
@@ -55,7 +74,7 @@ namespace PoECommerce.Client.Components.Trade
             Query = new Query();
             SearchText = null;
             League = "Blight";
-            Status = OnlineStatus.Any.ToString();
+            Status = OnlineStatus.Online.ToString();
             StateHasChanged();
         }
 
@@ -63,6 +82,15 @@ namespace PoECommerce.Client.Components.Trade
         {
             SearchResult searchResult = await TradeService.Search(Query);
             OnSearch.InvokeAsync(searchResult).Wait();
+        }
+
+        public void OnSearchTextChange(ChangeEventArgs changeEventArgs)
+        {
+            string value = changeEventArgs.Value.ToString();
+            SearchTooltipValues = SearchAutocompleteValues.Where(v => v.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                .OrderByDescending(v => v.StartsWith(value, StringComparison.InvariantCultureIgnoreCase))
+                .ThenBy(v => v)
+                .Take(5);
         }
 
         protected override void OnInitialized()
