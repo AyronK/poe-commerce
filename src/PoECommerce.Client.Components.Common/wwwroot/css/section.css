@@ -67,42 +67,28 @@
       border-bottom-color: #e2e2e2;
       border-bottom-style: outset; }
 
-.poec-checkbox {
-  display: block; }
-  .poec-checkbox .poec-checkbox__label {
-    position: relative;
-    padding-left: 25px;
-    cursor: pointer;
-    user-select: none;
-    color: #5a3806;
-    font-size: 0.9rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.00937em; }
-    .poec-checkbox .poec-checkbox__label input {
-      display: none; }
-      .poec-checkbox .poec-checkbox__label input:checked ~ .poec-checkbox__check:after {
-        opacity: 1;
-        transition: opacity 0.025s ease-in; }
-    .poec-checkbox .poec-checkbox__label .poec-checkbox__check {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 15px;
-      width: 15px;
-      background: #18181b;
-      border: 2px solid #5a3806;
-      border-radius: 1px; }
-      .poec-checkbox .poec-checkbox__label .poec-checkbox__check:hover {
-        filter: brightness(135%); }
-      .poec-checkbox .poec-checkbox__label .poec-checkbox__check:after {
-        left: 3px;
-        top: 3px;
-        width: 9px;
-        height: 9px;
-        background-color: #e2e2e2;
-        content: "";
-        position: absolute;
-        opacity: 0;
-        border-radius: 1px;
-        transition: opacity 0.025s ease-out; }
+.poec-section__header {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: #0a0a0a;
+  padding: 5px 7px; }
+  .poec-section__header .poec-line-ripple {
+    transform: scaleX(1);
+    opacity: 1;
+    background-color: #5a3806; }
+  .poec-section__header .poec-checkbox__label {
+    font-weight: 600;
+    color: #a38d6d; }
+
+.poec-section .poec-section__content__wrapper {
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height 0.1s linear, visibility 0.1s linear; }
+  .poec-section .poec-section__content__wrapper--open {
+    max-height: 500px;
+    visibility: visible;
+    transition: max-height 0.25s ease-in, visibility 0.25s ease-in; }
+  .poec-section .poec-section__content__wrapper .poec-section__content {
+    padding: 10px; }
