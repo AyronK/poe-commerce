@@ -30,6 +30,8 @@
   height: 34px;
   overflow: hidden;
   border-bottom-color: rgba(0, 0, 0, 0.42); }
+  .poec-input:hover {
+    filter: brightness(120%); }
   .poec-input__input {
     font-family: Verdana,Arial,Helvetica,sans-serif;
     -moz-osx-font-smoothing: grayscale;

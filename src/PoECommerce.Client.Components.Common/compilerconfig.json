@@ -16,6 +16,10 @@
     "inputFile": "Button.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/checkbox.css",
+    "inputFile": "Checkbox.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/common.css",
     "inputFile": "Common/Common.scss"
   },

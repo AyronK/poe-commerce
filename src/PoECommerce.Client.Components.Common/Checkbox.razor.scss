@@ -1,0 +1,53 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.poec-checkbox {
+    display: block;
+
+    .poec-checkbox__label {
+        position: relative;
+        padding-left: 25px;
+        cursor: pointer;
+        user-select: none;
+        color: $poec-theme-secondary;
+        font-size: 0.9rem;
+        line-height: 1.75rem;
+        font-weight: 400;
+        letter-spacing: 0.00937em;
+
+        input {
+            display: none;
+
+            &:checked ~ .poec-checkbox__check:after {
+                display: block;
+            }
+        }
+
+        .poec-checkbox__check {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 15px;
+            width: 15px;
+            background: $poec-theme-surface;
+            border: 2px solid $poec-theme-secondary;
+            border-radius: 1px;
+
+            &:hover {
+                filter: brightness(135%);
+            }
+
+            &:after {
+                left: 3px;
+                top: 3px;
+                width: 9px;
+                height: 9px;
+                background-color: $poec-theme-on-secondary;
+                content: "";
+                position: absolute;
+                display: none;
+                border-radius: 1px;
+            }
+        }
+    }
+}

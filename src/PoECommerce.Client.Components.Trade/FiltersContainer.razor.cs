@@ -15,6 +15,17 @@ namespace PoECommerce.Client.Components.Trade
         private string _league;
         private string _searchText;
         private string _status;
+        private bool _test;
+
+        public bool Test
+        {
+            get => _test;
+            set
+            {
+                _test = value;
+                StateHasChanged();
+            }
+        }
 
         [Inject]
         public ITradeService TradeService { get; set; }
