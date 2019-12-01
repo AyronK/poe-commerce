@@ -2,7 +2,7 @@
 {
     public class NullableEnumJsonConverter<T> : JsonConverter<T?> where T : struct, Enum, IConvertible
     {
-        private static readonly EnumJsonConverter<T> _converter = new EnumJsonConverter<T>();
+        private static readonly EnumJsonConverter<T> Converter = new EnumJsonConverter<T>();
 
 
         public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -12,7 +12,7 @@
                 return null;
             }
 
-            return _converter.Read(ref reader, typeToConvert, options);
+            return Converter.Read(ref reader, typeToConvert, options);
         }
 
         public override void Write(Utf8JsonWriter writer, T? value, JsonSerializerOptions options)
@@ -23,7 +23,7 @@
                 return;
             }
 
-            _converter.Write(writer, value.Value, options);
+            Converter.Write(writer, value.Value, options);
         }
     }
 }

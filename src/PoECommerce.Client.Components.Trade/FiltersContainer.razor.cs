@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -45,7 +43,7 @@ namespace PoECommerce.Client.Components.Trade
             "The Void",
             "Voidforge Infernal Sword",
             "Empower",
-            "Static Strike",
+            "Static Strike"
         };
 
         public IEnumerable<string> SearchTooltipValues { get; set; } = new List<string>();
@@ -76,13 +74,19 @@ namespace PoECommerce.Client.Components.Trade
             set
             {
                 _status = value;
-                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?)null;
+                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?) null;
             }
         }
 
         public void Clear()
         {
-            Query = new Query();
+            Query = new Query
+            {
+                TypeFilter = new TypeFilter(),
+                TradeFilter = new TradeFilter(),
+                WeaponFilter = new WeaponsFilter(),
+                ModifiersFilter = new ModifiersFilter()
+            };
             SearchText = null;
             League = "Blight";
             Status = OnlineStatus.Online.ToString();
@@ -101,7 +105,7 @@ namespace PoECommerce.Client.Components.Trade
             SearchTooltipValues = SearchAutocompleteValues.Where(v => v.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 .OrderByDescending(v => v.StartsWith(value, StringComparison.InvariantCultureIgnoreCase))
                 .ThenBy(v => v)
-                .Take(5);
+                .Take(50);
         }
 
         protected override void OnInitialized()

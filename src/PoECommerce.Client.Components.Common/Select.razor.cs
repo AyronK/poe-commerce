@@ -27,7 +27,7 @@ namespace PoECommerce.Client.Components.Common
             get => _value;
             set
             {
-                if (IsAutocomplete && Value?.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                if (IsAutocomplete && Value != null && value != null && Value.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     return;
                 }
@@ -63,6 +63,9 @@ namespace PoECommerce.Client.Components.Common
 
         [Parameter]
         public EventCallback<ChangeEventArgs> OnInput { get; set; }
+
+        [Parameter]
+        public int MaxElements { get; set; } = 5;
 
         public void SetValue(string value)
         {

@@ -21,5 +21,8 @@ namespace PoECommerce.PathOfExile.Models.Trade.Enums
 
         [JsonEnumName("A")]
         Abyss,
+
+        [JsonEnumName("G")]
+        UnknownRelatedToWhiteSocket,
     }
 }

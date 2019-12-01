@@ -1,10 +1,8 @@
 ﻿@using System.Text.Json
 @using PoECommerce.Core.Model.Search
+@using TypeFilter = PoECommerce.Core.Model.Search.TypeFilter
 @inherits FiltersContainerBase
-
-<h3>Search:</h3>
-
-<div style="display: flex;flex-direction: row">
+<div style="display: flex; flex-direction: row">
     <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
         @foreach (string value in SearchTooltipValues)
         {
@@ -20,45 +18,43 @@
         <SelectOption Value="@OnlineStatus.Any.ToString()">Any</SelectOption>
     </Select>
 </div>
-<br />
-<div style="display: flex;flex-direction: row">
-    <div style="width: 60%; justify-content: center;display: flex">
-        <Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary" Style="width:80%"></Button>
+<div style="display: flex; flex-direction: row; margin-top: 10px">
+    <div style="margin-right: 10px; width: 50%;">
+        <Section Title="Type Filters">
+            <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
+        </Section>
+        <Section Title="Weapon Filters">
+            <WeaponsFilterContainer Filter="@Query.WeaponFilter" OnChange="@((WeaponsFilter filter) => { Query.WeaponFilter = filter; StateHasChanged();})"></WeaponsFilterContainer>
+        </Section>
+        <Section Title="Armour Filters"></Section>
+        <Section Title="Socket Filters"></Section>
+        <Section Title="Requirements"></Section>
+        <Section Title="Map Filters"></Section>
+        <Section Title="Miscellaneous" ></Section>
+        <Section Title="Trade Filters">
+            <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
+        </Section>
     </div>
-    <div style="width: 20%; justify-content: center;display: flex">
-        <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width:80%"></Button>
-    </div>
-    <div style="width: 20%; justify-content: center;display: flex">
-        <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width:80%"></Button>
+    <div style="margin-left: 10px; width: 50%;">
+        <Section Title="Stat Filters" IsOpen="@true">
+            <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
+        </Section>
     </div>
 </div>
+<div style="display: flex; flex-direction: row; margin-top: 10px">
+    <div style="display: flex; justify-content: center; width: 60%;">
+        <Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+    </div>
+    <div style="display: flex; justify-content: center; width: 20%;">
+        <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width: 80%"></Button>
+    </div>
+    <div style="display: flex; justify-content: center; width: 20%;">
+        <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+    </div>
+</div>
+
 <br />
 <br />
 <br />
-
-<Checkbox @bind-Checked="@Test"></Checkbox>
-
-<Section Title="Test">
-    test
-    <br />
-    test
-    <br />
-</Section>
-<Section Title="Test2">
-    test
-    <br />
-    test
-    <br />
-</Section>
-<Section Title="Test3">
-    test
-    <br />
-    test
-    <br />
-</Section>
-
-@Test.ToString()
-
-
 
 @JsonSerializer.Serialize(Query);

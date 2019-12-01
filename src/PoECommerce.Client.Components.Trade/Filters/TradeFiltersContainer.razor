@@ -1,0 +1,62 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits TradeFiltersContainerBase
+
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Seller Account"></Label>
+        </div>
+        <div style="width: 50%">
+            <TextField @bind-Value="@AccountName" PlaceHolder="Seller Account Name" Style="width: 100%"></TextField>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Listed"></Label>
+        </div>
+        <div style="width: 50%">
+            <Select @bind-Value="@Indexed" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption>Any</SelectOption>
+                @foreach (Indexed indexed in Enum.GetValues(typeof(Indexed)))
+                {
+                    <SelectOption Value="@indexed.ToString()">@indexed.ToString()</SelectOption>
+                }
+            </Select>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Sale Type"></Label>
+        </div>
+        <div style="width: 50%">
+            <Select @bind-Value="@SaleType" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption>Any</SelectOption>
+                @foreach (SaleType saleType in Enum.GetValues(typeof(SaleType)))
+                {
+                    <SelectOption Value="@saleType.ToString()">@saleType.ToString()</SelectOption>
+                }
+            </Select>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Buyout Price"></Label>
+        </div>
+        <div style="width: 30%">
+            <Select @bind-Value="@PriceCurrency" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption Value="" >Chaos Orb Equivalent</SelectOption>
+                <SelectOption Value="chaos">Chaos Orb</SelectOption>
+            </Select>
+        </div>
+        <div style="width: 20%">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <TextField @bind-Value="@PriceMin" PlaceHolder="Min" Style="width: 100%;"></TextField>
+                </div>
+                <div style="width: 50%">
+                    <TextField @bind-Value="@PriceMax" PlaceHolder="Max" Style="width: 100%"></TextField>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

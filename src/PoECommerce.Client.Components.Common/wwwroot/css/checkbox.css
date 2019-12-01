@@ -4,6 +4,17 @@
   font-family: Verdana,Arial,Helvetica,sans-serif;
   text-transform: capitalize;
   font-variant: small-caps; }
+  body ::-webkit-scrollbar {
+    background: rgba(15, 15, 15, 0.2);
+    width: 8px; }
+    body ::-webkit-scrollbar:disabled {
+      background: transparent; }
+    body ::-webkit-scrollbar-thumb {
+      background: rgba(90, 56, 6, 0.7); }
+      body ::-webkit-scrollbar-thumb:hover {
+        background: rgba(90, 56, 6, 0.85); }
+      body ::-webkit-scrollbar-thumb:active {
+        background: #5a3806; }
 
 .poec-line-ripple {
   position: absolute;

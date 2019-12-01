@@ -1,13 +1,16 @@
 ﻿@inherits SelectBase
 
-<CascadingValue Value="@this">
-    <div class="@GetStateClass("poec-select")" style="@Style">
-        <input type="text" readonly="@(!IsAutocomplete)" placeholder="@PlaceHolder" class="@GetStateClass("poec-select__selected__input")" id="@Id" @bind="Value" oninput="@OnInput" onclick="@OnClick" onkeydown="@OnKeyDown" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
-        <div class="@GetStateClass("poec-select__menu")">
+<CascadingValue Value="@(this)">
+    <div class="@GetStateClass("poec-select__wrapper")" style="@Style">
+        <div class="@GetStateClass("poec-select")">
+            <input type="text" readonly="@(!IsAutocomplete)" placeholder="@PlaceHolder" class="@GetStateClass("poec-select__selected__input")" id="@Id" @bind="Value" oninput="@OnInput" onclick="@OnClick" onkeydown="@OnKeyDown" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
+            <div class="@GetStateClass("poec-line-ripple")">
+            </div>
+        </div>
+        <div class="@GetStateClass("poec-select__menu")" style="max-height: @(MaxElements * 38)px">
             <ul class="@GetStateClass("poec-select__menu__list")">
                 @ChildContent
             </ul>
         </div>
-        <div class="@GetStateClass("poec-line-ripple")"></div>
     </div>
 </CascadingValue>
