@@ -8,6 +8,10 @@
     "inputFile": "Section.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/label.css",
+    "inputFile": "Label.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/select.css",
     "inputFile": "Select.razor.scss"
   },
