@@ -1,0 +1,31 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits TypeFilterContainerBase
+
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Item Category"></Label>
+        </div>
+        <div style="width: 50%">
+            <Select @bind-Value="@Category" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption Value="A">A</SelectOption>
+                <SelectOption Value="B">B</SelectOption>
+                <SelectOption Value="C">C</SelectOption>
+            </Select>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <Label Value="Item Rarity"></Label>
+        </div>
+        <div style="width: 50%">
+            <Select @bind-Value="@ItemRarity" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption>Any</SelectOption>
+                @foreach (ItemRarity itemRarity in Enum.GetValues(typeof(ItemRarity)))
+                {
+                    <SelectOption Value="@itemRarity.ToString()">@itemRarity.ToString()</SelectOption>
+                }
+            </Select>
+        </div>
+    </div>
+</div>

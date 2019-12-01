@@ -1,0 +1,13 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits FilterMagnitudeContainerBase
+
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <TextField @bind-Value="@MinValue" PlaceHolder="Min" Type="number" Style="width:100%"></TextField>
+        </div>
+        <div style="width: 50%">
+            <TextField @bind-Value="@MaxValue" PlaceHolder="Max" Type="number" Style="width:100%"></TextField>
+        </div>
+    </div>
+</div>

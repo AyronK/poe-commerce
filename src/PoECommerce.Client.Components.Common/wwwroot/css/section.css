@@ -4,6 +4,17 @@
   font-family: Verdana,Arial,Helvetica,sans-serif;
   text-transform: capitalize;
   font-variant: small-caps; }
+  body ::-webkit-scrollbar {
+    background: rgba(15, 15, 15, 0.2);
+    width: 8px; }
+    body ::-webkit-scrollbar:disabled {
+      background: transparent; }
+    body ::-webkit-scrollbar-thumb {
+      background: rgba(90, 56, 6, 0.7); }
+      body ::-webkit-scrollbar-thumb:hover {
+        background: rgba(90, 56, 6, 0.85); }
+      body ::-webkit-scrollbar-thumb:active {
+        background: #5a3806; }
 
 .poec-line-ripple {
   position: absolute;
@@ -67,28 +78,29 @@
       border-bottom-color: #e2e2e2;
       border-bottom-style: outset; }
 
-.poec-section__header {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  background-color: #0a0a0a;
-  padding: 5px 7px; }
-  .poec-section__header .poec-line-ripple {
-    transform: scaleX(1);
-    opacity: 1;
-    background-color: #5a3806; }
-  .poec-section__header .poec-checkbox__label {
-    font-weight: 600;
-    color: #a38d6d; }
-
-.poec-section .poec-section__content__wrapper {
-  max-height: 0;
-  visibility: hidden;
-  transition: max-height 0.1s linear, visibility 0.1s linear; }
-  .poec-section .poec-section__content__wrapper--open {
-    max-height: 500px;
-    visibility: visible;
-    transition: max-height 0.25s ease-in, visibility 0.25s ease-in; }
-  .poec-section .poec-section__content__wrapper .poec-section__content {
-    padding: 10px; }
+.poec-section {
+  position: relative; }
+  .poec-section__header {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: #0a0a0a;
+    padding: 5px 7px; }
+    .poec-section__header .poec-line-ripple {
+      transform: scaleX(1);
+      opacity: 1;
+      background-color: #5a3806; }
+    .poec-section__header .poec-checkbox__label {
+      font-weight: 600;
+      color: #a38d6d; }
+  .poec-section .poec-section__content__wrapper {
+    max-height: 0;
+    visibility: hidden;
+    transition: max-height 0.1s linear, visibility 0.1s linear; }
+    .poec-section .poec-section__content__wrapper--open {
+      max-height: 500px;
+      visibility: visible;
+      transition: max-height 0.25s ease-in, visibility 0.25s ease-in; }
+    .poec-section .poec-section__content__wrapper .poec-section__content {
+      padding: 10px; }

@@ -7,5 +7,9 @@
         public string Type { get; set; }
         public OnlineStatus? OnlineStatus { get; set; }
         public string League { get; set; }
+        public TypeFilter TypeFilter { get; set; }
+        public WeaponsFilter WeaponFilter { get; set; }
+        public TradeFilter TradeFilter { get; set; }
+        public ModifiersFilter ModifiersFilter { get; set; }
     }
 }

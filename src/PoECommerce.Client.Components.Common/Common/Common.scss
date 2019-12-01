@@ -6,6 +6,27 @@ body {
     font-family: $poec-typography-font-family;
     text-transform: capitalize;
     font-variant: small-caps;
+
+    ::-webkit-scrollbar {
+        background: rgba($poec-theme-background, 0.2);
+        width: 8px;
+
+        &:disabled {
+            background: transparent;
+        }
+
+        &-thumb {
+            background: rgba($poec-theme-secondary, 0.7);
+
+            &:hover {
+                background: rgba($poec-theme-secondary, 0.85);
+            }
+
+            &:active {
+                background: $poec-theme-secondary;
+            }
+        }
+    }
 }
 
 .poec-line-ripple {
