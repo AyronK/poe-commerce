@@ -1,0 +1,198 @@
+﻿.text-default {
+  color: #7f7f7f; }
+
+.text-description {
+  color: #7f7f7f; }
+
+.text-firedamage {
+  color: #960000; }
+
+.text-colddamage {
+  color: #366492; }
+
+.text-lightningdamage {
+  color: #ffd700; }
+
+.text-chaosdamage {
+  color: #d02090; }
+
+.text-simple {
+  color: #FFFFFF; }
+
+.text-augmented {
+  color: #8888FF; }
+
+.text-enchant {
+  color: #b4b4ff; }
+
+.text-fractured {
+  color: #a29162; }
+
+.text-crafted {
+  color: #b4b4ff; }
+
+.text-corrupted {
+  color: #d20000; }
+
+.text-unmet {
+  color: #d20000; }
+
+.text-unidentified {
+  color: #d20000; }
+
+.text-note {
+  color: #AA9E82;
+  font-weight: bolder; }
+
+.listed-item-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: stretch;
+  margin: 10px;
+  position: relative;
+  background-color: #18181b; }
+  .listed-item-container-item {
+    width: 20%;
+    display: inline-block;
+    align-self: center;
+    margin: 0; }
+    .listed-item-container-item .icon-wrapper {
+      position: relative;
+      text-align: center; }
+      .listed-item-container-item .icon-wrapper .icon {
+        display: inline-block;
+        position: relative;
+        background-size: contain;
+        background-repeat: no-repeat; }
+        .listed-item-container-item .icon-wrapper .icon img {
+          padding: 15px;
+          vertical-align: middle; }
+  .listed-item-container-stats {
+    width: 60%;
+    background-color: black;
+    color: #7f7f7f;
+    font-size: 0.75em;
+    margin: 5px 0;
+    box-shadow: 0px 1px 4px 1px black;
+    position: relative;
+    align-self: stretch; }
+    .listed-item-container-stats__verified {
+      padding: 2px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #7f7f7f;
+      border: 1px solid #7f7f7f;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: 55px; }
+    .listed-item-container-stats h1 {
+      font-size: 16px;
+      line-height: 1em;
+      margin: 4px; }
+    .listed-item-container-stats .stats-serparator {
+      width: 100%;
+      height: 2px;
+      margin: 5px 0; }
+    .listed-item-container-stats .item-header {
+      padding: 2px 0;
+      margin-bottom: 4px; }
+    .listed-item-container-stats .item-description {
+      padding: 10px; }
+    .listed-item-container-stats__unique h1, .listed-item-container-stats__unique h2 {
+      color: #af6025;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__unique .item-header {
+      background: #af6025;
+      background: radial-gradient(circle, rgba(175, 96, 37, 0.35) 30%, rgba(175, 96, 37, 0.05) 100%); }
+    .listed-item-container-stats__unique .stats-serparator {
+      background: #af6025;
+      background: radial-gradient(circle, #af6025 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__rare h1, .listed-item-container-stats__rare h2 {
+      color: #ffff77;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__rare .item-header {
+      background: #ffff77;
+      background: radial-gradient(circle, rgba(255, 255, 119, 0.35) 30%, rgba(255, 255, 119, 0.05) 100%); }
+    .listed-item-container-stats__rare .stats-serparator {
+      background: #ffff77;
+      background: radial-gradient(circle, #ffff77 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__magic h1, .listed-item-container-stats__magic h2 {
+      color: #8888FF;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__magic .item-header {
+      background: #8888FF;
+      background: radial-gradient(circle, rgba(136, 136, 255, 0.35) 30%, rgba(136, 136, 255, 0.05) 100%); }
+    .listed-item-container-stats__magic .stats-serparator {
+      background: #8888FF;
+      background: radial-gradient(circle, #8888FF 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__normal h1, .listed-item-container-stats__normal h2 {
+      color: #c8c8c8;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__normal .item-header {
+      background: #c8c8c8;
+      background: radial-gradient(circle, rgba(200, 200, 200, 0.35) 30%, rgba(200, 200, 200, 0.05) 100%); }
+    .listed-item-container-stats__normal .stats-serparator {
+      background: #c8c8c8;
+      background: radial-gradient(circle, #c8c8c8 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__gem h1, .listed-item-container-stats__gem h2 {
+      color: #1ba29b;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__gem .item-header {
+      background: #1ba29b;
+      background: radial-gradient(circle, rgba(27, 162, 155, 0.35) 30%, rgba(27, 162, 155, 0.05) 100%); }
+    .listed-item-container-stats__gem .stats-serparator {
+      background: #1ba29b;
+      background: radial-gradient(circle, #1ba29b 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__prophecy h1, .listed-item-container-stats__prophecy h2 {
+      color: #b54bff;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__prophecy .item-header {
+      background: #b54bff;
+      background: radial-gradient(circle, rgba(181, 75, 255, 0.35) 30%, rgba(181, 75, 255, 0.05) 100%); }
+    .listed-item-container-stats__prophecy .stats-serparator {
+      background: #b54bff;
+      background: radial-gradient(circle, #b54bff 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__currency h1, .listed-item-container-stats__currency h2 {
+      color: #aa9e82;
+      -webkit-text-stroke-width: 0.2px;
+      -webkit-text-stroke-color: black; }
+    .listed-item-container-stats__currency .item-header {
+      background: #aa9e82;
+      background: radial-gradient(circle, rgba(170, 158, 130, 0.35) 30%, rgba(170, 158, 130, 0.05) 100%); }
+    .listed-item-container-stats__currency .stats-serparator {
+      background: #aa9e82;
+      background: radial-gradient(circle, #aa9e82 0%, transparent 80%);
+      width: 50%;
+      margin: 6px auto; }
+    .listed-item-container-stats__unique .text-description, .listed-item-container-stats__prophecy .text-description {
+      color: #af6025; }
+    .listed-item-container-stats__gem .text-description {
+      color: #1ba29b; }
+    .listed-item-container-stats .item-mod {
+      margin: 5px 0; }
+  .listed-item-container-listing {
+    width: 20%;
+    align-self: center; }

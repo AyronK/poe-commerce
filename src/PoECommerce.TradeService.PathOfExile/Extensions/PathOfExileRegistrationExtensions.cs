@@ -7,6 +7,7 @@ using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
 using PoECommerce.TradeService.PathOfExile.Mappers;
 using PoECommerce.TradeService.PathOfExile.Mappers.FromCore;
@@ -41,6 +42,7 @@ namespace PoECommerce.TradeService.PathOfExile.Extensions
             }
 
             services.AddSingleton<IModelMapper<CoreModels.Query, Query>, QueryToQueryMapper>();
+            services.AddSingleton<IModelMapper<CoreModels.SortType, SortType>, QueryToQueryMapper>();
             services.AddSingleton<IModelMapper<ListedItem, CoreModels.ListedItem>, ListedItemToListedItemMapper>();
             services.AddSingleton<IModelMapper<QueryResult, CoreModels.SearchResult>, QueryResultToSearchResultMapper>();
             services.AddSingleton<IModelMapper<League, CoreDataModels.League>, LeagueToLeagueMapper>();

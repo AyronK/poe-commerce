@@ -35,7 +35,7 @@
         </Select>
     </div>
     <div style="display: flex; flex-direction: row; margin-top: 10px">
-        <div style="margin-right: 10px; width: 50%;">
+        <div style="width: 100%;">
             <Section Title="Type Filters">
                 <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
             </Section>
@@ -50,9 +50,7 @@
             <Section Title="Trade Filters">
                 <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
             </Section>
-        </div>
-        <div style="margin-left: 10px; width: 50%;">
-            <Section Title="Stat Filters" IsOpen="@true">
+            <Section Title="Stat Filters">
                 <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
             </Section>
         </div>

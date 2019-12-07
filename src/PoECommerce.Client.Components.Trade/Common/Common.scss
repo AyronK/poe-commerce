@@ -1,0 +1,62 @@
+﻿@import "Variables";
+
+.text-default {
+    color: $poec-item-text-default;
+}
+
+.text-description {
+    color: $poec-item-text-default;
+}
+
+.text-firedamage {
+    color: $poec-item-text-firedamage;
+}
+
+.text-colddamage {
+    color: $poec-item-text-colddamage;
+}
+
+.text-lightningdamage {
+    color: $poec-item-text-lightningdamage;
+}
+
+.text-chaosdamage {
+    color: $poec-item-text-chaosdamage;
+}
+
+.text-simple {
+    color: $poec-item-text-simple;
+}
+
+.text-augmented {
+    color: $poec-item-text-augmented;
+}
+
+.text-enchant {
+    color: $poec-item-text-enchant;
+}
+
+.text-fractured {
+    color: $poec-item-text-fractured;
+}
+
+.text-crafted {
+    color: $poec-item-text-crafted;
+}
+
+.text-corrupted {
+    color: $poec-item-text-corrupted;
+}
+
+.text-unmet {
+    color: $poec-item-text-unmet;
+}
+
+.text-unidentified {
+    color: $poec-item-text-unidentified;
+}
+
+.text-note {
+    color: $poec-item-text-note;
+    font-weight:bolder;
+}

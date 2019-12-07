@@ -5,9 +5,9 @@ namespace PoECommerce.PathOfExile.Models.Search.Filters
     public class FilterMagnitude
     {
         [JsonPropertyName("min")]
-        public int? Min { get; set; }
+        public double? Min { get; set; }
 
         [JsonPropertyName("max")]
-        public int? Max { get; set; }
+        public double? Max { get; set; }
     }
 }

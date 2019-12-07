@@ -97,6 +97,7 @@ namespace PoECommerce.Client.Components.Trade
 
         public async Task Search()
         {
+            OnSearch.InvokeAsync(null).Wait();
             SearchResult searchResult = await TradeService.Search(Query);
             OnSearch.InvokeAsync(searchResult).Wait();
         }
@@ -128,9 +129,16 @@ namespace PoECommerce.Client.Components.Trade
             Query = new Query
             {
                 TypeFilter = new TypeFilter(),
-                TradeFilter = new TradeFilter(),
+                TradeFilter = new TradeFilter
+                {
+                    SaleType = SaleType.Priced
+                },
                 WeaponFilter = new WeaponsFilter(),
-                ModifiersFilter = new ModifiersFilter()
+                ModifiersFilter = new ModifiersFilter(),
+                Sort = new Dictionary<string, SortType>
+                {
+                    { "price", SortType.Ascending }
+                }
             };
 
             Query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());

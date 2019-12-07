@@ -34,6 +34,18 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                         Max = 50
                     },
                 Description = "With hash"
+            },
+            new ModelFromJsonTestCase<Magnitude>
+            {
+                Json = "{\"hash\":\"explicit.stat_3299347043\",\"min\":0.2,\"max\":0.4}",
+                ExpectedResult =
+                    new Magnitude
+                    {
+                        Hash = "explicit.stat_3299347043",
+                        Min = 0.2,
+                        Max = 0.4
+                    },
+                Description = "Double values"
             }
         };
 

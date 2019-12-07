@@ -17,12 +17,12 @@ namespace PoECommerce.PathOfExile.Models.Trade.Items
         ///     Minimum in the modifier's values range.
         /// </summary>
         [JsonPropertyName("min")]
-        public int Min { get; set; }
+        public double Min { get; set; }
 
         /// <summary>
         ///     Maximum in the modifier's values range.
         /// </summary>
         [JsonPropertyName("max")]
-        public int Max { get; set; }
+        public double Max { get; set; }
     }
 }

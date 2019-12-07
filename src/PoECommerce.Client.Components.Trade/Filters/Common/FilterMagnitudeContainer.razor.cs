@@ -12,16 +12,16 @@ namespace PoECommerce.Client.Components.Trade.Filters.Common
         protected string MinValue
         {
             get => Min?.ToString();
-            set => Min = int.TryParse(value, out int intValue) ? intValue : (int?) null;
+            set => Min = double.TryParse(value, out double doubleValue) ? doubleValue : (double?) null;
         }
 
         protected string MaxValue
         {
             get => Max?.ToString();
-            set => Max = int.TryParse(value, out int intValue) ? intValue : (int?) null;
+            set => Max = double.TryParse(value, out double doubleValue) ? doubleValue : (double?) null;
         }
 
-        public int? Min
+        public double? Min
         {
             get => FilterMagnitude.Min;
             set
@@ -31,7 +31,7 @@ namespace PoECommerce.Client.Components.Trade.Filters.Common
             }
         }
 
-        public int? Max
+        public double? Max
         {
             get => FilterMagnitude.Max;
             set

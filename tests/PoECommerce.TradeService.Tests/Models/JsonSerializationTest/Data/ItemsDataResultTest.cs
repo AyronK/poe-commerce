@@ -36,7 +36,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data
                                 Name = "testName",
                                 Type = "testType",
                                 Text = "testText",
-                                Disclaimer = "testDisc",
+                                Discriminator = "testDisc",
                                 Flags = null
                             }
                         },

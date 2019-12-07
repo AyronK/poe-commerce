@@ -1,4 +1,6 @@
-﻿namespace PoECommerce.Core.Model.Search
+﻿using System.Collections.Generic;
+
+namespace PoECommerce.Core.Model.Search
 {
     public class Query
     {
@@ -11,5 +13,6 @@
         public WeaponsFilter WeaponFilter { get; set; }
         public TradeFilter TradeFilter { get; set; }
         public ModifiersFilter ModifiersFilter { get; set; }
+        public IDictionary<string, SortType> Sort { get; set; }
     }
 }
