@@ -6,6 +6,6 @@
     {
         public string Id { get; set; }
 
-        public int Value { get; set; }
+        public int[] Values { get; set; }
     }
 }

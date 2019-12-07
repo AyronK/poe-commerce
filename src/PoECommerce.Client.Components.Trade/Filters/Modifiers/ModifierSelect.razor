@@ -1,0 +1,15 @@
+﻿@using PoECommerce.Core.Model.Data
+@inherits ModifierSelectBase
+
+<Select ValueChanged="@ValueChanged" Value="@Value" PlaceHolder="@PlaceHolder" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
+    @foreach (Modifier modifier in SearchTooltipValues)
+    {
+        <SelectOption Value="@modifier.Id" Text="@modifier.Text">
+            <Before>
+                <strong>
+                    @modifier.Type&nbsp|&nbsp
+                </strong>
+            </Before>
+        </SelectOption>
+    }
+</Select>

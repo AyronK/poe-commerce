@@ -163,7 +163,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                 ModifierType.Crafted,
                                 new[]
                                 {
-                                    new Hash {Id = "explicit.stat_1509134228", Value = 2}
+                                    new Hash {Id = "explicit.stat_1509134228", Values = new[] { 2 }}
                                 }
                             }
                         },

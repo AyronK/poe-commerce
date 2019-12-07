@@ -1,13 +1,9 @@
 ﻿@inherits SingleModifierFilterContainerBase
 
 <div style="display: flex; flex-direction: row">
-    <div style="width: 10%">
+    <div style="width: 70%; display:flex">
         <Checkbox @bind-Checked="@Enabled"></Checkbox>
-    </div>
-    <div style="width: 60%">
-        <Select @bind-Value="@Id" IsAutocomplete="@true" PlaceHolder="Change Modifier Filter">
-            <SelectOption Value="test">Test</SelectOption>
-        </Select>
+        <ModifierSelect @bind-Value="@Id" PlaceHolder="Change Modifier Filter"></ModifierSelect>
     </div>
     <div style="width: 20%">
         <FilterMagnitudeContainer FilterMagnitude="@Magnitude" OnChange="@(m => Magnitude = m)"></FilterMagnitudeContainer>

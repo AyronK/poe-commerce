@@ -37,20 +37,20 @@ namespace PoECommerce.PathOfExile.Json.Serialization
                     {
                         throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but starts with '{reader.TokenType}'.");
                     }
+                    List<int> values = new List<int>();
 
-                    if (reader.Read() && reader.TokenType != JsonTokenType.Number)
+                    while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
                     {
-                        throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array of integers, but contains '{reader.TokenType}'.");
+                        int value = reader.GetInt32();
+                        values.Add(value);
                     }
 
-                    int value = reader.GetInt32();
-
-                    result.Add(new Hash {Id = id, Value = value});
-
-                    if (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+                    if (reader.TokenType != JsonTokenType.EndArray)
                     {
-                        throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an one element array, but after the first element there is '{reader.TokenType}'.");
+                        throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but after the last element there is '{reader.TokenType}'.");
                     }
+
+                    result.Add(new Hash { Id = id, Values = values.ToArray() });
                 }
             }
 
@@ -66,7 +66,13 @@ namespace PoECommerce.PathOfExile.Json.Serialization
                 writer.WriteStartArray();
                 writer.WriteStringValue(hash.Id);
                 writer.WriteStartArray();
-                writer.WriteNumberValue(hash.Value);
+
+                foreach (int hashValue in hash.Values)
+                {
+
+                    writer.WriteNumberValue(hashValue);
+                }
+
                 writer.WriteEndArray();
                 writer.WriteEndArray();
             }

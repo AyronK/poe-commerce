@@ -1,7 +1,7 @@
 ﻿using PoECommerce.Core;
 using PoECommerce.PathOfExile.Models.Trade;
-using PoECommerce.PathOfExile.Models.Trade.Items;
 using CoreModels = PoECommerce.Core.Model.Search;
+using Item = PoECommerce.PathOfExile.Models.Trade.Items.Item;
 
 namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
 {

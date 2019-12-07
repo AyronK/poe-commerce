@@ -406,7 +406,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "implicit.stat_624954515",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 },
@@ -416,37 +416,37 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "explicit.stat_1509134228",
-                                            Value = 2
+                                            Values = new[] { 2 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_210067635",
-                                            Value = 3
+                                            Values = new[] { 3 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_3299347043",
-                                            Value = 6
+                                            Values = new[] { 6 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_2933625540",
-                                            Value = 4
+                                            Values = new[] { 4 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_1038949719",
-                                            Value = 1
+                                            Values = new[] { 1 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_1840985759",
-                                            Value = 5
+                                            Values = new[] { 5 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_4031851097",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 }
@@ -647,7 +647,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "implicit.stat_1175385867",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 },
@@ -657,7 +657,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "enchant.stat_1580810115",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 },
@@ -667,22 +667,22 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "explicit.stat_3604946673",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_3299347043",
-                                            Value = 1
+                                            Values = new[] { 1 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_1050105434",
-                                            Value = 2
+                                            Values = new[] { 2 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_4220027924",
-                                            Value = 3
+                                            Values = new[] { 3 }
                                         }
                                     }
                                 }
@@ -799,17 +799,17 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "explicit.stat_700317374",
-                                            Value = 1
+                                            Values = new[] { 1 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_173226756",
-                                            Value = 1
+                                            Values = new[] { 1 }
                                         },
                                         new Hash
                                         {
                                             Id = "explicit.stat_3479987487",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 }
@@ -946,7 +946,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Trade.Items
                                         new Hash
                                         {
                                             Id = "implicit.stat_3527617737",
-                                            Value = 0
+                                            Values = new[] { 0 }
                                         }
                                     }
                                 }

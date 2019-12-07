@@ -77,6 +77,9 @@
     .poec-input__input--filled, .poec-select__wrapper .poec-select__selected__input--filled {
       border-bottom-color: #e2e2e2;
       border-bottom-style: outset; }
+  .poec-input[type=number]::-webkit-inner-spin-button, .poec-select__wrapper [type=number].poec-select::-webkit-inner-spin-button, .poec-input[type=number]::-webkit-outer-spin-button, .poec-select__wrapper [type=number].poec-select::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
 
 .poec-select__wrapper {
   position: relative;

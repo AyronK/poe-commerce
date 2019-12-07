@@ -1,60 +1,76 @@
 ﻿@using System.Text.Json
+@using PoECommerce.Core.Model.Data
 @using PoECommerce.Core.Model.Search
 @using TypeFilter = PoECommerce.Core.Model.Search.TypeFilter
+@using Item = PoECommerce.Core.Model.Data.Item
 @inherits FiltersContainerBase
-<div style="display: flex; flex-direction: row">
-    <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
-        @foreach (string value in SearchTooltipValues)
-        {
-            <SelectOption Value="@value">@value</SelectOption>
-        }
-    </Select>
-    <Select @bind-Value="@League" Style="width: 20%" PlaceHolder="League">
-        <SelectOption Value="Blight">Blight</SelectOption>
-        <SelectOption Value="Hardcore Blight">Hardcore Blight</SelectOption>
-    </Select>
-    <Select @bind-Value="@Status" Style="width: 20%" PlaceHolder="Online Status">
-        <SelectOption Value="@OnlineStatus.Online.ToString()">Online Only</SelectOption>
-        <SelectOption Value="@OnlineStatus.Any.ToString()">Any</SelectOption>
-    </Select>
-</div>
-<div style="display: flex; flex-direction: row; margin-top: 10px">
-    <div style="margin-right: 10px; width: 50%;">
-        <Section Title="Type Filters">
-            <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
-        </Section>
-        <Section Title="Weapon Filters">
-            <WeaponsFilterContainer Filter="@Query.WeaponFilter" OnChange="@((WeaponsFilter filter) => { Query.WeaponFilter = filter; StateHasChanged();})"></WeaponsFilterContainer>
-        </Section>
-        <Section Title="Armour Filters"></Section>
-        <Section Title="Socket Filters"></Section>
-        <Section Title="Requirements"></Section>
-        <Section Title="Map Filters"></Section>
-        <Section Title="Miscellaneous" ></Section>
-        <Section Title="Trade Filters">
-            <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
-        </Section>
+<div style="user-select: none">
+    <div style="display: flex; flex-direction: row">
+        <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
+            @foreach (Item value in SearchTooltipValues)
+            {
+                <SelectOption Value="@value.GetHashCode().ToString()" Text="@value.ToString()">
+                    <Before>
+                        @if (value.IsUnique)
+                        {
+                            @:Unique&nbsp;|&nbsp;
+                        }
+                        else if (value.IsProphecy)
+                        {
+                            @:Prophecy&nbsp;|&nbsp;
+                        }
+                    </Before>
+                </SelectOption>
+            }
+        </Select>
+        <Select @bind-Value="@League" Style="width: 20%" PlaceHolder="League">
+            @foreach (League league in Leagues)
+            {
+                <SelectOption Value="@league.Id" Text="@league.Text"></SelectOption>
+            }
+        </Select>
+        <Select @bind-Value="@Status" Style="width: 20%" PlaceHolder="Online Status">
+            <SelectOption Value="@OnlineStatus.Online.ToString()" Text="Online Only"></SelectOption>
+            <SelectOption Value="@OnlineStatus.Any.ToString()" Text="Any"></SelectOption>
+        </Select>
     </div>
-    <div style="margin-left: 10px; width: 50%;">
-        <Section Title="Stat Filters" IsOpen="@true">
-            <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
-        </Section>
+    <div style="display: flex; flex-direction: row; margin-top: 10px">
+        <div style="margin-right: 10px; width: 50%;">
+            <Section Title="Type Filters">
+                <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
+            </Section>
+            <Section Title="Weapon Filters">
+                <WeaponsFilterContainer Filter="@Query.WeaponFilter" OnChange="@((WeaponsFilter filter) => { Query.WeaponFilter = filter; StateHasChanged();})"></WeaponsFilterContainer>
+            </Section>
+            <Section Title="Armour Filters"></Section>
+            <Section Title="Socket Filters"></Section>
+            <Section Title="Requirements"></Section>
+            <Section Title="Map Filters"></Section>
+            <Section Title="Miscellaneous"></Section>
+            <Section Title="Trade Filters">
+                <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
+            </Section>
+        </div>
+        <div style="margin-left: 10px; width: 50%;">
+            <Section Title="Stat Filters" IsOpen="@true">
+                <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
+            </Section>
+        </div>
     </div>
-</div>
-<div style="display: flex; flex-direction: row; margin-top: 10px">
-    <div style="display: flex; justify-content: center; width: 60%;">
-        <Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+    <div style="display: flex; flex-direction: row; margin-top: 10px">
+        <div style="display: flex; justify-content: center; width: 60%;">
+            <Button OnClick="@Search" Value="Search" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+        </div>
+        <div style="display: flex; justify-content: center; width: 20%;">
+            <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width: 80%"></Button>
+        </div>
+        <div style="display: flex; justify-content: center; width: 20%;">
+            <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+        </div>
     </div>
-    <div style="display: flex; justify-content: center; width: 20%;">
-        <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width: 80%"></Button>
-    </div>
-    <div style="display: flex; justify-content: center; width: 20%;">
-        <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
-    </div>
-</div>
 
-<br />
-<br />
-<br />
-
+    <br />
+    <br />
+    <br />
+</div>
 @JsonSerializer.Serialize(Query);

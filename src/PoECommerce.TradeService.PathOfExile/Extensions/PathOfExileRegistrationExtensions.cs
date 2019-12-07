@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using PoECommerce.Core;
 using PoECommerce.PathOfExile;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Trade;
 using PoECommerce.TradeService.PathOfExile.Mappers;
 using PoECommerce.TradeService.PathOfExile.Mappers.FromCore;
 using PoECommerce.TradeService.PathOfExile.Mappers.ToCore;
 using CoreModels = PoECommerce.Core.Model.Search;
+using CoreDataModels = PoECommerce.Core.Model.Data;
 
 namespace PoECommerce.TradeService.PathOfExile.Extensions
 {
@@ -39,8 +43,14 @@ namespace PoECommerce.TradeService.PathOfExile.Extensions
             services.AddSingleton<IModelMapper<CoreModels.Query, Query>, QueryToQueryMapper>();
             services.AddSingleton<IModelMapper<ListedItem, CoreModels.ListedItem>, ListedItemToListedItemMapper>();
             services.AddSingleton<IModelMapper<QueryResult, CoreModels.SearchResult>, QueryResultToSearchResultMapper>();
+            services.AddSingleton<IModelMapper<League, CoreDataModels.League>, LeagueToLeagueMapper>();
+            services.AddSingleton<IModelMapper<Modifier, CoreDataModels.Modifier>, ModifierToModifierMapper>();
+            services.AddSingleton<IModelMapper<KeyValuePair<ItemCategory, Item>, CoreDataModels.Item>, ItemToItemMapper>();
+            services.AddSingleton<IModelMapper<ItemCategory, Core.Model.Data.ItemCategory>, ItemToItemMapper>();
+            services.AddSingleton<IModelMapper<ModifierType, CoreDataModels.ModifierType>, ModifierToModifierMapper>();
             services.AddSingleton<IMapperFacade, MapperFacade>();
             services.AddScoped<ITradeService, PathOfExileTradeService>();
+            services.AddScoped<IStaticDataService, PathOfExileStaticDataService>();
         }
     }
 }

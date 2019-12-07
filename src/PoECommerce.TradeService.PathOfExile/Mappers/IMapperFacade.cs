@@ -1,45 +1,23 @@
-﻿using PoECommerce.Core;
+﻿using System.Collections.Generic;
+using PoECommerce.Core;
+using PoECommerce.PathOfExile.Models.Data;
+using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Trade;
 using CoreModels = PoECommerce.Core.Model.Search;
+using CoreDataModels = PoECommerce.Core.Model.Data;
 
 namespace PoECommerce.TradeService.PathOfExile.Mappers
 {
-    internal interface IMapperFacade : IModelMapper<CoreModels.Query, Query>, IModelMapper<ListedItem, CoreModels.ListedItem>, IModelMapper<QueryResult, CoreModels.SearchResult>
+    internal interface IMapperFacade : 
+        IModelMapper<CoreModels.Query, Query>,
+        IModelMapper<ListedItem, CoreModels.ListedItem>,
+        IModelMapper<QueryResult, CoreModels.SearchResult>,
+        IModelMapper<League, CoreDataModels.League>,
+        IModelMapper<Modifier, CoreDataModels.Modifier>, 
+        IModelMapper<ModifierType, CoreDataModels.ModifierType>,
+        IModelMapper<KeyValuePair<ItemCategory, Item>, CoreDataModels.Item>,
+        IModelMapper<ItemCategory, CoreDataModels.ItemCategory>
     {
-    }
-
-    internal class MapperFacade : IMapperFacade
-    {
-        private readonly IModelMapper<ListedItem, CoreModels.ListedItem> _listedItemMapper;
-        private readonly IModelMapper<CoreModels.Query, Query> _queryMapper;
-        private readonly IModelMapper<QueryResult, CoreModels.SearchResult> _searchResultMapper;
-
-        public MapperFacade
-        (
-            IModelMapper<CoreModels.Query, Query> queryMapper,
-            IModelMapper<ListedItem, CoreModels.ListedItem> listedItemMapper,
-            IModelMapper<QueryResult, CoreModels.SearchResult> searchResultMapper
-        )
-        {
-            _queryMapper = queryMapper;
-            _listedItemMapper = listedItemMapper;
-            _searchResultMapper = searchResultMapper;
-        }
-
-        public Query Map(CoreModels.Query mapOperand)
-        {
-            return _queryMapper.Map(mapOperand);
-        }
-
-        public CoreModels.ListedItem Map(ListedItem mapOperand)
-        {
-            return _listedItemMapper.Map(mapOperand);
-        }
-
-        public CoreModels.SearchResult Map(QueryResult mapOperand)
-        {
-            return _searchResultMapper.Map(mapOperand);
-        }
     }
 }
