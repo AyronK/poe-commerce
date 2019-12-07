@@ -16,10 +16,10 @@
         </div>
         <div style="width: 50%">
             <Select @bind-Value="@Indexed" IsAutocomplete="@true" Style="width:100%">
-                <SelectOption>Any</SelectOption>
+                <SelectOption Text="Any"></SelectOption>
                 @foreach (Indexed indexed in Enum.GetValues(typeof(Indexed)))
                 {
-                    <SelectOption Value="@indexed.ToString()">@indexed.ToString()</SelectOption>
+                    <SelectOption Value="@indexed.ToString()" Text="@indexed.ToString()"></SelectOption>
                 }
             </Select>
         </div>
@@ -30,10 +30,10 @@
         </div>
         <div style="width: 50%">
             <Select @bind-Value="@SaleType" IsAutocomplete="@true" Style="width:100%">
-                <SelectOption>Any</SelectOption>
+                <SelectOption Text="Any"></SelectOption>
                 @foreach (SaleType saleType in Enum.GetValues(typeof(SaleType)))
                 {
-                    <SelectOption Value="@saleType.ToString()">@saleType.ToString()</SelectOption>
+                    <SelectOption Value="@saleType.ToString()" Text="@saleType.ToString()"></SelectOption>
                 }
             </Select>
         </div>
@@ -44,8 +44,23 @@
         </div>
         <div style="width: 30%">
             <Select @bind-Value="@PriceCurrency" IsAutocomplete="@true" Style="width:100%">
-                <SelectOption Value="" >Chaos Orb Equivalent</SelectOption>
-                <SelectOption Value="chaos">Chaos Orb</SelectOption>
+                <SelectOption Value="" Text="Chaos Orb Equivalent"></SelectOption>
+                <SelectOption Value="chaos" Text="Chaos Orb"></SelectOption>
+                <SelectOption Value="exa" Text="Exalted Orb"></SelectOption>
+                <SelectOption Value="blessed" Text="Blessed Orb"></SelectOption>
+                <SelectOption Value="chisel" Text="Cartographer's Chisel"></SelectOption>
+                <SelectOption Value="chrom" Text="Chromatic Orb"></SelectOption>
+                <SelectOption Value="divine" Text="Divine Orb"></SelectOption>
+                <SelectOption Value="gcp" Text="Gemcutter's Prism"></SelectOption>
+                <SelectOption Value="jew" Text="Jeweller's Orb"></SelectOption>
+                <SelectOption Value="scour" Text="Orb of Scouring"></SelectOption>
+                <SelectOption Value="regret" Text="Orb of Regret"></SelectOption>
+                <SelectOption Value="fusing" Text="Orb of Fusing"></SelectOption>
+                <SelectOption Value="chance" Text="Orb of Chance"></SelectOption>
+                <SelectOption Value="alt" Text="Orb of Alteration"></SelectOption>
+                <SelectOption Value="alch" Text="Orb of Alchemy"></SelectOption>
+                <SelectOption Value="regal" Text="Regal Orb"></SelectOption>
+                <SelectOption Value="vaal" Text="Vaal Orb"></SelectOption>
             </Select>
         </div>
         <div style="width: 20%">

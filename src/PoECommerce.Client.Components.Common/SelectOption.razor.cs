@@ -10,6 +10,12 @@ namespace PoECommerce.Client.Components.Common
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
+        
+        [Parameter]
+        public RenderFragment Before { get; set; }
+
+        [Parameter]
+        public string Text { get; set; }
 
         [Parameter]
         public string Value { get; set; }
@@ -20,10 +26,19 @@ namespace PoECommerce.Client.Components.Common
         {
             base.OnInitialized();
 
+            Parent.RegisterOption(Value, Text);
+
             OnMouseDown = new EventCallbackFactory().Create(this, (MouseEventArgs args) =>
             {
                 Parent.SetValue(Value);
             });
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            Parent.RegisterOption(Value, Text);
         }
     }
 }

@@ -77,3 +77,6 @@
     .poec-input__input--filled {
       border-bottom-color: #e2e2e2;
       border-bottom-style: outset; }
+  .poec-input[type=number]::-webkit-inner-spin-button, .poec-input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }

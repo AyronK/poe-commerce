@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core;
+using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
+using Item = PoECommerce.Core.Model.Data.Item;
 
 namespace PoECommerce.Client.Components.Trade
 {
@@ -28,25 +30,19 @@ namespace PoECommerce.Client.Components.Trade
         [Inject]
         public ITradeService TradeService { get; set; }
 
+        [Inject]
+        public IStaticDataService DataService { get; set; }
+
+        public League[] Leagues { get; set; } = new League[0];
+
         [Parameter]
         public EventCallback<SearchResult> OnSearch { get; set; }
 
         public Query Query { get; set; } = new Query();
 
-        public string[] SearchAutocompleteValues { get; set; } =
-        {
-            "Voideye Unset Ring",
-            "Voidheart Iron Ring",
-            "Null and Void Legion Gloves",
-            "Voidbringer Conjurer Gloves",
-            "Voidwalker Murder Boots",
-            "The Void",
-            "Voidforge Infernal Sword",
-            "Empower",
-            "Static Strike"
-        };
+        protected IEnumerable<Item> Items { get; set; } = new Item[0];
 
-        public IEnumerable<string> SearchTooltipValues { get; set; } = new List<string>();
+        public IEnumerable<Item> SearchTooltipValues { get; set; } = new Item[0];
 
         public string SearchText
         {
@@ -54,7 +50,19 @@ namespace PoECommerce.Client.Components.Trade
             set
             {
                 _searchText = value;
-                Query.Text = value;
+
+                if (Items.FirstOrDefault(i => i.GetHashCode().ToString().Equals(value, StringComparison.InvariantCultureIgnoreCase)) is Item matchedItem)
+                {
+                    Query.Type = matchedItem.Type;
+                    Query.Name = matchedItem.Name;
+                    Query.Text = null;
+                }
+                else
+                {
+                    Query.Type = null;
+                    Query.Name = null;
+                    Query.Text = value;
+                }
             }
         }
 
@@ -74,21 +82,15 @@ namespace PoECommerce.Client.Components.Trade
             set
             {
                 _status = value;
-                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?) null;
+                Query.OnlineStatus = Enum.TryParse(_status, out OnlineStatus status) ? status : (OnlineStatus?)null;
             }
         }
 
         public void Clear()
         {
-            Query = new Query
-            {
-                TypeFilter = new TypeFilter(),
-                TradeFilter = new TradeFilter(),
-                WeaponFilter = new WeaponsFilter(),
-                ModifiersFilter = new ModifiersFilter()
-            };
+            InitModels();
             SearchText = null;
-            League = "Blight";
+            League = Leagues[0].Id;
             Status = OnlineStatus.Online.ToString();
             StateHasChanged();
         }
@@ -102,16 +104,36 @@ namespace PoECommerce.Client.Components.Trade
         public void OnSearchTextChange(ChangeEventArgs changeEventArgs)
         {
             string value = changeEventArgs.Value.ToString();
-            SearchTooltipValues = SearchAutocompleteValues.Where(v => v.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
-                .OrderByDescending(v => v.StartsWith(value, StringComparison.InvariantCultureIgnoreCase))
-                .ThenBy(v => v)
+            SearchTooltipValues = Items.Where(v => v.Name?.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0 || v.Type?.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                .OrderBy(v => v.IsUnique)
+                .ThenBy(v => v.IsProphecy)
+                .ThenBy(v => v.ItemCategory)
+                .ThenBy(v => v.Name?.StartsWith(value, StringComparison.InvariantCultureIgnoreCase) ?? v.Type.StartsWith(value, StringComparison.InvariantCultureIgnoreCase))
+                .ThenBy(v => v.Name ?? v.Type)
+                .ThenBy(v => v.Disclaimer)
                 .Take(50);
         }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
+            InitModels();
+            Leagues = await DataService.GetLeagues();
+            Items = (await DataService.GetItems()).SelectMany(m => m.Value).ToArray();
             Clear();
+        }
+
+        private void InitModels()
+        {
+            Query = new Query
+            {
+                TypeFilter = new TypeFilter(),
+                TradeFilter = new TradeFilter(),
+                WeaponFilter = new WeaponsFilter(),
+                ModifiersFilter = new ModifiersFilter()
+            };
+
+            Query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
         }
     }
 }

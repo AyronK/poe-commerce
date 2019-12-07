@@ -5,8 +5,7 @@
 
 @if (SearchResult != null)
 {
-
-    @if (ListedItems.Count == 0)
+    @if (ListedItems == null || ListedItems.Count == 0)
     {
         @:No results found
     }

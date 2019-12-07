@@ -16,7 +16,7 @@ namespace PoECommerce.PathOfExile.Tests.Json.Serialization
         public void SetUp()
         {
             _converter = new HashesDictionaryJsonConverter();
-            _jsonSerializerOptions = new JsonSerializerOptions {Converters = {_converter}, AllowTrailingCommas = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase};
+            _jsonSerializerOptions = new JsonSerializerOptions { Converters = { _converter }, AllowTrailingCommas = true, DictionaryKeyPolicy = JsonNamingPolicy.CamelCase };
         }
 
         private HashesDictionaryJsonConverter _converter;
@@ -32,7 +32,7 @@ namespace PoECommerce.PathOfExile.Tests.Json.Serialization
             IDictionary<ModifierType, Hash[]> result = JsonSerializer.Deserialize<IDictionary<ModifierType, Hash[]>>(json, _jsonSerializerOptions);
 
             // Then
-            object[] expectedValues = { new Hash { Id = "testValue", Value = 5 } };
+            object[] expectedValues = { new Hash { Id = "testValue", Values = new[] { 5 } } };
 
             result.Should().ContainKey(ModifierType.Crafted);
             result[ModifierType.Crafted].Should().BeEquivalentTo(expectedValues);
@@ -68,7 +68,7 @@ namespace PoECommerce.PathOfExile.Tests.Json.Serialization
         public void When_Serialize()
         {
             // Given
-            IDictionary<ModifierType, Hash[]> dictionary = new Dictionary<ModifierType, Hash[]> {{ModifierType.Crafted, new[] {new Hash {Id = "testValue", Value = 5}}}};
+            IDictionary<ModifierType, Hash[]> dictionary = new Dictionary<ModifierType, Hash[]> { { ModifierType.Crafted, new[] { new Hash { Id = "testValue", Values = new[] { 5 } } } } };
 
             // When
             string result = JsonSerializer.Serialize(dictionary, _jsonSerializerOptions);

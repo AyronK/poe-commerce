@@ -8,9 +8,53 @@
         </div>
         <div style="width: 50%">
             <Select @bind-Value="@Category" IsAutocomplete="@true" Style="width:100%">
-                <SelectOption Value="A">A</SelectOption>
-                <SelectOption Value="B">B</SelectOption>
-                <SelectOption Value="C">C</SelectOption>
+                <SelectOption Value="" Text="Any"></SelectOption>
+                <SelectOption Value="weapon" Text="Any Weapon"></SelectOption>
+                <SelectOption Value="weapon.one" Text="One-Handed Weapon"></SelectOption>
+                <SelectOption Value="weapon.onemelee" Text="One-Handed Melee Weapon"></SelectOption>
+                <SelectOption Value="weapon.twomelee" Text="Two-Handed Melee Weapon"></SelectOption>
+                <SelectOption Value="weapon.bow" Text="Bow"></SelectOption>
+                <SelectOption Value="weapon.claw" Text="Claw"></SelectOption>
+                <SelectOption Value="weapon.dagger" Text="Any Dagger"></SelectOption>
+                <SelectOption Value="weapon.runedagger" Text="Rune Dagger"></SelectOption>
+                <SelectOption Value="weapon.oneaxe" Text="One-Handed Axe"></SelectOption>
+                <SelectOption Value="weapon.onemace" Text="One-Handed Mace"></SelectOption>
+                <SelectOption Value="weapon.onesword" Text="One-Handed Sword"></SelectOption>
+                <SelectOption Value="weapon.sceptre" Text="Sceptre"></SelectOption>
+                <SelectOption Value="weapon.staff" Text="Any Staff"></SelectOption>
+                <SelectOption Value="weapon.warstaff" Text="Warstaff"></SelectOption>
+                <SelectOption Value="weapon.twoaxe" Text="Two-Handed Axe"></SelectOption>
+                <SelectOption Value="weapon.twomace" Text="Two-Handed Mace"></SelectOption>
+                <SelectOption Value="weapon.twosword" Text="Two-Handed Sword"></SelectOption>
+                <SelectOption Value="weapon.wand" Text="Wand"></SelectOption>
+                <SelectOption Value="weapon.rod" Text="Fishing Rod"></SelectOption>
+                <SelectOption Value="armour" Text="Any Armour"></SelectOption>
+                <SelectOption Value="armour.chest" Text="Body Armour"></SelectOption>
+                <SelectOption Value="armour.boots" Text="Boots"></SelectOption>
+                <SelectOption Value="armour.gloves" Text="Gloves"></SelectOption>
+                <SelectOption Value="armour.helmet" Text="Helmet"></SelectOption>
+                <SelectOption Value="armour.shield" Text="Shield"></SelectOption>
+                <SelectOption Value="armour.quiver" Text="Quiver"></SelectOption>
+                <SelectOption Value="accessory" Text="Any Accessory"></SelectOption>
+                <SelectOption Value="accessory.amulet" Text="Amulet"></SelectOption>
+                <SelectOption Value="accessory.belt" Text="Belt"></SelectOption>
+                <SelectOption Value="accessory.ring" Text="Ring"></SelectOption>
+                <SelectOption Value="gem" Text="Any Gem"></SelectOption>
+                <SelectOption Value="gem.activegem" Text="Skill Gem"></SelectOption>
+                <SelectOption Value="gem.supportgem" Text="Support Gem"></SelectOption>
+                <SelectOption Value="jewel" Text="Any Jewel"></SelectOption>
+                <SelectOption Value="jewel.abyss" Text="Abyss Jewel"></SelectOption>
+                <SelectOption Value="flask" Text="Flask"></SelectOption>
+                <SelectOption Value="map" Text="Map"></SelectOption>
+                <SelectOption Value="leaguestone" Text="Leaguestone"></SelectOption>
+                <SelectOption Value="prophecy" Text="Prophecy"></SelectOption>
+                <SelectOption Value="card" Text="Card"></SelectOption>
+                <SelectOption Value="monster" Text="Captured Beast"></SelectOption>
+                <SelectOption Value="currency" Text="Any Currency"></SelectOption>
+                <SelectOption Value="currency.piece" Text="Unique Fragment"></SelectOption>
+                <SelectOption Value="currency.resonator" Text="Resonator"></SelectOption>
+                <SelectOption Value="currency.fossil" Text="Fossil"></SelectOption>
+                <SelectOption Value="currency.incubator" Text="Incubator"></SelectOption>
             </Select>
         </div>
     </div>
@@ -20,10 +64,10 @@
         </div>
         <div style="width: 50%">
             <Select @bind-Value="@ItemRarity" IsAutocomplete="@true" Style="width:100%">
-                <SelectOption>Any</SelectOption>
+                <SelectOption Text="Any"></SelectOption>
                 @foreach (ItemRarity itemRarity in Enum.GetValues(typeof(ItemRarity)))
                 {
-                    <SelectOption Value="@itemRarity.ToString()">@itemRarity.ToString()</SelectOption>
+                    <SelectOption Value="@itemRarity.ToString()" Text="@itemRarity.ToString()"></SelectOption>
                 }
             </Select>
         </div>
