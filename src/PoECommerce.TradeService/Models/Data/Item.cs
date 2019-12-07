@@ -23,6 +23,6 @@ namespace PoECommerce.PathOfExile.Models.Data
         ///     E.g. map origins (atlasofworlds, theawakening).
         /// </summary>
         [JsonPropertyName("disc")]
-        public string Disclaimer { get; set; }
+        public string Discriminator { get; set; }
     }
 }

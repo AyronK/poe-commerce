@@ -18,10 +18,11 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
                 Name = mapOperand.Value.Name,
                 Text = mapOperand.Value.Text,
                 Type = mapOperand.Value.Type,
-                Disclaimer = mapOperand.Value.Disclaimer,
+                Disclaimer = mapOperand.Value.Discriminator,
                 ItemCategory = Map(mapOperand.Key),
                 IsProphecy = valueFlags != null && valueFlags.TryGetValue(ItemFlag.Prophecy, out bool isProphecy) && isProphecy,
                 IsUnique = valueFlags != null && valueFlags.TryGetValue(ItemFlag.Unique, out bool isUnique) && isUnique,
+                
             };
         }
 

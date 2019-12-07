@@ -17,6 +17,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
         private readonly IModelMapper<PoEModels.Enums.ModifierType, CoreDataModels.ModifierType> _modifierTypeMapper;
         private readonly IModelMapper<KeyValuePair<ItemCategory, PoEModels.Data.Item>, CoreDataModels.Item> _itemsMapper;
         private readonly IModelMapper<ItemCategory, CoreDataModels.ItemCategory> _itemCategoryMapper;
+        private readonly IModelMapper<CoreModels.Search.SortType, PoEModels.Search.Enums.SortType> _sortTypeMapper;
 
         public MapperFacade
         (
@@ -27,7 +28,8 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
         IModelMapper<PoEModels.Data.Modifier, CoreDataModels.Modifier> modifierMapper,
         IModelMapper<PoEModels.Enums.ModifierType, CoreDataModels.ModifierType> modifierTypeMapper,
         IModelMapper<KeyValuePair<ItemCategory, PoEModels.Data.Item>, CoreDataModels.Item> itemsMapper,
-        IModelMapper<ItemCategory, CoreDataModels.ItemCategory> itemCategoryMapper
+        IModelMapper<ItemCategory, CoreDataModels.ItemCategory> itemCategoryMapper,
+        IModelMapper<CoreModels.Search.SortType, PoEModels.Search.Enums.SortType> sortTypeMapper
         )
         {
             _queryMapper = queryMapper;
@@ -38,6 +40,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
             _modifierTypeMapper = modifierTypeMapper;
             _itemsMapper = itemsMapper;
             _itemCategoryMapper = itemCategoryMapper;
+            _sortTypeMapper = sortTypeMapper;
         }
 
         public PoEModels.Search.Query Map(CoreModels.Search.Query mapOperand)
@@ -78,6 +81,11 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
         public CoreDataModels.ItemCategory Map(ItemCategory mapOperand)
         {
             return _itemCategoryMapper.Map(mapOperand);
+        }
+
+        public PoEModels.Search.Enums.SortType Map(CoreModels.Search.SortType mapOperand)
+        {
+            return _sortTypeMapper.Map(mapOperand);
         }
     }
 }

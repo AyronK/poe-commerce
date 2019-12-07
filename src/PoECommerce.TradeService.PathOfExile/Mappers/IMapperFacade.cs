@@ -3,6 +3,7 @@ using PoECommerce.Core;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
 using CoreModels = PoECommerce.Core.Model.Search;
 using CoreDataModels = PoECommerce.Core.Model.Data;
@@ -11,6 +12,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
 {
     internal interface IMapperFacade : 
         IModelMapper<CoreModels.Query, Query>,
+        IModelMapper<CoreModels.SortType, SortType>,
         IModelMapper<ListedItem, CoreModels.ListedItem>,
         IModelMapper<QueryResult, CoreModels.SearchResult>,
         IModelMapper<League, CoreDataModels.League>,

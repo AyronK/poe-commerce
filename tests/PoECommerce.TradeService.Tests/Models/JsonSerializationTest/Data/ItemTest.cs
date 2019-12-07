@@ -22,7 +22,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data
                         Name = null,
                         Type = null,
                         Text = null,
-                        Disclaimer = null,
+                        Discriminator = null,
                         Flags = null
                     },
                 Description = "All nulls"
@@ -36,7 +36,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data
                         Name = "testName",
                         Type = "testType",
                         Text = "testText",
-                        Disclaimer = "testDisc",
+                        Discriminator = "testDisc",
                         Flags = null
                     },
                 Description = "Without flags"
@@ -50,7 +50,7 @@ namespace PoECommerce.PathOfExile.Tests.Models.JsonSerializationTest.Data
                         Name = "testName",
                         Type = "testType",
                         Text = "testText",
-                        Disclaimer = "testDisc",
+                        Discriminator = "testDisc",
                         Flags = new Dictionary<ItemFlag, bool>
                         {
                             {ItemFlag.Prophecy, true},

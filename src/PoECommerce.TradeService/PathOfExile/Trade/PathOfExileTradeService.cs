@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using PoECommerce.PathOfExile.Extensions.Internal;
 using PoECommerce.PathOfExile.Models;
 using PoECommerce.PathOfExile.Models.Search;
+using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
 
 namespace PoECommerce.PathOfExile.PathOfExile.Trade
@@ -22,9 +24,9 @@ namespace PoECommerce.PathOfExile.PathOfExile.Trade
 
         }
 
-        public async Task<QueryResult> Search(Query query, string league)
+        public async Task<QueryResult> Search(Query query, IDictionary<string, SortType> sort, string league)
         {
-            string queryJson = JsonSerializer.Serialize(new QueryCommand(query), JsonOptions);
+            string queryJson = JsonSerializer.Serialize(new QueryCommand(query, sort), JsonOptions);
             StringContent body = new StringContent(queryJson, Encoding.UTF8, MediaTypeNames.Application.Json);
 
             HttpResponseMessage response = await HttpClient.PostAsync(SearchEndpoint + league, body);

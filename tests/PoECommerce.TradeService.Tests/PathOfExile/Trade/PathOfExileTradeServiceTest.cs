@@ -56,7 +56,7 @@ namespace PoECommerce.PathOfExile.Tests.PathOfExile.Trade
             string expectedUrl = $"api/trade/search/Delve";
 
             // When
-            QueryResult result = await _tradeService.Search(query, "Delve");
+            QueryResult result = await _tradeService.Search(query, null, "Delve");
 
             // Then;
             Then_HttpMethod(HttpMethod.Post);

@@ -132,7 +132,7 @@
             return;
         }
 
-        QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" }, "Blight");
+        QueryResult queryResult = await TradeService.Search(new Query { Name = "Null's Inclination", Type = "Ranger Bow" }, null, "Blight");
 
         ListedItems = await TradeService.Fetch(queryResult.Id, queryResult.Result.Take(5).ToArray());
 
