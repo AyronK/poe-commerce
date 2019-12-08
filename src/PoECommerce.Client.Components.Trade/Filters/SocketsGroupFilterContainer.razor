@@ -1,0 +1,21 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits SocketsGroupFilterContainerBase
+
+    <div style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: row">
+            <div style="width: 50%">
+                <Label Value="Sockets"></Label>
+            </div>
+            <div style="width: 50%">
+                <SocketsFilterContainer SocketsFilter="@SocketsFilter" OnChange="@((SocketsFilter socketsFilter) => { SocketsFilter = socketsFilter; StateHasChanged();})"></SocketsFilterContainer>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div style="width: 50%">
+                <Label Value="Links"></Label>
+            </div>
+            <div style="width: 50%">
+                <SocketsFilterContainer SocketsFilter="@LinksFilter" OnChange="@((SocketsFilter socketsFilter) => { LinksFilter = socketsFilter; StateHasChanged();})"></SocketsFilterContainer>
+            </div>
+        </div>
+    </div>

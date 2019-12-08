@@ -15,17 +15,7 @@ namespace PoECommerce.Client.Components.Trade
         private string _league;
         private string _searchText;
         private string _status;
-        private bool _test;
-
-        public bool Test
-        {
-            get => _test;
-            set
-            {
-                _test = value;
-                StateHasChanged();
-            }
-        }
+        private bool _isFiltersSectionOpen = false;
 
         [Inject]
         public ITradeService TradeService { get; set; }
@@ -86,6 +76,11 @@ namespace PoECommerce.Client.Components.Trade
             }
         }
 
+        public void ToggleFilter()
+        {
+            IsFiltersSectionOpen = !IsFiltersSectionOpen;
+        }
+
         public void Clear()
         {
             InitModels();
@@ -115,6 +110,16 @@ namespace PoECommerce.Client.Components.Trade
                 .Take(50);
         }
 
+        public bool IsFiltersSectionOpen
+        {
+            get => _isFiltersSectionOpen;
+            set
+            {
+                _isFiltersSectionOpen = value;
+                StateHasChanged();
+            }
+        }
+
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
@@ -135,6 +140,11 @@ namespace PoECommerce.Client.Components.Trade
                 },
                 WeaponFilter = new WeaponsFilter(),
                 ModifiersFilter = new ModifiersFilter(),
+                ArmourFilter = new ArmoursFilter(),
+                MapsFilter = new MapsFilter(),
+                RequirementsFilter = new RequirementsFilter(),
+                SocketFilter = new SocketsGroupFilter(),
+                MiscellaneousFilter = new MiscellaneousFilter(),
                 Sort = new Dictionary<string, SortType>
                 {
                     { "price", SortType.Ascending }

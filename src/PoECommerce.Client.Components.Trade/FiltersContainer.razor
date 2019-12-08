@@ -3,8 +3,9 @@
 @using PoECommerce.Core.Model.Search
 @using TypeFilter = PoECommerce.Core.Model.Search.TypeFilter
 @using Item = PoECommerce.Core.Model.Data.Item
+
 @inherits FiltersContainerBase
-<div style="user-select: none">
+<div style="user-select: none" class="filter-section">
     <div style="display: flex; flex-direction: row">
         <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
             @foreach (Item value in SearchTooltipValues)
@@ -36,22 +37,34 @@
     </div>
     <div style="display: flex; flex-direction: row; margin-top: 10px">
         <div style="width: 100%;">
-            <Section Title="Type Filters">
-                <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
-            </Section>
-            <Section Title="Weapon Filters">
-                <WeaponsFilterContainer Filter="@Query.WeaponFilter" OnChange="@((WeaponsFilter filter) => { Query.WeaponFilter = filter; StateHasChanged();})"></WeaponsFilterContainer>
-            </Section>
-            <Section Title="Armour Filters"></Section>
-            <Section Title="Socket Filters"></Section>
-            <Section Title="Requirements"></Section>
-            <Section Title="Map Filters"></Section>
-            <Section Title="Miscellaneous"></Section>
-            <Section Title="Trade Filters">
-                <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
-            </Section>
-            <Section Title="Stat Filters">
-                <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
+            <Section Title="Filters" @bind-IsOpen="@IsFiltersSectionOpen">
+                <Section Title="Type Filters">
+                    <TypeFiltersContainer Filter="@Query.TypeFilter" OnChange="@((TypeFilter filter) => { Query.TypeFilter = filter; StateHasChanged();})"></TypeFiltersContainer>
+                </Section>
+                <Section Title="Weapon Filters">
+                    <WeaponsFilterContainer Filter="@Query.WeaponFilter" OnChange="@((WeaponsFilter filter) => { Query.WeaponFilter = filter; StateHasChanged();})"></WeaponsFilterContainer>
+                </Section>
+                <Section Title="Armour Filters">
+                    <ArmoursFilterContainer Filter="@Query.ArmourFilter" OnChange="@((ArmoursFilter filter) => { Query.ArmourFilter = filter; StateHasChanged();})"></ArmoursFilterContainer>
+                </Section>
+                <Section Title="Socket Filters">
+                    <SocketsGroupFilterContainer Filter="@Query.SocketFilter" OnChange="@((SocketsGroupFilter filter) => { Query.SocketFilter = filter; StateHasChanged();})"></SocketsGroupFilterContainer>
+                </Section>
+                <Section Title="Requirements">
+                    <RequirementsFilterContainer Filter="@Query.RequirementsFilter" OnChange="@((RequirementsFilter filter) => { Query.RequirementsFilter = filter; StateHasChanged();})"></RequirementsFilterContainer>
+                </Section>
+                <Section Title="Map Filters">
+                    <MapsFilterContainer Filter="@Query.MapsFilter" OnChange="@((MapsFilter filter) => { Query.MapsFilter = filter; StateHasChanged();})"></MapsFilterContainer>
+                </Section>
+                <Section Title="Miscellaneous">
+                    <MiscellaneousFilterContainer Filter="@Query.MiscellaneousFilter" OnChange="@((MiscellaneousFilter filter) => { Query.MiscellaneousFilter = filter; StateHasChanged();})"></MiscellaneousFilterContainer>
+                </Section>
+                <Section Title="Trade Filters">
+                    <TradeFiltersContainer Filter="@Query.TradeFilter" OnChange="@((TradeFilter filter) => { Query.TradeFilter = filter; StateHasChanged();})"></TradeFiltersContainer>
+                </Section>
+                <Section Title="Stat Filters" IsOpen="@true">
+                    <ModifiersFiltersContainer Filter="@Query.ModifiersFilter" OnChange="@((ModifiersFilter filter) => { Query.ModifiersFilter = filter; StateHasChanged();})"></ModifiersFiltersContainer>
+                </Section>
             </Section>
         </div>
     </div>
@@ -63,7 +76,7 @@
             <Button OnClick="@Clear" Value="Clear" ElementType="@ElementType.Secondary" Style="width: 80%"></Button>
         </div>
         <div style="display: flex; justify-content: center; width: 20%;">
-            <Button OnClick="@Clear" Value="Show filters" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
+            <Button OnClick="@ToggleFilter" Value="@(IsFiltersSectionOpen ? "Hide" : "Show")" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
         </div>
     </div>
 
@@ -72,3 +85,4 @@
     <br />
 </div>
 @JsonSerializer.Serialize(Query);
+

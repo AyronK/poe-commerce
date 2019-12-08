@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core.Model.Search;
 
@@ -12,13 +13,13 @@ namespace PoECommerce.Client.Components.Trade.Filters.Common
         protected string MinValue
         {
             get => Min?.ToString();
-            set => Min = double.TryParse(value, out double doubleValue) ? doubleValue : (double?) null;
+            set => Min = double.TryParse(value.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleValue) ? doubleValue : (double?) null;
         }
 
         protected string MaxValue
         {
             get => Max?.ToString();
-            set => Max = double.TryParse(value, out double doubleValue) ? doubleValue : (double?) null;
+            set => Max = double.TryParse(value.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleValue) ? doubleValue : (double?) null;
         }
 
         public double? Min

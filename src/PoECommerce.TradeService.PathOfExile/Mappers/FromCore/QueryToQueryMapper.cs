@@ -22,9 +22,23 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
                 {
                     TypeFilter = Map(mapOperand.TypeFilter) is TypeFilter typeFilter ? new FilterWrapper<TypeFilter> { Filter = typeFilter } : null,
                     WeaponFilter = Map(mapOperand.WeaponFilter) is WeaponsFilter weaponFilter ? new FilterWrapper<WeaponsFilter> { Filter = weaponFilter } : null,
+                    ArmourFilter = Map(mapOperand.ArmourFilter) is ArmoursFilter armourFilter ? new FilterWrapper<ArmoursFilter> { Filter = armourFilter } : null,
+                    SocketFilter = Map(mapOperand.SocketFilter) is SocketsGroupFilter socketFilter ? new FilterWrapper<SocketsGroupFilter> { Filter = socketFilter } : null,
+                    RequirementsFilter = Map(mapOperand.RequirementsFilter) is RequirementsFilter requirementsFilter ? new FilterWrapper<RequirementsFilter> { Filter = requirementsFilter } : null,
+                    MapsFilter = Map(mapOperand.MapsFilter) is MapsFilter mapsFilter ? new FilterWrapper<MapsFilter> { Filter = mapsFilter } : null,
+                    MiscellaneousFilter = Map(mapOperand.MiscellaneousFilter) is MiscellaneousFilter miscellaneousFilter ? new FilterWrapper<MiscellaneousFilter> { Filter = miscellaneousFilter } : null,
                     TradeFilter = Map(mapOperand.TradeFilter) is TradeFilter tradeFilter ? new FilterWrapper<TradeFilter> { Filter = tradeFilter } : null
                 },
                 ModifiersFilters = Map(mapOperand.ModifiersFilter)
+            };
+        }
+
+        public SortType Map(CoreModels.SortType mapOperand)
+        {
+            return mapOperand switch
+            {
+                CoreModels.SortType.Ascending => SortType.Ascending,
+                CoreModels.SortType.Descending => SortType.Descending,
             };
         }
 
@@ -77,6 +91,28 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
             };
         }
 
+        private ArmoursFilter Map(CoreModels.ArmoursFilter mapOperand)
+        {
+            return new ArmoursFilter
+            {
+                Armour = Map(mapOperand.Armour),
+                EnergyShield = Map(mapOperand.EnergyShield),
+                Evasion = Map(mapOperand.Evasion),
+                Block = Map(mapOperand.Block)
+            };
+        }
+
+        private RequirementsFilter Map(CoreModels.RequirementsFilter mapOperand)
+        {
+            return new RequirementsFilter
+            {
+                Level = Map(mapOperand.Level),
+                Dexterity = Map(mapOperand.Dexterity),
+                Strength = Map(mapOperand.Strength),
+                Intelligence = Map(mapOperand.Intelligence)
+            };
+        }
+
         private FilterMagnitude Map(CoreModels.FilterMagnitude mapOperand)
         {
             if (mapOperand == null)
@@ -88,6 +124,66 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
             {
                 Min = mapOperand.Min,
                 Max = mapOperand.Max
+            };
+        }
+
+        private SocketsGroupFilter Map(CoreModels.SocketsGroupFilter mapOperand)
+        {
+            return new SocketsGroupFilter
+            {
+                SocketsFilter = Map(mapOperand.SocketsFilter),
+                LinksFilter = Map(mapOperand.LinksFilter)
+            };
+        }
+
+        private SocketsFilter Map(CoreModels.SocketsFilter mapOperand)
+        {
+            return new SocketsFilter
+            {
+                GreenMin = mapOperand.GreenMin,
+                RedMin = mapOperand.RedMin,
+                BlueMin = mapOperand.BlueMin,
+                WhiteMin = mapOperand.WhiteMin,
+                AnyMin = mapOperand.AnyMin,
+                AnyMax = mapOperand.AnyMax
+            };
+        }
+
+        private MapsFilter Map(CoreModels.MapsFilter mapOperand)
+        {
+            return new MapsFilter
+            {
+                Tier = Map(mapOperand.Tier),
+                IncreasedItemQuantity = Map(mapOperand.IncreasedItemQuantity),
+                PackSize = Map(mapOperand.PackSize),
+                IncreasedItemRarity = Map(mapOperand.IncreasedItemRarity),
+                Shaped = mapOperand.Shaped.HasValue ? new BooleanOption { Value = mapOperand.Shaped } : null,
+                Blighted = mapOperand.Blighted.HasValue ? new BooleanOption { Value = mapOperand.Blighted } : null,
+                Elder = mapOperand.Elder.HasValue ? new BooleanOption { Value = mapOperand.Elder } : null,
+                Series = mapOperand.Series != null ? new StringOption { Value = mapOperand.Series } : null
+            };
+        }
+
+        private MiscellaneousFilter Map(CoreModels.MiscellaneousFilter mapOperand)
+        {
+            return new MiscellaneousFilter
+            {
+                Quality = Map(mapOperand.Quality),
+                GemLevel = Map(mapOperand.GemLevel),
+                ItemLevel = Map(mapOperand.ItemLevel),
+                GemLevelProgress = Map(mapOperand.GemLevelProgress),
+                Shaper = mapOperand.Shaper.HasValue ? new BooleanOption { Value = mapOperand.Shaper } : null,
+                Fractured = mapOperand.Fractured.HasValue ? new BooleanOption { Value = mapOperand.Fractured } : null,
+                AlternateArt = mapOperand.AlternateArt.HasValue ? new BooleanOption { Value = mapOperand.AlternateArt } : null,
+                Corrupted = mapOperand.Corrupted.HasValue ? new BooleanOption { Value = mapOperand.Corrupted } : null,
+                Crafted = mapOperand.Crafted.HasValue ? new BooleanOption { Value = mapOperand.Crafted } : null,
+                Enchanted = mapOperand.Enchanted.HasValue ? new BooleanOption { Value = mapOperand.Enchanted } : null,
+                Elder = mapOperand.Elder.HasValue ? new BooleanOption { Value = mapOperand.Elder } : null,
+                Synthesised = mapOperand.Synthesised.HasValue ? new BooleanOption { Value = mapOperand.Synthesised } : null,
+                Identified = mapOperand.Identified.HasValue ? new BooleanOption { Value = mapOperand.Identified } : null,
+                Mirrored = mapOperand.Mirrored.HasValue ? new BooleanOption { Value = mapOperand.Mirrored } : null,
+                Veiled = mapOperand.Veiled.HasValue ? new BooleanOption { Value = mapOperand.Veiled } : null,
+                TalismanTier = Map(mapOperand.TalismanTier)
             };
         }
 
@@ -178,15 +274,6 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
                 CoreModels.FilterOperand.If => FilterOperand.If,
                 CoreModels.FilterOperand.Not => FilterOperand.Not,
                 CoreModels.FilterOperand.Weight => FilterOperand.Weight,
-            };
-        }
-
-        public SortType Map(CoreModels.SortType mapOperand)
-        {
-            return mapOperand switch
-            {
-                CoreModels.SortType.Ascending => SortType.Ascending,
-                CoreModels.SortType.Descending => SortType.Descending,
             };
         }
     }
