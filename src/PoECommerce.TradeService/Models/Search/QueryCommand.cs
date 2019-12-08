@@ -8,7 +8,7 @@ namespace PoECommerce.PathOfExile.Models.Search
     {
         public QueryCommand()
         {
-            
+
         }
 
         public QueryCommand(Query query, IDictionary<string, SortType> sort)

@@ -1,4 +1,4 @@
-﻿namespace PoECommerce.Core.Model.Search
+﻿namespace PoECommerce.Core.Model.Enums
 {
     public enum OnlineStatus
     {

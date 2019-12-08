@@ -3,16 +3,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core;
+using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
+using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Client.Components.Trade
 {
     public class ItemsContainerBase : ComponentBase
     {
+        private string _lastQueryId;
+
         [Parameter]
         public SearchResult SearchResult { get; set; }
-
-        private string _lastQueryId;
 
         public List<ListedItem> ListedItems { get; set; } = new List<ListedItem>();
 
@@ -33,11 +35,12 @@ namespace PoECommerce.Client.Components.Trade
                 _lastQueryId = SearchResult.QueryId;
                 ListedItems = new List<ListedItem>();
 
-                for (int i = 0; i < itemIds.Length; i+=10)
+                for (int i = 0; i < itemIds.Length; i += 10)
                 {
                     string[] ids = itemIds.Skip(i).Take(10).ToArray();
                     ListedItems.AddRange(await TradeService.Fetch(_lastQueryId, ids));
                     StateHasChanged();
+                    await Task.Delay(1000);
                 }
             }
             else
@@ -47,7 +50,6 @@ namespace PoECommerce.Client.Components.Trade
 
                 StateHasChanged();
             }
-
         }
     }
 }

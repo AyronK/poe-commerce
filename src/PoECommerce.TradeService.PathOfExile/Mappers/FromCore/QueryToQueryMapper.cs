@@ -33,15 +33,6 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
             };
         }
 
-        public SortType Map(CoreModels.SortType mapOperand)
-        {
-            return mapOperand switch
-            {
-                CoreModels.SortType.Ascending => SortType.Ascending,
-                CoreModels.SortType.Descending => SortType.Descending,
-            };
-        }
-
         private ItemRarityOption Map(CoreModels.ItemRarity? mapOperand)
         {
             ItemRarity? mapped = mapOperand switch
@@ -58,11 +49,11 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
             return mapped.HasValue ? new ItemRarityOption { Value = mapped.Value } : null;
         }
 
-        private OnlineStatusOption Map(CoreModels.OnlineStatus? mapOperand)
+        private OnlineStatusOption Map(Core.Model.Enums.OnlineStatus? mapOperand)
         {
             switch (mapOperand)
             {
-                case CoreModels.OnlineStatus.Online:
+                case Core.Model.Enums.OnlineStatus.Online:
                     return new OnlineStatusOption { Value = OnlineStatus.Online };
                 default:
                     return null;
@@ -274,6 +265,15 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
                 CoreModels.FilterOperand.If => FilterOperand.If,
                 CoreModels.FilterOperand.Not => FilterOperand.Not,
                 CoreModels.FilterOperand.Weight => FilterOperand.Weight,
+            };
+        }
+
+        public SortType Map(CoreModels.SortType mapOperand)
+        {
+            return mapOperand switch
+            {
+                CoreModels.SortType.Ascending => SortType.Ascending,
+                CoreModels.SortType.Descending => SortType.Descending,
             };
         }
     }

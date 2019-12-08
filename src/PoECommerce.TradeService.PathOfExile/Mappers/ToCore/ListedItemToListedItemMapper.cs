@@ -5,13 +5,90 @@ using PoECommerce.PathOfExile.Models.Trade;
 using PoECommerce.PathOfExile.Models.Trade.Enums;
 using PoECommerce.PathOfExile.Models.Trade.Items;
 using PoECommerce.PathOfExile.Models.Trade.Items.Enums;
-using CoreModels = PoECommerce.Core.Model.Search;
+using PoECommerce.PathOfExile.Models.Trade.Listings;
+using CoreModels = PoECommerce.Core.Model.Trade;
 using Item = PoECommerce.PathOfExile.Models.Trade.Items.Item;
 
 namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
 {
     internal class ListedItemToListedItemMapper : IModelMapper<ListedItem, CoreModels.ListedItem>, IModelMapper<Item, CoreModels.Item>
     {
+        public CoreModels.ListedItem Map(ListedItem mapOperand)
+        {
+            return new CoreModels.ListedItem
+            {
+                ListingId = mapOperand.Id,
+                Item = Map(mapOperand.Item),
+                Listing = Map(mapOperand.Listing)
+            };
+        }
+
+        public CoreModels.Listing Map(Listing mapOperand)
+        {
+            return new CoreModels.Listing
+            {
+                Account = Map(mapOperand.Account),
+                Indexed = mapOperand.Indexed,
+                Whisper = mapOperand.Whisper,
+                Price = Map(mapOperand.Price),
+                Stash = Map(mapOperand.Stash)
+            };
+        }
+
+        public CoreModels.Account Map(Account mapOperand)
+        {
+            return new CoreModels.Account
+            {
+                Name = mapOperand.Name,
+                Language = mapOperand.Language,
+                LastCharacterName = mapOperand.LastCharacterName,
+                Online = Map(mapOperand.Online)
+            };
+        }
+
+        public CoreModels.OnlineStatus Map(Online mapOperand)
+        {
+            if (mapOperand is null)
+            {
+                return new CoreModels.OnlineStatus
+                {
+                    IsOnline = false
+                };
+            }
+
+            return new CoreModels.OnlineStatus
+            {
+                IsOnline = true,
+                Status = mapOperand.Status,
+                League = mapOperand.League
+            };
+        }
+
+        public CoreModels.Price Map(Price mapOperand)
+        {
+            return new CoreModels.Price
+            {
+                Currency = mapOperand.Currency,
+                Type = mapOperand.Type,
+                Amount = mapOperand.Amount
+            };
+        }
+
+        public CoreModels.Stash Map(Stash mapOperand)
+        {
+            if (mapOperand is null)
+            {
+                return null;
+            }
+
+            return new CoreModels.Stash
+            {
+                Name = mapOperand.Name,
+                X = mapOperand.X,
+                Y = mapOperand.Y
+            };
+        }
+
         public CoreModels.Item Map(Item mapOperand)
         {
             return new CoreModels.Item
@@ -105,15 +182,6 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mapOperand), mapOperand, null);
             }
-        }
-
-        public CoreModels.ListedItem Map(ListedItem mapOperand)
-        {
-            return new CoreModels.ListedItem
-            {
-                ListingId = mapOperand.Id,
-                Item = Map(mapOperand.Item)
-            };
         }
 
         public CoreModels.ItemType Map(FrameType mapOperand)

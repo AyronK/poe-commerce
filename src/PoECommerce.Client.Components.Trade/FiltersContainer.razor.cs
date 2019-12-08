@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Data;
+using PoECommerce.Core.Model.Enums;
 using PoECommerce.Core.Model.Search;
 using Item = PoECommerce.Core.Model.Data.Item;
 

@@ -43,7 +43,7 @@ namespace PoECommerce.TradeService.PathOfExile.Extensions
 
             services.AddSingleton<IModelMapper<CoreModels.Query, Query>, QueryToQueryMapper>();
             services.AddSingleton<IModelMapper<CoreModels.SortType, SortType>, QueryToQueryMapper>();
-            services.AddSingleton<IModelMapper<ListedItem, CoreModels.ListedItem>, ListedItemToListedItemMapper>();
+            services.AddSingleton<IModelMapper<ListedItem, Core.Model.Trade.ListedItem>, ListedItemToListedItemMapper>();
             services.AddSingleton<IModelMapper<QueryResult, CoreModels.SearchResult>, QueryResultToSearchResultMapper>();
             services.AddSingleton<IModelMapper<League, CoreDataModels.League>, LeagueToLeagueMapper>();
             services.AddSingleton<IModelMapper<Modifier, CoreDataModels.Modifier>, ModifierToModifierMapper>();

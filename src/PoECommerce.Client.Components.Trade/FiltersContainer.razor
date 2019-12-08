@@ -1,11 +1,12 @@
 ﻿@using System.Text.Json
 @using PoECommerce.Core.Model.Data
+@using PoECommerce.Core.Model.Enums
 @using PoECommerce.Core.Model.Search
 @using TypeFilter = PoECommerce.Core.Model.Search.TypeFilter
 @using Item = PoECommerce.Core.Model.Data.Item
 
 @inherits FiltersContainerBase
-<div style="user-select: none" class="filter-section">
+<div style="user-select: none">
     <div style="display: flex; flex-direction: row">
         <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
             @foreach (Item value in SearchTooltipValues)
@@ -35,7 +36,7 @@
             <SelectOption Value="@OnlineStatus.Any.ToString()" Text="Any"></SelectOption>
         </Select>
     </div>
-    <div style="display: flex; flex-direction: row; margin-top: 10px">
+    <div style="display: flex; flex-direction: row; margin-top: 10px" class="filter-section">
         <div style="width: 100%;">
             <Section Title="Filters" @bind-IsOpen="@IsFiltersSectionOpen">
                 <Section Title="Type Filters">
