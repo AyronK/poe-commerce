@@ -1,4 +1,5 @@
 ﻿@using PoECommerce.Core.Model.Search
+@using PoECommerce.Core.Model.Trade
 @inherits ListedItemContainerBase
 
 <div class="listed-item-container">
@@ -218,6 +219,77 @@
         }
     </div>
     <div class="listed-item-container-listing">
-        Id: @ListedItem.ListingId
+        <div class="text-simple">@ListedItem.Listing.Account.LastCharacterName</div>
+        <div class="text-default"><i>@ListedItem.Listing.Account.Name</i></div>
+
+        <div class="online-status online-status__@GetOnlineStatus().ToLower()">
+            @GetOnlineStatus()
+        </div>
+
+        <div class="indexed-status">
+            @{
+                TimeSpan listedAgo = DateTime.Now - ListedItem.Listing.Indexed;
+
+                if (listedAgo.Days >= 60)
+                {
+                    @:@(listedAgo.Days / 30) months ago
+                }
+                else if (listedAgo.Days >= 30)
+                {
+                    @:One month ago
+                }
+                else if (listedAgo.Days > 7)
+                {
+                    @:@(listedAgo.Days / 7) weeks ago
+                }
+                else if (listedAgo.Days == 7)
+                {
+                    @:One week ago
+                }
+                else if (listedAgo.Days > 1)
+                {
+                    @:@(listedAgo.Days) days ago
+                }
+                else if (listedAgo.Days == 1)
+                {
+                    @:One day ago
+                }
+                else if (listedAgo.Hours > 1)
+                {
+                    @:@(listedAgo.Hours) hours ago
+                }
+                else if (listedAgo.Hours == 1)
+                {
+                    @:One hour ago
+                }
+                else if (listedAgo.Minutes > 1)
+                {
+                    @:@(listedAgo.Minutes) minutes ago
+                }
+                else if (listedAgo.Minutes == 1)
+                {
+                    @:One minute ago
+                }
+                else
+                {
+                    @:@(listedAgo.Seconds) seconds ago
+                }
+            }
+        </div>
+        <br />
+        <div>
+            <span class="text-default text-price-type">@GetPricedTypeName():</span>
+            <br />
+            <span class="text-simple text-price-amount">@(ListedItem.Listing.Price?.Amount)x</span> <span class="text-augmented text-price-amount">@(ListedItem.Listing.Price?.Currency)</span>
+        </div>
+        <br />
+        <div>
+            <div>
+                <Button ElementType="@ElementType.Primary" Value="Instant Whisper" Style="width: 140px"></Button>
+            </div>
+            <div>
+                <Button ElementType="@ElementType.Secondary" Value="Copy Whisper" Style="width: 140px"></Button>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 ﻿using System;
+using PoECommerce.Core.Model.Search;
 
-namespace PoECommerce.Core.Model.Search
+namespace PoECommerce.Core.Model.Trade
 {
     public class Item
     {

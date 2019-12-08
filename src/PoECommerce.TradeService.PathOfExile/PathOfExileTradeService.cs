@@ -31,10 +31,10 @@ namespace PoECommerce.TradeService.PathOfExile
             return mappedResult;
         }
 
-        public async Task<CoreModels.ListedItem[]> Fetch(string queryId, string[] itemsIds)
+        public async Task<Core.Model.Trade.ListedItem[]> Fetch(string queryId, string[] itemsIds)
         {
             ListedItem[] result = await _tradeService.Fetch(queryId, itemsIds);
-            CoreModels.ListedItem[] mappedResult = result.Where(i => i != null).Select(i => _mapper.Map(i)).ToArray();
+            Core.Model.Trade.ListedItem[] mappedResult = result.Where(i => i != null).Select(i => _mapper.Map(i)).ToArray();
             return mappedResult;
         }
     }

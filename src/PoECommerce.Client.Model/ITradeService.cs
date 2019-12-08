@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
+using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Core
 {

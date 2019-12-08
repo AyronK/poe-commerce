@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PoECommerce.Core.Model.Enums;
 
 namespace PoECommerce.Core.Model.Search
 {

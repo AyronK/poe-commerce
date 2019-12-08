@@ -1,4 +1,4 @@
-﻿namespace PoECommerce.Core.Model.Search
+﻿namespace PoECommerce.Core.Model.Trade
 {
     /// <summary>
     ///     Describes how the property which consists of PropertyName and PropertyValues[] should be displayed.

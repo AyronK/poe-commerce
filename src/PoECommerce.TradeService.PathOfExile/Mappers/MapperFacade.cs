@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PoECommerce.Core;
+using PoECommerce.Core.Model.Trade;
 using CoreDataModels = PoECommerce.Core.Model.Data;
 using PoEModels = PoECommerce.PathOfExile.Models;
 using CoreModels = PoECommerce.Core.Model;
@@ -9,7 +10,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
 {
     internal class MapperFacade : IMapperFacade
     {
-        private readonly IModelMapper<PoEModels.Trade.ListedItem, CoreModels.Search.ListedItem> _listedItemMapper;
+        private readonly IModelMapper<PoEModels.Trade.ListedItem, ListedItem> _listedItemMapper;
         private readonly IModelMapper<CoreModels.Search.Query, PoEModels.Search.Query> _queryMapper;
         private readonly IModelMapper<PoEModels.Search.QueryResult, CoreModels.Search.SearchResult> _searchResultMapper;
         private readonly IModelMapper<PoEModels.Data.League, CoreDataModels.League> _leagueMapper;
@@ -21,7 +22,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
 
         public MapperFacade
         (
-        IModelMapper<PoEModels.Trade.ListedItem, CoreModels.Search.ListedItem> listedItemMapper,
+        IModelMapper<PoEModels.Trade.ListedItem, ListedItem> listedItemMapper,
         IModelMapper<CoreModels.Search.Query, PoEModels.Search.Query> queryMapper,
         IModelMapper<PoEModels.Search.QueryResult, CoreModels.Search.SearchResult> searchResultMapper,
         IModelMapper<PoEModels.Data.League, CoreDataModels.League> leagueMapper,
@@ -48,7 +49,7 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers
             return _queryMapper.Map(mapOperand);
         }
 
-        public CoreModels.Search.ListedItem Map(PoEModels.Trade.ListedItem mapOperand)
+        public ListedItem Map(PoEModels.Trade.ListedItem mapOperand)
         {
             return _listedItemMapper.Map(mapOperand);
         }
