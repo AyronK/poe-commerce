@@ -3,18 +3,18 @@
 
 <div style="display: flex; flex-direction: column">
     <div style="display: flex; flex-direction: row">
-        <div style="width: 50%">
+        <div style="width: 30%">
             <Label Value="Seller Account"></Label>
         </div>
-        <div style="width: 50%">
+        <div style="width: 70%">
             <TextField @bind-Value="@AccountName" PlaceHolder="Seller Account Name" Style="width: 100%"></TextField>
         </div>
     </div>
     <div style="display: flex; flex-direction: row">
-        <div style="width: 50%">
+        <div style="width: 30%">
             <Label Value="Listed"></Label>
         </div>
-        <div style="width: 50%">
+        <div style="width: 70%">
             <Select @bind-Value="@Indexed" IsAutocomplete="@true" Style="width:100%">
                 <SelectOption Text="Any"></SelectOption>
                 @foreach (Indexed indexed in Enum.GetValues(typeof(Indexed)))
@@ -25,10 +25,10 @@
         </div>
     </div>
     <div style="display: flex; flex-direction: row">
-        <div style="width: 50%">
+        <div style="width: 30%">
             <Label Value="Sale Type"></Label>
         </div>
-        <div style="width: 50%">
+        <div style="width: 70%">
             <Select @bind-Value="@SaleType" IsAutocomplete="@true" Style="width:100%">
                 <SelectOption Text="Any"></SelectOption>
                 @foreach (SaleType saleType in Enum.GetValues(typeof(SaleType)))
@@ -39,10 +39,10 @@
         </div>
     </div>
     <div style="display: flex; flex-direction: row">
-        <div style="width: 50%">
+        <div style="width: 30%">
             <Label Value="Buyout Price"></Label>
         </div>
-        <div style="width: 30%">
+        <div style="width: 40%">
             <Select @bind-Value="@PriceCurrency" IsAutocomplete="@true" Style="width:100%">
                 <SelectOption Value="" Text="Chaos Orb Equivalent"></SelectOption>
                 <SelectOption Value="chaos" Text="Chaos Orb"></SelectOption>
@@ -63,7 +63,7 @@
                 <SelectOption Value="vaal" Text="Vaal Orb"></SelectOption>
             </Select>
         </div>
-        <div style="width: 20%">
+        <div style="width: 30%">
             <div style="display: flex; flex-direction: row">
                 <div style="width: 50%">
                     <TextField @bind-Value="@PriceMin" PlaceHolder="Min" Style="width: 100%;"></TextField>

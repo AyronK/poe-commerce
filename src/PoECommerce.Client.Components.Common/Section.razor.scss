@@ -25,14 +25,10 @@
     }
 
     .poec-section__content__wrapper {
-        max-height: 0;
-        visibility: hidden;
-        transition: max-height 0.1s linear, visibility 0.1s linear;
+        display: none;
 
         &--open {
-            max-height: 500px;
-            visibility: visible;
-            transition: max-height 0.25s ease-in, visibility 0.25s ease-in;
+            display: block;
         }
 
         .poec-section__content {

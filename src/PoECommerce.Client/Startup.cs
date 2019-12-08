@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
 using PoECommerce.Client.Cache.TradeService;
-using PoECommerce.Client.Components.Trade;
 using PoECommerce.Client.StartupExtensions.Electron;
 using PoECommerce.PathOfExile.Extensions;
 using PoECommerce.TradeService.PathOfExile.Extensions;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PoECommerce.PathOfExile.Extensions
+﻿namespace PoECommerce.PathOfExile.Extensions
 {
     public class RegistrationConfiguration
     {

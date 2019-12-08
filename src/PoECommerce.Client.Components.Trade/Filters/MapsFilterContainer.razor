@@ -1,0 +1,91 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits MapsFilterContainerBase
+
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Map Tier"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@Tier" OnChange="@((FilterMagnitude filterMagnitude) => { Tier = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Map Packsize"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@PackSize" OnChange="@((FilterMagnitude filterMagnitude) => { PackSize = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Shaped Map"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@ShapedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true">Yes</SelectOption>
+                        <SelectOption Value="false">No</SelectOption>
+                        <SelectOption Value="">Any</SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Blighted Map"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@BlightedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true">Yes</SelectOption>
+                        <SelectOption Value="false">No</SelectOption>
+                        <SelectOption Value="">Any</SelectOption>
+                    </Select>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Map IIQ"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@IncreasedItemQuantity" OnChange="@((FilterMagnitude filterMagnitude) => { IncreasedItemQuantity = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Map IIR"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@IncreasedItemRarity" OnChange="@((FilterMagnitude filterMagnitude) => { IncreasedItemRarity = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Elder Map"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@ElderValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true">Yes</SelectOption>
+                        <SelectOption Value="false">No</SelectOption>
+                        <SelectOption Value="">Any</SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Map Series"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@Series" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="A">A</SelectOption>
+                        <SelectOption Value="B">B</SelectOption>
+                        <SelectOption Value="C">C</SelectOption>
+                    </Select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,11 @@ namespace PoECommerce.Core.Model.Search
         public WeaponsFilter WeaponFilter { get; set; }
         public TradeFilter TradeFilter { get; set; }
         public ModifiersFilter ModifiersFilter { get; set; }
+        public ArmoursFilter ArmourFilter { get; set; }
+        public SocketsGroupFilter SocketFilter { get; set; }
+        public RequirementsFilter RequirementsFilter { get; set; }
+        public MapsFilter MapsFilter { get; set; }
+        public MiscellaneousFilter MiscellaneousFilter { get; set; }
         public IDictionary<string, SortType> Sort { get; set; }
     }
 }

@@ -1,47 +1,59 @@
 ﻿@using PoECommerce.Core.Model.Search
 @inherits WeaponsFilterContainerBase
 
-    <div style="display: flex; flex-direction: column">
-        <div style="display: flex; flex-direction: row">
-            <div style="width: 30%">
-                <Label Value="Damage"></Label>
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Damage"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@Damage" OnChange="@((FilterMagnitude filterMagnitude) => { Damage = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@Damage" OnChange="@((FilterMagnitude filterMagnitude) => { Damage = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Critical Chance"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@CriticalChance" OnChange="@((FilterMagnitude filterMagnitude) => { CriticalChance = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
-            <div style="width: 30%">
-                <Label Value="Attacks per Second"></Label>
-            </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@AttacksPerSecond" OnChange="@((FilterMagnitude filterMagnitude) => { AttacksPerSecond = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Damage per Second"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@Dps" OnChange="@((FilterMagnitude filterMagnitude) => { Dps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
         </div>
-        <div style="display: flex; flex-direction: row">
-            <div style="width: 30%">
-                <Label Value="Critical Chance"></Label>
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Attacks per Second"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@AttacksPerSecond" OnChange="@((FilterMagnitude filterMagnitude) => { AttacksPerSecond = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@CriticalChance" OnChange="@((FilterMagnitude filterMagnitude) => { CriticalChance = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Physical Dps"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@PhysicalDps" OnChange="@((FilterMagnitude filterMagnitude) => { PhysicalDps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
-            <div style="width: 30%">
-                <Label Value="Damage per Second"></Label>
-            </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@Dps" OnChange="@((FilterMagnitude filterMagnitude) => { Dps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
-            </div>
-        </div>
-        <div style="display: flex; flex-direction: row">
-            <div style="width: 30%">
-                <Label Value="Physical Dps"></Label>
-            </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@PhysicalDps" OnChange="@((FilterMagnitude filterMagnitude) => { PhysicalDps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
-            </div>
-            <div style="width: 30%">
-                <Label Value="Elemental Dps"></Label>
-            </div>
-            <div style="width: 20%">
-                <FilterMagnitudeContainer FilterMagnitude="@ElementalDps" OnChange="@((FilterMagnitude filterMagnitude) => { ElementalDps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Elemental Dps"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@ElementalDps" OnChange="@((FilterMagnitude filterMagnitude) => { ElementalDps = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
             </div>
         </div>
     </div>
+</div>

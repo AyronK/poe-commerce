@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace PoECommerce.Client.Components.Common
@@ -21,11 +22,18 @@ namespace PoECommerce.Client.Components.Common
             get => _isOpen;
             set
             {
-                _isOpen = value;
-                States["open"] = _isOpen;
-                StateHasChanged();
+                if (!EqualityComparer<bool>.Default.Equals(value, _isOpen))
+                {
+                    _isOpen = value;
+                    States["open"] = _isOpen;
+                    IsOpenChanged.InvokeAsync(value);
+                    StateHasChanged();
+                }
             }
         }
+
+        [Parameter]
+        public EventCallback<bool> IsOpenChanged { get; set; }
 
         protected override void OnInitialized()
         {

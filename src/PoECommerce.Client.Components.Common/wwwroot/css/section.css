@@ -98,12 +98,8 @@
       font-weight: 600;
       color: #a38d6d; }
   .poec-section .poec-section__content__wrapper {
-    max-height: 0;
-    visibility: hidden;
-    transition: max-height 0.1s linear, visibility 0.1s linear; }
+    display: none; }
     .poec-section .poec-section__content__wrapper--open {
-      max-height: 500px;
-      visibility: visible;
-      transition: max-height 0.25s ease-in, visibility 0.25s ease-in; }
+      display: block; }
     .poec-section .poec-section__content__wrapper .poec-section__content {
       padding: 10px; }
