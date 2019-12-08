@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
