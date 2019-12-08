@@ -46,7 +46,7 @@
 
         &__verified {
             padding: 2px;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 600;
             color: $poec-item-text-default;
             border: 1px solid $poec-item-text-default;
@@ -150,6 +150,16 @@
             &__offline {
                 background-color: darkred;
             }
+        }
+
+        .sent-whisper {
+            padding: 2px;
+            font-size: 0.65rem;
+            font-weight: bolder;
+            margin: 7px auto;
+            max-width: 100px;
+            color: $poec-item-text-simple;
+            background-color: black;
         }
     }
 

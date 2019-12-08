@@ -79,7 +79,7 @@
     align-self: stretch; }
     .listed-item-container-stats__verified {
       padding: 2px;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 600;
       color: #7f7f7f;
       border: 1px solid #7f7f7f;
@@ -212,6 +212,14 @@
         background-color: orangered; }
       .listed-item-container-listing .online-status__offline {
         background-color: darkred; }
+    .listed-item-container-listing .sent-whisper {
+      padding: 2px;
+      font-size: 0.65rem;
+      font-weight: bolder;
+      margin: 7px auto;
+      max-width: 100px;
+      color: #FFFFFF;
+      background-color: black; }
   .listed-item-container .text-price-type {
     font-size: 0.85rem; }
   .listed-item-container .text-price-amount {

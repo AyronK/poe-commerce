@@ -283,13 +283,19 @@
             <span class="text-simple text-price-amount">@(ListedItem.Listing.Price?.Amount)x</span> <span class="text-augmented text-price-amount">@(ListedItem.Listing.Price?.Currency)</span>
         </div>
         <br />
-        <div>
+        @if (ListedItem.Listing.Account.Online.IsOnline)
+        {
             <div>
-                <Button ElementType="@ElementType.Primary" Value="Instant Whisper" Style="width: 140px"></Button>
+                @if (SentWhisper)
+                {
+                    <div class="sent-whisper">
+                        Whisper Sent
+                    </div>
+                }
+                <div>
+                    <Button ElementType="@ElementType.Primary" Value="@(SentWhisper ? "Redo Whisper" : "Whisper")" OnClick="@InvokeInstantWhisper" Style="width: 140px"></Button>
+                </div>
             </div>
-            <div>
-                <Button ElementType="@ElementType.Secondary" Value="Copy Whisper" Style="width: 140px"></Button>
-            </div>
-        </div>
+        }
     </div>
 </div>
