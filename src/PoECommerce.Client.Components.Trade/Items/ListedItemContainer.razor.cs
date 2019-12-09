@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using GregsStack.InputSimulatorStandard;
 using GregsStack.InputSimulatorStandard.Native;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Client.Components.Trade.Items
@@ -18,6 +18,12 @@ namespace PoECommerce.Client.Components.Trade.Items
 
         [Parameter]
         public ListedItem ListedItem { get; set; }
+
+        [Parameter]
+        public IntPtr? PoEWindow { get; set; }
+
+        [Inject]
+        public IInputSimulator InputSimulator { get; set; }
 
         public bool SentWhisper
         {
@@ -65,24 +71,20 @@ namespace PoECommerce.Client.Components.Trade.Items
 #if DEBUG // if PoE is turned off
             SentWhisper = true;
 #endif
-
-            Process poeProcess = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.StartsWith("PathOfExile"));
-
-            if (poeProcess != null)
+            if (PoEWindow.HasValue)
             {
-                SwitchToThisWindow(poeProcess.MainWindowHandle, true);
+                SwitchToThisWindow(PoEWindow.Value, true);
 
-                InputSimulator simulator = new InputSimulator();
-
-                simulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                simulator.Keyboard.Sleep(100);
-                simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
-                simulator.Keyboard.Sleep(100);
-                simulator.Keyboard.KeyPress(VirtualKeyCode.DELETE);
-                simulator.Keyboard.Sleep(100);
-                simulator.Keyboard.TextEntry(ListedItem.Listing.Whisper);
-                simulator.Keyboard.Sleep(100);
-                simulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                InputSimulator.Keyboard.Sleep(100);
+                InputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                InputSimulator.Keyboard.Sleep(100);
+                InputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
+                InputSimulator.Keyboard.Sleep(100);
+                InputSimulator.Keyboard.KeyPress(VirtualKeyCode.DELETE);
+                InputSimulator.Keyboard.Sleep(100);
+                InputSimulator.Keyboard.TextEntry(ListedItem.Listing.Whisper);
+                InputSimulator.Keyboard.Sleep(100);
+                InputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
                 SentWhisper = true;
             }

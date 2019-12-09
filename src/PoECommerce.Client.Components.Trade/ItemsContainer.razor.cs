@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using PoECommerce.Core;
-using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
 using PoECommerce.Core.Model.Trade;
 
@@ -21,6 +21,16 @@ namespace PoECommerce.Client.Components.Trade
 
         [Inject]
         public ITradeService TradeService { get; set; }
+
+        protected IntPtr? PoEWindow { get; set; }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            
+            Process poeProcess = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.StartsWith("PathOfExile"));
+            PoEWindow = poeProcess?.MainWindowHandle;
+        }
 
         protected override async Task OnParametersSetAsync()
         {

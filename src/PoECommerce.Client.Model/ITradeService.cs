@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using PoECommerce.Core.Model.Data;
+﻿using System.Threading.Tasks;
 using PoECommerce.Core.Model.Search;
 using PoECommerce.Core.Model.Trade;
 
