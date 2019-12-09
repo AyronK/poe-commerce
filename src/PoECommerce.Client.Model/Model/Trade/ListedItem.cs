@@ -1,6 +1,4 @@
 ﻿using System;
-using PoECommerce.Core.Model.Enums;
-using PoECommerce.Core.Model.Search;
 
 namespace PoECommerce.Core.Model.Trade
 {

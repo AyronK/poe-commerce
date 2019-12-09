@@ -1,4 +1,5 @@
 using System;
+using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,7 @@ namespace PoECommerce.Client
             services.AddServerSideBlazor();
             services.AddElectronHybrid();
             services.AddSingleton(_logger);
+            services.AddSingleton<IInputSimulator, InputSimulator>();
 
             // PoE related registrations
             services.AddPathOfExileApiServices((cfg) =>

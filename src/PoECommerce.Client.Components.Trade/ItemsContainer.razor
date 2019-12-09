@@ -1,6 +1,4 @@
-﻿@using PoECommerce.Core.Model.Data
-@using PoECommerce.Core.Model.Search
-@using PoECommerce.Core.Model.Trade
+﻿@using PoECommerce.Core.Model.Trade
 @inherits ItemsContainerBase
 
 <h3>ItemsContainer</h3>
@@ -16,7 +14,7 @@
         @:Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)
         foreach (ListedItem resultItem in ListedItems)
         {
-            <ListedItemContainer ListedItem="@resultItem"></ListedItemContainer>
+            <ListedItemContainer ListedItem="@resultItem" PoEWindow="@PoEWindow"></ListedItemContainer>
         }
     }
 }

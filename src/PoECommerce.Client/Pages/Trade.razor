@@ -1,0 +1,48 @@
+﻿@page "/Trade"
+@using PoECommerce.Client.Shared.Display
+
+@inject IWindowManager WindowManager
+
+<div class="window-task-bar">
+    <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="-"></Button>
+</div>
+<div class="window-content">
+    <TradeContainer></TradeContainer>
+</div>
+
+<style>
+    body {
+        overflow: hidden;
+        user-select: none;
+    }
+
+    .window-task-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        background-color: black;
+        padding: 3px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .window-content {
+        margin-top: 35px;
+        max-width: 800px;
+        max-height: 800px;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .window-task-bar button {
+        height: 15px;
+        width: 15px;
+        min-height: 15px;
+        min-width: 15px;
+        max-height: 15px;
+        max-width: 15px;
+        line-height: inherit;
+        font-weight: bold;
+    }
+</style>
