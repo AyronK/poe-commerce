@@ -127,5 +127,7 @@ namespace PoECommerce.Core.Model.Trade
         ///     Pseudo modifiers related to trade side such as '+#% total Elemental Resistance'.
         /// </summary>
         public string[] PseudoMods { get; set; }
+
+        public Socket[] Sockets { get; set; }
     }
 }

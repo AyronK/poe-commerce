@@ -8,6 +8,10 @@
     "inputFile": "Items/ItemPropertiesContainer.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/items/sockets-container.css",
+    "inputFile": "Items/SocketsContainer.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/common.css",
     "inputFile": "Common/Common.scss"
   }

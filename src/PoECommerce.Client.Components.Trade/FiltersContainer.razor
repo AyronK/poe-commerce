@@ -1,5 +1,4 @@
-﻿@using System.Text.Json
-@using PoECommerce.Core.Model.Data
+﻿@using PoECommerce.Core.Model.Data
 @using PoECommerce.Core.Model.Enums
 @using PoECommerce.Core.Model.Search
 @using TypeFilter = PoECommerce.Core.Model.Search.TypeFilter
@@ -80,10 +79,5 @@
             <Button OnClick="@ToggleFilter" Value="@(IsFiltersSectionOpen ? "Hide" : "Show")" ElementType="@ElementType.Primary" Style="width: 80%"></Button>
         </div>
     </div>
-
-    <br />
-    <br />
-    <br />
 </div>
-@JsonSerializer.Serialize(Query);
 
