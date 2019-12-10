@@ -48,6 +48,9 @@ namespace PoECommerce.Client.Components.Common
         [Parameter]
         public string Style { get; set; }
 
+        [Parameter]
+        public string InputStyle { get; set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

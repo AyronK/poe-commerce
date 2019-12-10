@@ -56,7 +56,8 @@
     width: 15%;
     display: inline-block;
     align-self: center;
-    margin: 0; }
+    margin: 0;
+    padding: 15px; }
     .listed-item-container-item .icon-wrapper {
       position: relative;
       text-align: center; }
@@ -195,7 +196,8 @@
       margin: 5px 0; }
   .listed-item-container-listing {
     width: 25%;
-    align-self: center; }
+    align-self: center;
+    padding: 15px; }
     .listed-item-container-listing .indexed-status {
       font-size: 0.55rem;
       font-style: italic; }

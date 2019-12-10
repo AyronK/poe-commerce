@@ -5,7 +5,11 @@
     <div class="listed-item-container-item">
         <div class="icon-wrapper">
             <div class="icon">
-                <img src="@ListedItem.Item.Icon" alt="item" />
+                <img src="@ListedItem.Item.Icon" alt="item">
+                @if (ListedItem.Item.Sockets != null)
+                {
+                    <SocketsContainer Sockets="@ListedItem.Item.Sockets" ItemWidth="@ListedItem.Item.Width" ItemHeight="@ListedItem.Item.Height"></SocketsContainer>
+                }
             </div>
         </div>
     </div>

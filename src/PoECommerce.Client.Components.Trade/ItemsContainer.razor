@@ -1,11 +1,9 @@
 ﻿@using PoECommerce.Core.Model.Trade
 @inherits ItemsContainerBase
 
-<h3>ItemsContainer</h3>
-
 @if (SearchResult != null)
 {
-    @if (ListedItems == null || ListedItems.Count == 0)
+    if (ListedItems == null || ListedItems.Count == 0)
     {
         @:No results found
     }

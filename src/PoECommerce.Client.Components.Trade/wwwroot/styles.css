@@ -1,5 +1,6 @@
 ﻿@import url(css/items/listed-item-container.css);
 @import url(css/items/item-properties-container.css);
+@import url(css/items/sockets-container.css);
 
 .flex-column-50 {
     padding: 5px;

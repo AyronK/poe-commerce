@@ -121,8 +121,39 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
                 IsCorrupted = mapOperand.IsCorrupted,
                 IsIdentified = mapOperand.IsIdentified,
                 Note = mapOperand.Note,
-                ProphecyText = mapOperand.ProphecyText
+                ProphecyText = mapOperand.ProphecyText,
+                Sockets = mapOperand.Sockets?.Select(Map).ToArray()
             };
+        }
+        
+        public CoreModels.Socket Map(Socket mapOperand)
+        {
+            return new CoreModels.Socket
+            {
+                Group = mapOperand.Group,
+                Type = Map(mapOperand.Colour)
+            };
+        }
+
+        private CoreModels.SocketType Map(SocketColour mapOperand)
+        {
+            switch (mapOperand)
+            {
+                case SocketColour.Blue:
+                    return CoreModels.SocketType.Blue;
+                case SocketColour.Red:
+                    return CoreModels.SocketType.Red;
+                case SocketColour.Green:
+                    return CoreModels.SocketType.Green;
+                case SocketColour.White:
+                    return CoreModels.SocketType.White;
+                case SocketColour.Abyss:
+                    return CoreModels.SocketType.Abyss;
+                case SocketColour.Delve:
+                    return CoreModels.SocketType.Delve;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mapOperand), mapOperand, null);
+            }
         }
 
         public CoreModels.Property Map(Property mapOperand)

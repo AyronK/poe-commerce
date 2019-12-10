@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using PoECommerce.Core;
+using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
 
 namespace PoECommerce.Client.Components.Trade.Filters
@@ -8,6 +13,11 @@ namespace PoECommerce.Client.Components.Trade.Filters
     {
         [Parameter]
         public MapsFilter Filter { get; set; }
+
+        [Inject]
+        public IStaticDataService DataService { get; set; }
+
+        protected string[] MapSeries = new string[0];
 
         public FilterMagnitude Tier
         {
@@ -109,5 +119,13 @@ namespace PoECommerce.Client.Components.Trade.Filters
 
         [Parameter]
         public Action<MapsFilter> OnChange { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+
+            IReadOnlyDictionary<ItemCategory, Item[]> items = await DataService.GetItems();
+            MapSeries = items[ItemCategory.NormalMap].Select(m => m.Disclaimer).Distinct().Where(m => !string.IsNullOrEmpty(m)).ToArray();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@inherits TextFieldBase
 
 <div class="@GetStateClass("poec-text-field")" style="@Style">
-    <input type="@Type" placeholder="@PlaceHolder" required=@Required class="@GetStateClass("poec-text-field__input")" id="@Id" @bind="Value" disabled=@Disabled readonly="@ReadOnly" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
+    <input type="@Type" placeholder="@PlaceHolder" required=@Required class="@GetStateClass("poec-text-field__input")" id="@Id" @bind="Value" disabled=@Disabled readonly="@ReadOnly" onfocus="@OnFocus" onfocusout="@OnFocusOut" style="@InputStyle"/>
     <div class="@GetStateClass("poec-line-ripple")"></div>
 </div>

@@ -1,6 +1,3 @@
-﻿@using System.Text.Json
-@inherits TradeContainerBase
+﻿@inherits TradeContainerBase
 <FiltersContainer OnSearch="@(s => SearchResult = s)"></FiltersContainer>
 <ItemsContainer SearchResult="@SearchResult"></ItemsContainer>
-
-@JsonSerializer.Serialize(SearchResult)

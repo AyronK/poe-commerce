@@ -26,9 +26,9 @@
                 </div>
                 <div style="width: 50%">
                     <Select @bind-Value="@ShapedValue" IsAutocomplete="@true" Style="width:100%">
-                        <SelectOption Value="true">Yes</SelectOption>
-                        <SelectOption Value="false">No</SelectOption>
-                        <SelectOption Value="">Any</SelectOption>
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
                     </Select>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                 </div>
                 <div style="width: 50%">
                     <Select @bind-Value="@BlightedValue" IsAutocomplete="@true" Style="width:100%">
-                        <SelectOption Value="true">Yes</SelectOption>
-                        <SelectOption Value="false">No</SelectOption>
-                        <SelectOption Value="">Any</SelectOption>
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
                     </Select>
                 </div>
             </div>
@@ -68,9 +68,9 @@
                 </div>
                 <div style="width: 50%">
                     <Select @bind-Value="@ElderValue" IsAutocomplete="@true" Style="width:100%">
-                        <SelectOption Value="true">Yes</SelectOption>
-                        <SelectOption Value="false">No</SelectOption>
-                        <SelectOption Value="">Any</SelectOption>
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
                     </Select>
                 </div>
             </div>
@@ -80,9 +80,11 @@
                 </div>
                 <div style="width: 50%">
                     <Select @bind-Value="@Series" IsAutocomplete="@true" Style="width:100%">
-                        <SelectOption Value="A">A</SelectOption>
-                        <SelectOption Value="B">B</SelectOption>
-                        <SelectOption Value="C">C</SelectOption>
+                        @foreach (string option in MapSeries)
+                        {
+                            <SelectOption Value="@option" Text="@option.ToUpper()"></SelectOption>
+                        }
+                        <SelectOption Value="" Text="Any"></SelectOption>
                     </Select>
                 </div>
             </div>
