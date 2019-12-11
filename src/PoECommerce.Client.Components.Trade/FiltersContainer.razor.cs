@@ -42,7 +42,7 @@ namespace PoECommerce.Client.Components.Trade
             {
                 _searchText = value;
 
-                if (Items.FirstOrDefault(i => i.GetHashCode().ToString().Equals(value, StringComparison.InvariantCultureIgnoreCase)) is Item matchedItem)
+                if (Items.FirstOrDefault(i => i.ToString().Equals(value, StringComparison.InvariantCultureIgnoreCase)) is Item matchedItem)
                 {
                     Query.Type = matchedItem.Type;
                     Query.Name = matchedItem.Name;

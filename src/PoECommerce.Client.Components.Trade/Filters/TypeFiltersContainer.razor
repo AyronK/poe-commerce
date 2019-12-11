@@ -67,7 +67,7 @@
                 <SelectOption Text="Any"></SelectOption>
                 @foreach (ItemRarity itemRarity in Enum.GetValues(typeof(ItemRarity)))
                 {
-                    <SelectOption Value="@itemRarity.ToString()" Text="@itemRarity.ToString()"></SelectOption>
+                    <SelectOption Value="@itemRarity.ToString()" Text="@(itemRarity == Core.Model.Search.ItemRarity.NonUnique ? "Any Non-Unique" : itemRarity.ToString())"></SelectOption>
                 }
             </Select>
         </div>

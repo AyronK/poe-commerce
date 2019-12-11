@@ -7,10 +7,10 @@
 @inherits FiltersContainerBase
 <div style="user-select: none">
     <div style="display: flex; flex-direction: row">
-        <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange">
+        <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange" ValuesMap="@Items.ToDictionary(i=>i.ToString(), i=>i.ToString())">
             @foreach (Item value in SearchTooltipValues)
             {
-                <SelectOption Value="@value.GetHashCode().ToString()" Text="@value.ToString()">
+                <SelectOption Value="@value.ToString()" Text="@value.ToString()">
                     <Before>
                         @if (value.IsUnique)
                         {
@@ -24,6 +24,7 @@
                 </SelectOption>
             }
         </Select>
+        @Query.Text
         <Select @bind-Value="@League" Style="width: 20%" PlaceHolder="League">
             @foreach (League league in Leagues)
             {

@@ -7,7 +7,9 @@ namespace PoECommerce.Client.Components.Common
 {
     public class SelectBase : PoECommerceComponentBase
     {
-        private readonly Dictionary<string, string> _valuesMap = new Dictionary<string, string>();
+        [Parameter]
+        public Dictionary<string, string> ValuesMap { get; set; } = new Dictionary<string, string>();
+
         private bool _isSectionOpen;
         private string _value;
         protected string _valueText;
@@ -28,17 +30,35 @@ namespace PoECommerce.Client.Components.Common
         public string Value
         {
             get => _value;
-            set => SetValue(value);
+            set
+            {
+                if (string.Equals(value, _value, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                _value = value;
+                _valueText = ValuesMap.TryGetValue(value ?? string.Empty, out string textValue) ? textValue : value;
+
+                States["filled"] = !string.IsNullOrEmpty(_value);
+
+                ValueChanged.InvokeAsync(_value);
+                StateHasChanged();
+            }
         }
 
         /// <summary>
         ///     Updates <see cref="Value" /> which should handle <see cref="_valueText" /> change as well according to
-        ///     <see cref="_valuesMap" />.
-        /// </summary>
+        ///     <see cref="ValuesMap" />.
+        /// </summary
         protected string ValueText
         {
             get => _valueText;
-            set => SetValue(value);
+            set
+            {
+                Value = value;
+                StateHasChanged();
+            }
         }
 
         [Parameter]
@@ -60,6 +80,7 @@ namespace PoECommerce.Client.Components.Common
         protected EventCallback<FocusEventArgs> OnFocus { get; set; }
         protected EventCallback<FocusEventArgs> OnFocusOut { get; set; }
         protected EventCallback<ChangeEventArgs> OnChange { get; set; }
+        protected EventCallback<ChangeEventArgs> OnInputWrapper { get; set; }
 
         [Parameter]
         public EventCallback<ChangeEventArgs> OnInput { get; set; }
@@ -87,38 +108,32 @@ namespace PoECommerce.Client.Components.Common
                 }
             });
             OnChange = eventCallbackFactory.Create(this, (ChangeEventArgs args) => SetValue(args.Value.ToString()));
+            OnInputWrapper = eventCallbackFactory.Create(this, (ChangeEventArgs args) =>
+            {
+                ValueText = args.Value.ToString();
+                OnInput.InvokeAsync(args);
+            });
         }
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
             States["autocomplete"] = IsAutocomplete;
-            _valueText = _valuesMap.TryGetValue(_value ?? string.Empty, out string textValue) ? textValue : _value;
+            _valueText = ValuesMap.TryGetValue(_value ?? string.Empty, out string textValue) ? textValue : _value;
         }
 
         internal void SetValue(string value)
         {
-            if (IsAutocomplete && !string.IsNullOrEmpty(Value) && !string.IsNullOrEmpty(value) && Value.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                return;
-            }
-
-            _valueText = _valuesMap.TryGetValue(value ?? string.Empty, out string textValue) ? textValue : value;
-
-            if (value == _value)
-            {
-                return;
-            }
-
-            _value = value;
-            States["filled"] = !string.IsNullOrEmpty(_value);
-
-            ValueChanged.InvokeAsync(_value);
+            Value = value;
+            StateHasChanged();
         }
 
         internal void RegisterOption(string value, string text)
         {
-            _valuesMap[value ?? string.Empty] = text;
+            if (!ValuesMap.TryGetValue(value ?? string.Empty, out string existingKey) || existingKey != (text ?? string.Empty))
+            {
+                ValuesMap[value ?? string.Empty] = text ?? string.Empty;
+            }
         }
     }
 }

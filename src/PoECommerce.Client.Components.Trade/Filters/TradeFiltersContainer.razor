@@ -15,12 +15,14 @@
             <Label Value="Listed"></Label>
         </div>
         <div style="width: 70%">
-            <Select @bind-Value="@Indexed" IsAutocomplete="@true" Style="width:100%">
+            <Select @bind-Value="@IndexedText" IsAutocomplete="@true" Style="width:100%">
                 <SelectOption Text="Any"></SelectOption>
-                @foreach (Indexed indexed in Enum.GetValues(typeof(Indexed)))
-                {
-                    <SelectOption Value="@indexed.ToString()" Text="@indexed.ToString()"></SelectOption>
-                }
+                <SelectOption Value="@(Indexed.OneDay.ToString())" Text="Up To a Day Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.ThreeDays.ToString())" Text="Up To Three Days Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.OneWeek.ToString())" Text="Up To a Week Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.TwoWeek.ToString())" Text="Up To Two Weeks Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.OneMonth.ToString())" Text="Up To a Month Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.TwoMonths.ToString())" Text="Up To Two Months Ago"></SelectOption>
             </Select>
         </div>
     </div>
@@ -29,12 +31,10 @@
             <Label Value="Sale Type"></Label>
         </div>
         <div style="width: 70%">
-            <Select @bind-Value="@SaleType" IsAutocomplete="@true" Style="width:100%">
+            <Select @bind-Value="@SaleTypeText" IsAutocomplete="@true" Style="width:100%">
                 <SelectOption Text="Any"></SelectOption>
-                @foreach (SaleType saleType in Enum.GetValues(typeof(SaleType)))
-                {
-                    <SelectOption Value="@saleType.ToString()" Text="@saleType.ToString()"></SelectOption>
-                }
+                <SelectOption Value="@(SaleType.Priced.ToString())" Text="Buyout or Fixed Price"></SelectOption>
+                <SelectOption Value="@(SaleType.NotPriced.ToString())" Text="No Listed Price"></SelectOption>
             </Select>
         </div>
     </div>

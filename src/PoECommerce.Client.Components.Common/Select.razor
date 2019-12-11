@@ -3,7 +3,7 @@
 <CascadingValue Value="@(this)">
     <div class="@GetStateClass("poec-select__wrapper")" style="@Style">
         <div class="@GetStateClass("poec-select")">
-            <input type="text" readonly="@(!IsAutocomplete)" placeholder="@PlaceHolder" class="@GetStateClass("poec-select__selected__input")" id="@Id" value="@ValueText" onchange="@OnChange" oninput="@OnInput" onclick="@OnClick" onkeydown="@OnKeyDown" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
+            <input type="text" readonly="@(!IsAutocomplete)" placeholder="@PlaceHolder" class="@GetStateClass("poec-select__selected__input")" id="@Id" value="@ValueText" oninput="@OnInputWrapper" onclick="@OnClick" onkeydown="@OnKeyDown" onfocus="@OnFocus" onfocusout="@OnFocusOut" />
             <div class="@GetStateClass("poec-line-ripple")">
             </div>
         </div>
