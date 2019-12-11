@@ -19,7 +19,7 @@ namespace PoECommerce.Client.Components.Trade.Filters
             }
         }
 
-        public string Indexed
+        public string IndexedText
         {
             get => Filter.Indexed.ToString();
             set
@@ -29,7 +29,7 @@ namespace PoECommerce.Client.Components.Trade.Filters
             }
         }
 
-        public string SaleType
+        public string SaleTypeText
         {
             get => Filter.SaleType.ToString();
             set

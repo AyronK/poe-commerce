@@ -2,11 +2,11 @@
 {
     public enum ItemRarity
     {
-        NonUnique,
         Normal,
         Magic,
         Rare,
         Unique,
+        NonUnique,
         Relic,
     }
 }
