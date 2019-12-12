@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GregsStack.InputSimulatorStandard;
 using GregsStack.InputSimulatorStandard.Native;
 using Microsoft.AspNetCore.Components;
+using NLog;
 using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Client.Components.Trade.Items
@@ -21,6 +22,9 @@ namespace PoECommerce.Client.Components.Trade.Items
 
         [Parameter]
         public IntPtr? PoEWindow { get; set; }
+
+        [Inject]
+        public ILogger Logger { get; set; }
 
         [Inject]
         public IInputSimulator InputSimulator { get; set; }
@@ -87,6 +91,10 @@ namespace PoECommerce.Client.Components.Trade.Items
                 InputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
                 SentWhisper = true;
+            }
+            else
+            {
+                Logger.Debug("Cannot send whisper because Path of Exile process is not attached.");
             }
         }
     }
