@@ -36,7 +36,7 @@ namespace PoECommerce.Client
             services.AddSingleton<IInputSimulator, InputSimulator>();
 
             // PoE related registrations
-            services.AddPathOfExileApiServices((cfg) =>
+            services.AddPathOfExileApiServices(cfg =>
             {
                 cfg.DataServiceSettings.Scope = RegistrationType.Singleton;
                 cfg.DataServiceSettings.Factory = factory => new CachedDataService(factory);

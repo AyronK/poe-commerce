@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.1 - 2019-12-12
+### Fixed
+- Aligned "Trade" button
+- Fixed blinking sockets on mouse over
+- Now the "No results" will not be displayed when the results are loading. There will be "Loading..." message instead
+- Improved PoE Process handler for better relability of in-game messages
+
 ## 0.1.0 - 2019-12-12
 ### Added
 - Application starts with an overlay window with a button "Trade" in the bottom right corner of the screen
