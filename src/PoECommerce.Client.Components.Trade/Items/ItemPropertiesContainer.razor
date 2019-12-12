@@ -1,0 +1,111 @@
+﻿@using System.Text.RegularExpressions
+@using Microsoft.VisualBasic
+@using PoECommerce.Core.Model.Trade
+
+<div class="item-property-container item-property-container__@(OneLine ? "single-row" : "multiple-rows")">
+    @if (OneLine && !string.IsNullOrEmpty(OneLinePrefix))
+    {
+        <span class="item-property-prefix text-default)">
+            @OneLinePrefix
+        </span>
+    }
+    @foreach (Property itemProperty in Properties)
+    {
+        Property lastProperty = Properties.Last();
+
+        <div class="item-property">
+            @switch (itemProperty.DisplayMode)
+            {
+                case PropertyDisplayMode.MultipleValues:
+
+                    PropertyValue firstValue = itemProperty.Values?.FirstOrDefault();
+
+                    @if (firstValue != null)
+                    {
+
+                        @(GetPropertyNameAsHtml(itemProperty.Name) + ":")
+                    }
+                    else
+                    {
+                        @GetPropertyNameAsHtml(itemProperty.Name)
+                    }
+
+                    @if (itemProperty.Values != null)
+                    {
+
+                        @foreach (PropertyValue value in itemProperty.Values)
+                        {
+                            if (value != firstValue)
+                            {
+                                @:,&nbsp;
+                            }
+
+                            <span class="item-property-value text-@(value.Format.ToString().ToLower())">
+                                @value.Value
+                            </span>
+                        }
+                    }
+                    break;
+                case PropertyDisplayMode.SingleValue:
+                    PropertyValue singleValue = itemProperty.Values?.FirstOrDefault();
+                    @GetPropertyNameAsHtml(itemProperty.Name)@::
+                    @if (singleValue != null)
+                    {
+                        <span class="item-property-value text-@(singleValue.Format.ToString().ToLower())">
+                            @singleValue.Value
+                        </span>
+                    }
+                    break;
+                case PropertyDisplayMode.ProgressBar:
+                    PropertyValue firstOrDefault = itemProperty.Values.FirstOrDefault();
+                    @if (firstOrDefault != null)
+                    {
+                        <span class="item-property-value text-@(firstOrDefault.Format.ToString().ToLower())">
+                            [@(itemProperty.Progress.HasValue ? (itemProperty.Progress.Value * 100).ToString("F") : "0")%] @firstOrDefault?.Value
+                        </span>
+                    }
+                    break;
+                case PropertyDisplayMode.Template:
+                    string template = itemProperty.Name;
+
+                    for (int index = 0; index < itemProperty.Values.Length; index++)
+                    {
+                        PropertyValue propertyValue = itemProperty.Values[index];
+                        string formattedValue = $"<span class=\"text-{propertyValue.Format.ToString().ToLower()}\">{propertyValue.Value}</span>";
+                        template = Strings.Replace(template, $"%{index}", formattedValue, 1, 1);
+                    }
+
+                    <div class="item-property-value">
+                        @GetPropertyNameAsHtml(template)
+                    </div>
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            @if (OneLine && itemProperty != lastProperty)
+            {
+                @:,
+            }
+        </div>
+    }
+</div>
+
+@functions
+{
+    [Parameter]
+    public Property[] Properties { get; set; }
+
+    [Parameter]
+    public bool OneLine { get; set; }
+
+    [Parameter]
+    public string OneLinePrefix { get; set; }
+
+    public MarkupString GetPropertyNameAsHtml(string propertyName)
+    {
+        propertyName = Regex.Replace(propertyName, @"<unmet>{(\d*)}", "<span class=\"text-unmet\">&nbsp;$1&nbsp;</span>");
+
+        return (MarkupString)propertyName;
+    }
+}

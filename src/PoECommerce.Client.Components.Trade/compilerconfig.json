@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/items/listed-item-container.css",
+    "inputFile": "Items/ListedItemContainer.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/items/item-properties-container.css",
+    "inputFile": "Items/ItemPropertiesContainer.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/items/sockets-container.css",
+    "inputFile": "Items/SocketsContainer.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/common.css",
+    "inputFile": "Common/Common.scss"
+  }
+]

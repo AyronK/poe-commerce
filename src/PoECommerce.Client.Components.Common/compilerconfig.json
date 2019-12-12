@@ -1,0 +1,38 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/text-field.css",
+    "inputFile": "TextField.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/section.css",
+    "inputFile": "Section.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/label.css",
+    "inputFile": "Label.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/select.css",
+    "inputFile": "Select.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/select-option.css",
+    "inputFile": "SelectOption.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/button.css",
+    "inputFile": "Button.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/checkbox.css",
+    "inputFile": "Checkbox.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/common.css",
+    "inputFile": "Common/Common.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/variables.css",
+    "inputFile": "Common/Variables.scss"
+  }
+]

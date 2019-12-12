@@ -1,0 +1,50 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.poec-button {
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 4px 8px 4px 8px;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+    height: 36px;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    user-select: none;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    font-family: $poec-typography-font-family;
+    text-transform: capitalize;
+    font-variant: small-caps;
+    margin: 5px;
+
+    &--primary {
+        background-color: $poec-theme-primary;
+        color: $poec-theme-on-primary;
+    }
+
+    &--secondary {
+        background-color: $poec-theme-secondary;
+        color: $poec-theme-on-secondary;
+    }
+
+    &:hover, &:active {
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        filter: brightness(135%);
+        -webkit-transition: -webkit-filter 75ms ease
+    }
+
+    &:active {
+        filter: brightness(175%);
+        -webkit-transition: -webkit-filter 50ms ease
+    }
+}

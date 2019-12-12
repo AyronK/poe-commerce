@@ -1,0 +1,21 @@
+﻿@import "Common/Variables";
+
+.poec-select__menu__list__item {
+    min-height: 38px;
+    font-size: 0.85rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.00937em;
+    align-self: flex-end;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    border: none;
+    color: $poec-theme-on-primary;
+    cursor: pointer;
+
+    &:hover, &[data-selected] {
+        background-color: $poec-theme-primary;
+    }
+}

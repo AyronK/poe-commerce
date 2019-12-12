@@ -1,4 +1,5 @@
 using System;
+using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
+using PoECommerce.Client.Cache.TradeService;
 using PoECommerce.Client.StartupExtensions.Electron;
+using PoECommerce.PathOfExile.Extensions;
+using PoECommerce.TradeService.PathOfExile.Extensions;
 
 namespace PoECommerce.Client
 {
@@ -29,6 +33,15 @@ namespace PoECommerce.Client
             services.AddServerSideBlazor();
             services.AddElectronHybrid();
             services.AddSingleton(_logger);
+            services.AddSingleton<IInputSimulator, InputSimulator>();
+
+            // PoE related registrations
+            services.AddPathOfExileApiServices((cfg) =>
+            {
+                cfg.DataServiceSettings.Scope = RegistrationType.Singleton;
+                cfg.DataServiceSettings.Factory = factory => new CachedDataService(factory);
+            });
+            services.AddPathOfExileCoreServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

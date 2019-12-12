@@ -1,0 +1,77 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits TradeFiltersContainerBase
+
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 30%">
+            <Label Value="Seller Account"></Label>
+        </div>
+        <div style="width: 70%">
+            <TextField @bind-Value="@AccountName" PlaceHolder="Seller Account Name" Style="width: 100%"></TextField>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 30%">
+            <Label Value="Listed"></Label>
+        </div>
+        <div style="width: 70%">
+            <Select @bind-Value="@IndexedText" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption Text="Any"></SelectOption>
+                <SelectOption Value="@(Indexed.OneDay.ToString())" Text="Up To a Day Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.ThreeDays.ToString())" Text="Up To Three Days Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.OneWeek.ToString())" Text="Up To a Week Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.TwoWeek.ToString())" Text="Up To Two Weeks Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.OneMonth.ToString())" Text="Up To a Month Ago"></SelectOption>
+                <SelectOption Value="@(Indexed.TwoMonths.ToString())" Text="Up To Two Months Ago"></SelectOption>
+            </Select>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 30%">
+            <Label Value="Sale Type"></Label>
+        </div>
+        <div style="width: 70%">
+            <Select @bind-Value="@SaleTypeText" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption Text="Any"></SelectOption>
+                <SelectOption Value="@(SaleType.Priced.ToString())" Text="Buyout or Fixed Price"></SelectOption>
+                <SelectOption Value="@(SaleType.NotPriced.ToString())" Text="No Listed Price"></SelectOption>
+            </Select>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 30%">
+            <Label Value="Buyout Price"></Label>
+        </div>
+        <div style="width: 40%">
+            <Select @bind-Value="@PriceCurrency" IsAutocomplete="@true" Style="width:100%">
+                <SelectOption Value="" Text="Chaos Orb Equivalent"></SelectOption>
+                <SelectOption Value="chaos" Text="Chaos Orb"></SelectOption>
+                <SelectOption Value="exa" Text="Exalted Orb"></SelectOption>
+                <SelectOption Value="blessed" Text="Blessed Orb"></SelectOption>
+                <SelectOption Value="chisel" Text="Cartographer's Chisel"></SelectOption>
+                <SelectOption Value="chrom" Text="Chromatic Orb"></SelectOption>
+                <SelectOption Value="divine" Text="Divine Orb"></SelectOption>
+                <SelectOption Value="gcp" Text="Gemcutter's Prism"></SelectOption>
+                <SelectOption Value="jew" Text="Jeweller's Orb"></SelectOption>
+                <SelectOption Value="scour" Text="Orb of Scouring"></SelectOption>
+                <SelectOption Value="regret" Text="Orb of Regret"></SelectOption>
+                <SelectOption Value="fusing" Text="Orb of Fusing"></SelectOption>
+                <SelectOption Value="chance" Text="Orb of Chance"></SelectOption>
+                <SelectOption Value="alt" Text="Orb of Alteration"></SelectOption>
+                <SelectOption Value="alch" Text="Orb of Alchemy"></SelectOption>
+                <SelectOption Value="regal" Text="Regal Orb"></SelectOption>
+                <SelectOption Value="vaal" Text="Vaal Orb"></SelectOption>
+            </Select>
+        </div>
+        <div style="width: 30%">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <TextField @bind-Value="@PriceMin" PlaceHolder="Min" Style="width: 100%;"></TextField>
+                </div>
+                <div style="width: 50%">
+                    <TextField @bind-Value="@PriceMax" PlaceHolder="Max" Style="width: 100%"></TextField>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

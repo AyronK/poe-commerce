@@ -1,0 +1,14 @@
+﻿@inherits SingleModifierFilterContainerBase
+
+<div style="display: flex; flex-direction: row">
+    <div style="width: 70%; display:flex">
+        <Checkbox @bind-Checked="@Enabled"></Checkbox>
+        <ModifierSelect @bind-Value="@Id" PlaceHolder="Change Modifier Filter"></ModifierSelect>
+    </div>
+    <div style="width: 20%">
+        <FilterMagnitudeContainer FilterMagnitude="@Magnitude" OnChange="@(m => Magnitude = m)"></FilterMagnitudeContainer>
+    </div>
+    <div style="width: 10%">
+        <Button ElementType="@ElementType.Secondary" Value="x" OnClick="@(_ => OnRemove?.Invoke(Filter))"></Button>
+    </div>
+</div>

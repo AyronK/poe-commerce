@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>PoECommerce.System.Text.Json</AssemblyName>
+    <RootNamespace>System.Text.Json</RootNamespace>
+  </PropertyGroup>
+
+</Project>
