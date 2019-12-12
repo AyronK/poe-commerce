@@ -1,0 +1,13 @@
+﻿@inherits SectionBase
+
+<div class="@GetStateClass("poec-section")">
+    <div class="@GetStateClass("poec-section__header")" onclick="@OnClick">
+        <Checkbox @bind-Checked="@IsOpen" Label="@Title"></Checkbox>
+        <div class="@GetStateClass("poec-line-ripple")"></div>
+    </div>
+    <div class="@GetStateClass("poec-section__content__wrapper")">
+        <div class="@GetStateClass("poec-section__content")">
+            @ChildContent
+        </div>
+    </div>
+</div>

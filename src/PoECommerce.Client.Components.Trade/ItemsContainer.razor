@@ -1,0 +1,18 @@
+﻿@using PoECommerce.Core.Model.Trade
+@inherits ItemsContainerBase
+
+@if (SearchResult != null)
+{
+    if (ListedItems == null || ListedItems.Count == 0)
+    {
+        @:No results found
+    }
+    else
+    {
+        @:Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)
+        foreach (ListedItem resultItem in ListedItems)
+        {
+            <ListedItemContainer ListedItem="@resultItem" PoEWindow="@PoEWindow"></ListedItemContainer>
+        }
+    }
+}

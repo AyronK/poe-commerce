@@ -1,0 +1,22 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.poec-text-field {
+    @extend .poec-input;
+
+    &__input {
+        @extend .poec-input__input;
+
+        &:focus {
+            @extend .poec-input__input:focus;
+        }
+
+        &--focused {
+            @extend .poec-input__input--focused;
+        }
+
+        &--filled {
+            @extend .poec-input__input--filled;
+        }
+    }
+}

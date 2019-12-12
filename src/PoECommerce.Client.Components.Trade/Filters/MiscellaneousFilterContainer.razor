@@ -1,0 +1,182 @@
+﻿@using PoECommerce.Core.Model.Search
+@inherits MiscellaneousFilterContainerBase
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: row">
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Quality"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@Quality" OnChange="@((FilterMagnitude filterMagnitude) => { Quality = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Gem Level"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@ItemLevel" OnChange="@((FilterMagnitude filterMagnitude) => { ItemLevel = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Shaper Item"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@ShaperValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Fractured Item"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@FracturedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Alternate Art"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@AlternateArtValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Corrupted"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@CorruptedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Crafted"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@CraftedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Enchanted"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@EnchantedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column-50">
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Item Level"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@GemLevel" OnChange="@((FilterMagnitude filterMagnitude) => { GemLevel = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Gem Experience %"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@GemLevelProgress" OnChange="@((FilterMagnitude filterMagnitude) => { GemLevelProgress = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Elder Item"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@ElderValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Synthesised Item"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@SynthesisedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Identified"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@IdentifiedValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Mirrored"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@MirroredValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Veiled"></Label>
+                </div>
+                <div style="width: 50%">
+                    <Select @bind-Value="@VeiledValue" IsAutocomplete="@true" Style="width:100%">
+                        <SelectOption Value="true" Text="Yes"></SelectOption>
+                        <SelectOption Value="false" Text="No"></SelectOption>
+                        <SelectOption Value="" Text="Any"></SelectOption>
+                    </Select>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                    <Label Value="Talisman Tier"></Label>
+                </div>
+                <div style="width: 50%">
+                    <FilterMagnitudeContainer FilterMagnitude="@TalismanTier" OnChange="@((FilterMagnitude filterMagnitude) => { TalismanTier = filterMagnitude; StateHasChanged();})"></FilterMagnitudeContainer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿﻿@using PoECommerce.Core.Model.Data
+@using PoECommerce.Core.Model.Search
+@inherits ModifiersFiltersContainerBase
+
+<div style="display: flex; flex-direction: column">
+    @foreach (ModifierGroupFilter filterGroup in Filter.GroupFilters)
+    {
+        <div>
+            @foreach (SingleModifierFilter filter in filterGroup.Filters)
+            {
+                <SingleModifierFilterContainer Filter="@filter"
+                                               OnChange="@(_ => OnChange?.Invoke(Filter))"
+                                               OnRemove="@(f => RemoveFilter(filterGroup, f))">
+                </SingleModifierFilterContainer>
+            }
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <ModifierSelect ValueChanged="@(s => AddFilter(filterGroup, s))" PlaceHolder="Add Modifier Filter"></ModifierSelect>
+        </div>
+    }
+</div>

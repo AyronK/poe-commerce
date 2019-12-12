@@ -1,0 +1,9 @@
+﻿@inherits CheckboxBase
+
+<div class="@GetStateClass("poec-checkbox")">
+    <label class="@GetStateClass("poec-checkbox__label")">
+        @Label
+        <input type="checkbox" id="@Id" checked="@Checked" @onchange="ChangeHandler">
+        <span class="@GetStateClass("poec-checkbox__check")"></span>
+    </label>
+</div>

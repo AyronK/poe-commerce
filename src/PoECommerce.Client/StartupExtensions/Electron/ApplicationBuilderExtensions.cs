@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -20,17 +21,12 @@ namespace PoECommerce.Client.StartupExtensions.Electron
             appLifetime.ApplicationStarted.Register(() =>
             {
                 logger.Debug("PoE Commerce started.");
-                
+
                 if (HybridSupport.IsElectronActive)
                 {
                     logger.Debug("Electron mode is active.");
                     logger.Debug("Opening main window...");
-                }
-
-                applicationBuilder.ApplicationServices.GetService<IWindowManager>().Show(0).Wait();
-
-                if (HybridSupport.IsElectronActive)
-                {
+                    applicationBuilder.ApplicationServices.GetService<IWindowManager>().Show(0).Wait();
                     logger.Debug("Main window opened.");
                 }
             });
@@ -50,10 +46,28 @@ namespace PoECommerce.Client.StartupExtensions.Electron
             {
                 ElectronWindowManager manager = serviceProvider.GetService<ElectronWindowManager>();
 
+                Display display = ElectronNET.API.Electron.Screen.GetPrimaryDisplayAsync().Result;
+                int width = display.Bounds.Width;
+                int height = display.Bounds.Height;
+
+                int overlayWidth = 48;
+                int overlayHeight = 28;
+
+                int padding = 10;
+
                 manager.AddWindow(new ElectronWindow(0, new BrowserWindowOptions
                 {
+                    Transparent = true,
                     Show = false,
-                    Frame = true,
+                    Frame = false,
+                    AlwaysOnTop = true,
+                    Movable = false,
+                    Resizable = false,
+                    Closable = true,
+                    Width = overlayWidth,
+                    X = width - overlayWidth - padding,
+                    Height = overlayHeight,
+                    Y = height - overlayHeight - padding,
                 }));
 
                 manager.AddWindow(new ElectronWindow(1, new BrowserWindowOptions
@@ -63,22 +77,24 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     Frame = false,
                     AlwaysOnTop = true,
                     HasShadow = false,
-                    SkipTaskbar = true,
                     Resizable = false,
                     Movable = false,
-                }, "/TestPage1"));
+                    Closable = true,
+                    Width = 800,
+                    Height = 800,
+                    X = width - 800,
+                    Y = (height / 2) - 400,
+                }, "/Trade"));
 
-                manager.AddWindow(new ElectronWindow(2, new BrowserWindowOptions
-                {
-                    Show = false
-                }, "/TestPage2"));
+#if !DEBUG
+                ElectronNET.API.Electron.Menu.SetApplicationMenu(new MenuItem[0]);
+#endif
             }
             else
             {
                 WebBrowserTabManager manager = serviceProvider.GetService<WebBrowserTabManager>();
-                manager.AddWindow(new WebBrowserWindow(0));
-                manager.AddWindow(new WebBrowserWindow(1, "/TestPage1"));
-                manager.AddWindow(new WebBrowserWindow(2, "/TestPage2"));
+                manager.AddWindow(new WebBrowserWindow(0, "/"));
+                manager.AddWindow(new WebBrowserWindow(1, "/Trade"));
             }
 
             return applicationBuilder;

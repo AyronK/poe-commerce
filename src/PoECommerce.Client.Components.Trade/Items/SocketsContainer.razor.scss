@@ -1,0 +1,312 @@
+﻿@import "Common/Variables";
+@import "Common/Common";
+
+.sockets-container {
+
+    $socket-size: 30px;
+    $socket-inside-size: 23px;
+    $socket-margin: 17px;
+    $link-height: 6px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+        display: none;
+    }
+
+    &.sockets-container__1x1 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+    }
+
+    &.sockets-container__2x1 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: $socket-size;
+        }
+    }
+
+    &.sockets-container__3x1 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: $socket-size;
+        }
+
+        &.sockets-container__3s {
+            width: calc(2*#{$socket-margin} + 3*#{$socket-size});
+            height: $socket-size;
+        }
+    }
+
+    &.sockets-container__1x2 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: $socket-size;
+            height: calc(#{$socket-margin} + 2*#{$socket-size});
+        }
+
+        .socket {
+
+            &__2 {
+                top: calc(#{$socket-margin} + #{$socket-size});
+                left: 0;
+            }
+        }
+
+        .link {
+            &__1-2 {
+                width: $link-height;
+                height: $socket-margin;
+                top: $socket-size;
+                left: calc(#{$socket-size}/2);
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+
+    &.sockets-container__1x3,
+    &.sockets-container__1x4 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: $socket-size;
+            height: calc(#{$socket-margin} + 2*#{$socket-size});
+        }
+
+        &.sockets-container__3s {
+            width: $socket-size;
+            height: calc(2*#{$socket-margin} + 3*#{$socket-size});
+        }
+
+        .socket {
+
+            &__2 {
+                top: calc(#{$socket-margin} + #{$socket-size});
+                left: 0;
+            }
+
+            &__3 {
+                top: calc(2*(#{$socket-margin} + #{$socket-size}));
+                left: 0;
+            }
+        }
+
+        .link {
+            &__1-2 {
+                width: $link-height;
+                height: $socket-margin;
+                top: $socket-size;
+                left: calc(#{$socket-size}/2);
+                transform: translate(-50%, 0);
+            }
+
+            &__2-3 {
+                width: $link-height;
+                height: $socket-margin;
+                top: calc(2*#{$socket-size} + #{$socket-margin});
+                left: calc(#{$socket-size}/2);
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+
+    &.sockets-container__2x2 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: $socket-size;
+        }
+
+        &.sockets-container__3s,
+        &.sockets-container__4s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: calc(#{$socket-margin} + 2*#{$socket-size});
+        }
+    }
+
+
+    &.sockets-container__2x3,
+    &.sockets-container__2x4 {
+        &.sockets-container__1s {
+            width: $socket-size;
+            height: $socket-size;
+        }
+
+        &.sockets-container__2s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: $socket-size;
+        }
+
+        &.sockets-container__3s,
+        &.sockets-container__4s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: calc(#{$socket-margin} + 2*#{$socket-size});
+        }
+
+        &.sockets-container__5s,
+        &.sockets-container__6s {
+            width: calc(#{$socket-margin} + 2*#{$socket-size});
+            height: calc(2*#{$socket-margin} + 3*#{$socket-size});
+        }
+    }
+
+    .socket {
+        position: absolute;
+        width: $socket-size;
+        height: $socket-size;
+        border-radius: 50%;
+
+        > div {
+            width: $socket-inside-size;
+            height: $socket-inside-size;
+            background: rgb(104,91,69);
+            background: radial-gradient(circle, #5f4b30 10%, #40321f 40%, #322316 56%, #d7c479 60%, #d7c479 62%, #40321f 74%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &__green {
+            background: linear-gradient(45deg, black 5%, #4ab60c 40%, lighten(#4ab60c, 50%) 55%, #4ab60c 85%);
+        }
+
+        &__red {
+            background: linear-gradient(45deg, black 5%, #b50c27 40%, lighten(#b50c27, 50%) 55%, #b50c27 85%);
+        }
+
+        &__blue {
+            background: linear-gradient(45deg, black 5%, #0c50b6 40%, lighten(#0c50b6, 50%) 55%, #0c50b6 85%);
+        }
+
+        &__white {
+            background: linear-gradient(45deg, black 5%, #e3e3e3 40%, lighten(#e3e3e3, 50%) 55%, #e3e3e3 85%);
+        }
+
+        &__delve {
+            background: linear-gradient(45deg, black 5%, #dc751c 40%, lighten(#dc751c, 50%) 55%, #f27720 85%);
+        }
+
+        &__abyss {
+            background: linear-gradient(45deg, black 5%, #1c1c1c 40%, lighten(#1c1c1c, 50%) 55%, #1c1c1c 85%);
+        }
+
+        &__1 {
+            top: 0;
+            left: 0;
+        }
+
+        &__2 {
+            top: 0;
+            left: calc(#{$socket-margin} + #{$socket-size});
+        }
+
+        &__3 {
+            top: calc(#{$socket-margin} + #{$socket-size});
+            left: calc(#{$socket-margin} + #{$socket-size});
+        }
+
+        &__4 {
+            top: calc(#{$socket-margin} + #{$socket-size});
+            left: 0;
+        }
+
+        &__5 {
+            top: calc(2*(#{$socket-margin} + #{$socket-size}));
+            left: 0px;
+        }
+
+        &__6 {
+            top: calc(2*(#{$socket-margin} + #{$socket-size}));
+            left: calc(#{$socket-margin} + #{$socket-size});
+        }
+    }
+
+    .link {
+        position: absolute;
+        background: $poec-item-text-corrupted;
+
+        &__1-2 {
+            width: $socket-margin;
+            height: $link-height;
+            top: calc(#{$socket-size} / 2);
+            left: $socket-size;
+            transform: translate(0, -50%);
+        }
+
+        &__1-4 {
+            width: $link-height;
+            height: $socket-margin;
+            top: $socket-size;
+            left: calc(#{$socket-size} / 2);
+            transform: translate(-50%, 0);
+        }
+
+        &__2-3 {
+            width: $link-height;
+            height: $socket-margin;
+            top: $socket-size;
+            left: calc(#{$socket-size} + #{$socket-margin} + (#{$socket-size} / 2));
+            transform: translate(-50%, 0);
+        }
+
+        &__3-4 {
+            width: $socket-margin;
+            height: $link-height;
+            top: calc(#{$socket-size} + #{$socket-margin} + (#{$socket-size} / 2));
+            left: $socket-size;
+            transform: translate(0, -50%);
+        }
+
+        &__3-6 {
+            width: $link-height;
+            height: $socket-margin;
+            top: calc(2*#{$socket-size} + #{$socket-margin});
+            left: calc(#{$socket-size} + #{$socket-margin} + (#{$socket-size} / 2));
+            transform: translate(-50%, 0);
+        }
+
+        &__4-5 {
+            width: $link-height;
+            height: $socket-margin;
+            top: calc(2*#{$socket-size} + #{$socket-margin});
+            left: calc(#{$socket-size} / 2);
+            transform: translate(-50%, 0);
+        }
+
+        &__5-6 {
+            width: $socket-margin;
+            height: $link-height;
+            top: calc(2*#{$socket-size} + 2*#{$socket-margin} + (#{$socket-size} / 2));
+            left: $socket-size;
+            transform: translate(0, -50%);
+        }
+    }
+}

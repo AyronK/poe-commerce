@@ -1,0 +1,43 @@
+﻿@using System.Text
+@using PoECommerce.Core.Model.Trade
+@inherits SocketsContainerBase
+
+@if (Sockets != null && Sockets.Length >= 0 && Sockets.Length <= 6)
+{
+    <div class="sockets-container sockets-container__@(ItemWidth)x@(ItemHeight) sockets-container__@(Sockets.Length)s">
+        @{
+
+            @for (int index = 0; index < Sockets.Length; index++)
+            {
+                <div class="socket socket__@(index + 1) socket__@Sockets[index].Type.ToString().ToLower()">
+                    <div></div>
+                </div>
+
+                switch (index)
+                {
+                    case 0 when Sockets.Length > 1 && Sockets[1].Group == Sockets[index].Group:
+                        <div class="link link__1-2"></div>
+                        break;
+                    case 0 when Sockets.Length > 3 && Sockets[3].Group == Sockets[index].Group:
+                        <div class="link link__1-4"></div>
+                        break;
+                    case 1 when Sockets.Length > 2 && Sockets[2].Group == Sockets[index].Group:
+                        <div class="link link__2-3"></div>
+                        break;
+                    case 2 when Sockets.Length > 3 && Sockets[3].Group == Sockets[index].Group:
+                        <div class="link link__3-4"></div>
+                        break;
+                    case 2 when Sockets.Length > 5 && Sockets[5].Group == Sockets[index].Group:
+                        <div class="link link__3-6"></div>
+                        break;
+                    case 3 when Sockets.Length > 4 && Sockets[4].Group == Sockets[index].Group:
+                        <div class="link link__4-5"></div>
+                        break;
+                    case 4 when Sockets.Length > 5 && Sockets[5].Group == Sockets[index].Group:
+                        <div class="link link__5-6"></div>
+                        break;
+                }
+            }
+        }
+    </div>
+}

@@ -1,0 +1,13 @@
+﻿@inherits SelectOptionBase
+
+<li class="poec-select__menu__list__item" Id="@Id" onmousedown="@OnMouseDown" data-selected="@(Value==Parent.Value)">
+    @Before
+    @if (ChildContent != null)
+    {
+        @ChildContent
+    }
+    else
+    {
+        @Text
+    }
+</li>

@@ -1,0 +1,304 @@
+﻿@using PoECommerce.Core.Model.Trade
+@inherits ListedItemContainerBase
+
+<div class="listed-item-container">
+    <div class="listed-item-container-item">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <img src="@ListedItem.Item.Icon" alt="item">
+                @if (ListedItem.Item.Sockets != null)
+                {
+                    <SocketsContainer Sockets="@ListedItem.Item.Sockets" ItemWidth="@ListedItem.Item.Width" ItemHeight="@ListedItem.Item.Height"></SocketsContainer>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="listed-item-container-stats listed-item-container-stats__@ListedItem.Item.ItemType.ToString().ToLower()">
+        <div class="item-header">
+            @switch (ListedItem.Item.ItemType)
+            {
+                case ItemType.Normal:
+                case ItemType.Magic:
+                    <h1>@ListedItem.Item.DisplayName</h1>
+                    break;
+                case ItemType.Rare:
+                case ItemType.Unique:
+                    <h1>@ListedItem.Item.Name</h1>
+                    <h1>@ListedItem.Item.TypeName</h1>
+                    break;
+                case ItemType.Gem:
+                    <h1>@ListedItem.Item.TypeName</h1>
+                    break;
+                case ItemType.Currency:
+                    <h1>@ListedItem.Item.TypeName</h1>
+                    break;
+                case ItemType.DivinationCard:
+                    <h1>@ListedItem.Item.TypeName</h1>
+                    break;
+                case ItemType.Prophecy:
+                    <h1>@ListedItem.Item.TypeName</h1>
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        </div>
+
+        @if (ListedItem.Item.ItemType == ItemType.Prophecy)
+        {
+            @if (ListedItem.Item.FlavourText?.Any() == true)
+            {
+                <div class="item-description text-simple">
+                    @foreach (string line in ListedItem.Item.FlavourText)
+                    {
+                        <span>@line</span>
+                    }
+                </div>
+                <div class="stats-serparator"></div>
+            }
+
+            @if (!string.IsNullOrEmpty(ListedItem.Item.ProphecyText))
+            {
+                <div class="item-description text-description">
+                    @(ListedItem.Item.ProphecyText)
+                </div>
+                <div class="stats-serparator"></div>
+            }
+        }
+        else
+        {
+
+            @if (ListedItem.Item.Properties?.Any() == true || ListedItem.Item.UtilityMods != null)
+            {
+                @if (ListedItem.Item.Properties?.Any() == true)
+                {
+                    <ItemPropertiesContainer Properties="@ListedItem.Item.Properties"></ItemPropertiesContainer>
+                }
+
+                @if (ListedItem.Item.UtilityMods != null)
+                {
+                    <div class="text-augmented">
+                        @foreach (string mod in ListedItem.Item.UtilityMods)
+                        {
+                            <div class="item-mod">
+                                @mod
+                            </div>
+                        }
+                    </div>
+                }
+
+                <div class="stats-serparator"></div>
+            }
+
+            @if (ListedItem.Item.ItemLevel > 0 || ListedItem.Item.Requirements?.Any() == true)
+            {
+                @if (ListedItem.Item.ItemLevel > 0)
+                {
+                    <div>
+                        Item Level:
+                        <span class="text-simple">
+                            @(ListedItem.Item.ItemLevel)
+                        </span>
+                    </div>
+                }
+                @if (ListedItem.Item.Requirements?.Any() == true)
+                {
+                    <ItemPropertiesContainer OneLine="@true" OneLinePrefix="Requires" Properties="@ListedItem.Item.Requirements"></ItemPropertiesContainer>
+                }
+                <div class="stats-serparator"></div>
+            }
+
+            @if (!string.IsNullOrEmpty(ListedItem.Item.Description))
+            {
+
+                <div class="item-description text-description">
+                    @(ListedItem.Item.Description)
+                </div>
+                <div class="stats-serparator"></div>
+            }
+
+            @if (ListedItem.Item.EnchantMods?.Any() == true)
+            {
+                <div class="text-enchant">
+                    @foreach (string mod in ListedItem.Item.EnchantMods)
+                    {
+                        <div class="item-mod">
+                            @mod
+                        </div>
+                    }
+                </div>
+                <div class="stats-serparator"></div>
+            }
+
+            @if (ListedItem.Item.ImplicitMods?.Any() == true)
+            {
+                <div class="text-augmented">
+                    @foreach (string mod in ListedItem.Item.ImplicitMods)
+                    {
+                        <div class="item-mod">
+                            @mod
+                        </div>
+                    }
+                </div>
+                <div class="stats-serparator"></div>
+            }
+
+            @if (ListedItem.Item.ExplicitMods?.Any() == true || ListedItem.Item.FracturedMods?.Any() == true || ListedItem.Item.CraftedMods?.Any() == true || ListedItem.Item.IsCorrupted || !ListedItem.Item.IsIdentified)
+            {
+                @if (ListedItem.Item.FracturedMods != null)
+                {
+                    <div class="text-fractured">
+                        @foreach (string mod in ListedItem.Item.FracturedMods)
+                        {
+                            <div class="item-mod">
+                                @mod
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (ListedItem.Item.ExplicitMods != null)
+                {
+                    <div class="text-augmented">
+                        @foreach (string mod in ListedItem.Item.ExplicitMods)
+                        {
+                            <div class="item-mod">
+                                @mod
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (ListedItem.Item.CraftedMods?.Any() == true)
+                {
+                    <div class="text-crafted">
+                        @foreach (string mod in ListedItem.Item.CraftedMods)
+                        {
+                            <div class="item-mod">
+                                @mod
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (ListedItem.Item.IsCorrupted)
+                {
+                    <div class="text-corrupted">
+                        <div class="item-mod">
+                            Corrupted
+                        </div>
+                    </div>
+                }
+
+                @if (!ListedItem.Item.IsIdentified)
+                {
+                    <div class="text-unidentified">
+                        <div class="item-mod">
+                            Unidentified
+                        </div>
+                    </div>
+                }
+
+                <div class="stats-serparator"></div>
+            }
+        }
+
+        @if (ListedItem.Item.AdditionalProperties?.Any() == true)
+        {
+            <ItemPropertiesContainer Properties="@ListedItem.Item.AdditionalProperties"></ItemPropertiesContainer>
+            <div class="stats-serparator"></div>
+        }
+
+        @if (!string.IsNullOrEmpty(ListedItem.Item.Note))
+        {
+            <div class="text-note">
+                @ListedItem.Item.Note
+            </div>
+        }
+
+        @if (ListedItem.Item.IsVerified)
+        {
+            <div style="height: 35px;">&nbsp;</div>
+            <span class="listed-item-container-stats__verified">Verified</span>
+        }
+    </div>
+    <div class="listed-item-container-listing">
+        <div class="text-simple">@ListedItem.Listing.Account.LastCharacterName</div>
+        <div class="text-default"><i>@ListedItem.Listing.Account.Name</i></div>
+
+        <div class="online-status online-status__@GetOnlineStatus().ToLower()">
+            @GetOnlineStatus()
+        </div>
+
+        <div class="indexed-status">
+            @{
+                TimeSpan listedAgo = DateTime.Now - ListedItem.Listing.Indexed;
+
+                if (listedAgo.Days >= 60)
+                {
+                    @:@(listedAgo.Days / 30) months ago
+                }
+                else if (listedAgo.Days >= 30)
+                {
+                    @:One month ago
+                }
+                else if (listedAgo.Days > 7)
+                {
+                    @:@(listedAgo.Days / 7) weeks ago
+                }
+                else if (listedAgo.Days == 7)
+                {
+                    @:One week ago
+                }
+                else if (listedAgo.Days > 1)
+                {
+                    @:@(listedAgo.Days) days ago
+                }
+                else if (listedAgo.Days == 1)
+                {
+                    @:One day ago
+                }
+                else if (listedAgo.Hours > 1)
+                {
+                    @:@(listedAgo.Hours) hours ago
+                }
+                else if (listedAgo.Hours == 1)
+                {
+                    @:One hour ago
+                }
+                else if (listedAgo.Minutes > 1)
+                {
+                    @:@(listedAgo.Minutes) minutes ago
+                }
+                else if (listedAgo.Minutes == 1)
+                {
+                    @:One minute ago
+                }
+                else
+                {
+                    @:@(listedAgo.Seconds) seconds ago
+                }
+            }
+        </div>
+        <br />
+        <div>
+            <span class="text-default text-price-type">@GetPricedTypeName():</span>
+            <br />
+            <span class="text-simple text-price-amount">@(ListedItem.Listing.Price?.Amount)x</span> <span class="text-augmented text-price-amount">@(ListedItem.Listing.Price?.Currency)</span>
+        </div>
+        <br />
+        @if (ListedItem.Listing.Account.Online.IsOnline)
+        {
+            <div>
+                @if (SentWhisper)
+                {
+                    <div class="sent-whisper">
+                        Whisper Sent
+                    </div>
+                }
+                <div>
+                    <Button ElementType="@ElementType.Primary" Value="@(SentWhisper ? "Redo Whisper" : "Whisper")" OnClick="@InvokeInstantWhisper" Style="width: 140px"></Button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

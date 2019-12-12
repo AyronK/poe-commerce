@@ -24,7 +24,12 @@ namespace PoECommerce.Client
                         logging.ClearProviders();
                         logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                     })
-                    .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseElectron(args).UseStartup<Startup>(); })
+                    .ConfigureWebHostDefaults(webBuilder =>
+                    {
+                        webBuilder.UseElectron(args);
+                        webBuilder.UseStaticWebAssets();
+                        webBuilder.UseStartup<Startup>();
+                    })
                     .Build()
                     .Run();
             }
