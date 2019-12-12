@@ -50,8 +50,8 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                 int width = display.Bounds.Width;
                 int height = display.Bounds.Height;
 
-                int overlayWidth = 48;
-                int overlayHeight = 28;
+                int overlayWidth = 60;
+                int overlayHeight = 50;
 
                 int padding = 10;
 

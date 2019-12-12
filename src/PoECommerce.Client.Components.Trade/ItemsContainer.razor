@@ -5,11 +5,18 @@
 {
     if (ListedItems == null || ListedItems.Count == 0)
     {
-        @:No results found
+        if (SearchResult?.ItemIds?.Any() == true)
+        {
+            <span>Loading...</span>
+        }
+        else
+        {
+            <span>:No results found</span>
+        }
     }
     else
     {
-        @:Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)
+        <span>Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)</span>
         foreach (ListedItem resultItem in ListedItems)
         {
             <ListedItemContainer ListedItem="@resultItem" PoEWindow="@PoEWindow"></ListedItemContainer>
