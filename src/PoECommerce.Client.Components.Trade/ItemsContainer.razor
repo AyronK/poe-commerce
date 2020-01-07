@@ -17,9 +17,37 @@
     else
     {
         <span>Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)</span>
-        foreach (ListedItem resultItem in ListedItems)
+
+        if (ShowSummary)
         {
-            <ListedItemContainer ListedItem="@resultItem" PoEWindow="@PoEWindow"></ListedItemContainer>
+            <hr />
+            <span>
+                @(SearchResult.Query.Text)
+                @if (SearchResult.Query.OnlineStatus != null)
+                {
+                    @:&nbsp;|&nbsp;@SearchResult.Query.OnlineStatus.Value
+                }
+                @if (SearchResult.Query.League != null)
+                {
+                    @:&nbsp;|&nbsp;@SearchResult.Query.League
+                }
+            </span>
+            <hr />
+        }
+
+        if (IsCompact)
+        {
+            foreach (ListedItem resultItem in ListedItems)
+            {
+                <CompactListedItemContainer ListedItem="@resultItem"></CompactListedItemContainer>
+            }
+        }
+        else
+        {
+            foreach (ListedItem resultItem in ListedItems)
+            {
+                <ListedItemContainer ListedItem="@resultItem"></ListedItemContainer>
+            }
         }
     }
 }

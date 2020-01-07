@@ -2,9 +2,9 @@
 @using PoECommerce.Client.Shared.Display
 @inject IWindowManager WindowManager
 
-<div class="task-bar">
-    <Button OnClick="@(async()=>await WindowManager.Show(1))" Value="Trade" ElementType="@ElementType.Primary"></Button>
-</div>
+    <div class="task-bar">
+        <Button OnClick="@(async()=>await WindowManager.Show(2))" Value="Trade" ElementType="@ElementType.Primary"></Button>
+    </div>
 
 <style>
     body {
@@ -21,3 +21,10 @@
             margin: 5px;
         }
 </style>
+
+@functions
+{
+    protected override async Task OnInitializedAsync()
+    {
+    }
+}

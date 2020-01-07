@@ -20,14 +20,14 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.FromCore
                 Status = Map(mapOperand.OnlineStatus),
                 Filter = new Filter
                 {
-                    TypeFilter = Map(mapOperand.TypeFilter) is TypeFilter typeFilter ? new FilterWrapper<TypeFilter> { Filter = typeFilter } : null,
-                    WeaponFilter = Map(mapOperand.WeaponFilter) is WeaponsFilter weaponFilter ? new FilterWrapper<WeaponsFilter> { Filter = weaponFilter } : null,
-                    ArmourFilter = Map(mapOperand.ArmourFilter) is ArmoursFilter armourFilter ? new FilterWrapper<ArmoursFilter> { Filter = armourFilter } : null,
-                    SocketFilter = Map(mapOperand.SocketFilter) is SocketsGroupFilter socketFilter ? new FilterWrapper<SocketsGroupFilter> { Filter = socketFilter } : null,
-                    RequirementsFilter = Map(mapOperand.RequirementsFilter) is RequirementsFilter requirementsFilter ? new FilterWrapper<RequirementsFilter> { Filter = requirementsFilter } : null,
-                    MapsFilter = Map(mapOperand.MapsFilter) is MapsFilter mapsFilter ? new FilterWrapper<MapsFilter> { Filter = mapsFilter } : null,
-                    MiscellaneousFilter = Map(mapOperand.MiscellaneousFilter) is MiscellaneousFilter miscellaneousFilter ? new FilterWrapper<MiscellaneousFilter> { Filter = miscellaneousFilter } : null,
-                    TradeFilter = Map(mapOperand.TradeFilter) is TradeFilter tradeFilter ? new FilterWrapper<TradeFilter> { Filter = tradeFilter } : null
+                    TypeFilter = mapOperand.TypeFilter != null ? Map(mapOperand.TypeFilter) is TypeFilter typeFilter ? new FilterWrapper<TypeFilter> { Filter = typeFilter } : null : null,
+                    WeaponFilter = mapOperand.WeaponFilter != null ? Map(mapOperand.WeaponFilter) is WeaponsFilter weaponFilter ? new FilterWrapper<WeaponsFilter> { Filter = weaponFilter } : null : null,
+                    ArmourFilter = mapOperand.ArmourFilter != null ? Map(mapOperand.ArmourFilter) is ArmoursFilter armourFilter ? new FilterWrapper<ArmoursFilter> { Filter = armourFilter } : null : null,
+                    SocketFilter = mapOperand.SocketFilter != null ? Map(mapOperand.SocketFilter) is SocketsGroupFilter socketFilter ? new FilterWrapper<SocketsGroupFilter> { Filter = socketFilter } : null : null,
+                    RequirementsFilter = mapOperand.RequirementsFilter != null ? Map(mapOperand.RequirementsFilter) is RequirementsFilter requirementsFilter ? new FilterWrapper<RequirementsFilter> { Filter = requirementsFilter } : null : null,
+                    MapsFilter = mapOperand.MapsFilter != null ? Map(mapOperand.MapsFilter) is MapsFilter mapsFilter ? new FilterWrapper<MapsFilter> { Filter = mapsFilter } : null : null,
+                    MiscellaneousFilter = mapOperand.MiscellaneousFilter != null ? Map(mapOperand.MiscellaneousFilter) is MiscellaneousFilter miscellaneousFilter ? new FilterWrapper<MiscellaneousFilter> { Filter = miscellaneousFilter } : null : null,
+                    TradeFilter = mapOperand.TradeFilter != null ? Map(mapOperand.TradeFilter) is TradeFilter tradeFilter ? new FilterWrapper<TradeFilter> { Filter = tradeFilter } : null : null
                 },
                 ModifiersFilters = Map(mapOperand.ModifiersFilter)
             };

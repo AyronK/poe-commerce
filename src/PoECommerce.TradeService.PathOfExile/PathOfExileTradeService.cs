@@ -28,6 +28,7 @@ namespace PoECommerce.TradeService.PathOfExile
             IDictionary<string, SortType> mappedSort = query.Sort.ToDictionary(s => s.Key, s => _mapper.Map(s.Value));
             QueryResult result = await _tradeService.Search(mappedQuery, mappedSort, query.League);
             CoreModels.SearchResult mappedResult = _mapper.Map(result);
+            mappedResult.Query = query;
             return mappedResult;
         }
 

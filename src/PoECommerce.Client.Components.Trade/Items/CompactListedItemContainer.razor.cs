@@ -4,12 +4,13 @@ using System.Runtime.InteropServices;
 using GregsStack.InputSimulatorStandard;
 using GregsStack.InputSimulatorStandard.Native;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using NLog;
 using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Client.Components.Trade.Items
 {
-    public class ListedItemContainerBase : ComponentBase
+    public class CompactListedItemContainerBase : ComponentBase
     {
         private bool _sentWhisper;
 
@@ -21,12 +22,15 @@ namespace PoECommerce.Client.Components.Trade.Items
 
         [Parameter]
         public ListedItem ListedItem { get; set; }
-        
-        [Inject]
-        public ILogger Logger { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         [Inject]
         public IInputSimulator InputSimulator { get; set; }
+
+        [Inject]
+        public ILogger Logger { get; set; }
 
         public bool SentWhisper
         {
@@ -69,6 +73,13 @@ namespace PoECommerce.Client.Components.Trade.Items
             return null;
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            OnClick = new EventCallbackFactory().Create<MouseEventArgs>(this, InvokeInstantWhisper);
+        }
+
         private static bool IsPathOfExileFocused()
         {
             GetWindowThreadProcessId(GetForegroundWindow(), out int processId);
@@ -76,7 +87,7 @@ namespace PoECommerce.Client.Components.Trade.Items
             return focusedProcess.ProcessName.Contains("PathOfExile") && focusedProcess.MainWindowTitle.StartsWith("Path of Exile");
         }
 
-        protected void InvokeInstantWhisper()
+        public void InvokeInstantWhisper()
         {
 #if DEBUG // if PoE is turned off
             SentWhisper = true;

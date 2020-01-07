@@ -1,0 +1,91 @@
+﻿@page "/CompactTrade"
+@using PoECommerce.Client.Shared.Display
+@using PoECommerce.Core
+@using PoECommerce.Core.Model.Data
+@using PoECommerce.Core.Model.Enums
+@using PoECommerce.Core.Model.Search
+
+@inject IWindowManager WindowManager
+
+<div class="window-task-bar">
+    <Button OnClick="@(() => WindowManager.Minimize(2))" ElementType="@ElementType.Secondary" Value="x"></Button>
+</div>
+<div class="window-content">
+    <ItemsContainer SearchResult="@SearchResult" IsCompact="@true" ShowSummary="@true"></ItemsContainer>
+</div>
+
+<style>
+    body {
+        overflow: hidden;
+        user-select: none;
+        font-size: smaller;
+    }
+
+    .window-task-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        background-color: black;
+        padding: 3px;
+        display: flex;
+        flex-direction: row-reverse;
+        -webkit-app-region: drag;
+    }
+    .window-task-bar button{
+        -webkit-app-region:  no-drag;;
+    }
+
+
+    .window-content {
+        margin-top: 35px;
+        max-width: 400px;
+        max-height: 200px;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .window-task-bar button {
+        height: 15px;
+        width: 15px;
+        min-height: 15px;
+        min-width: 15px;
+        max-height: 15px;
+        max-width: 15px;
+        line-height: inherit;
+        font-weight: bold;
+    }
+</style>
+
+@functions
+{
+    public SearchResult SearchResult { get; set; }
+
+    [Inject]
+    public ITradeService TradeService { get; set; }
+
+    [Inject]
+    public IStaticDataService DataService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        League[] leagues = await DataService.GetLeagues();
+
+        Query query = new Query
+        {
+            Text = "Voidforge Infernal Sword",
+            TradeFilter = new TradeFilter
+            {
+                SaleType = SaleType.Priced
+            },
+            Sort = new Dictionary<string, SortType>
+        {
+                { "price", SortType.Ascending }
+            },
+            League = leagues[0].Id,
+            OnlineStatus = OnlineStatus.Online
+        };
+
+        SearchResult = await TradeService.Search(query);
+    }
+}

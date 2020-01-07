@@ -86,6 +86,22 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     Y = (height / 2) - 400,
                 }, "/Trade"));
 
+                manager.AddWindow(new ElectronWindow(2, new BrowserWindowOptions
+                {
+                    Transparent = true,
+                    Show = false,
+                    Frame = false,
+                    AlwaysOnTop = true,
+                    HasShadow = false,
+                    Resizable = false,
+                    Movable = true,
+                    Closable = true,
+                    Width = 400,
+                    Height = 200,
+                    X = width - 400,
+                    Y = (height / 2) - 200,
+                }, "/CompactTrade"));
+
 #if !DEBUG
                 ElectronNET.API.Electron.Menu.SetApplicationMenu(new MenuItem[0]);
 #endif
@@ -95,6 +111,7 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                 WebBrowserTabManager manager = serviceProvider.GetService<WebBrowserTabManager>();
                 manager.AddWindow(new WebBrowserWindow(0, "/"));
                 manager.AddWindow(new WebBrowserWindow(1, "/Trade"));
+                manager.AddWindow(new WebBrowserWindow(2, "/CompactTrade"));
             }
 
             return applicationBuilder;

@@ -3,6 +3,7 @@
     public class SearchResult
     {
         public string QueryId { get; set; }
+        public Query Query { get; set; }
         public uint Total { get; set; }
         public string[] ItemIds { get; set; }
     }
