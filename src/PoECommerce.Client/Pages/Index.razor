@@ -1,6 +1,5 @@
 ﻿@page "/"
 @using ElectronNET.API
-@using ElectronNET.API.Entities
 @using PoECommerce.Client.Shared.Display
 @inject IWindowManager WindowManager
 
@@ -32,6 +31,7 @@
         {
             Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () => await WindowManager.Show(1));
             Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () => await WindowManager.Show(2));
+            Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
         }
     }
 }

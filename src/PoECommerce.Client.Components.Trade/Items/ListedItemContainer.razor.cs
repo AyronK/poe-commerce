@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using GregsStack.InputSimulatorStandard;
 using GregsStack.InputSimulatorStandard.Native;
@@ -12,12 +13,9 @@ namespace PoECommerce.Client.Components.Trade.Items
     public class ListedItemContainerBase : ComponentBase
     {
         private bool _sentWhisper;
-
+        
         [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+        static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [Parameter]
         public ListedItem ListedItem { get; set; }
@@ -71,9 +69,9 @@ namespace PoECommerce.Client.Components.Trade.Items
 
         private static bool IsPathOfExileFocused()
         {
-            GetWindowThreadProcessId(GetForegroundWindow(), out int processId);
-            Process focusedProcess = Process.GetProcessById(processId);
-            return focusedProcess.ProcessName.Contains("PathOfExile") && focusedProcess.MainWindowTitle.StartsWith("Path of Exile");
+            Process poeWindow = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.Contains("PathOfExile") && p.MainWindowTitle.StartsWith("Path of Exile"));
+
+            return poeWindow != null && SetForegroundWindow(poeWindow.MainWindowHandle);
         }
 
         protected void InvokeInstantWhisper()

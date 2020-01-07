@@ -68,6 +68,7 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     X = width - overlayWidth - padding,
                     Height = overlayHeight,
                     Y = height - overlayHeight - padding,
+                    SkipTaskbar = true,
                 }));
 
                 manager.AddWindow(new ElectronWindow(1, new BrowserWindowOptions
@@ -80,10 +81,12 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     Resizable = false,
                     Movable = true,
                     Closable = true,
+                    Minimizable = true,
                     Width = 800,
                     Height = 800,
                     X = width - 800,
                     Y = (height / 2) - 400,
+                    SkipTaskbar = true,
                 }, "/Trade"));
 
                 manager.AddWindow(new ElectronWindow(2, new BrowserWindowOptions
@@ -94,12 +97,14 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     AlwaysOnTop = true,
                     HasShadow = false,
                     Resizable = false,
+                    Minimizable = true,
                     Movable = true,
                     Closable = true,
                     Width = 400,
                     Height = 200,
                     X = width - 400,
                     Y = (height / 2) - 200,
+                    SkipTaskbar = true,
                 }, "/CompactTrade"));
 
 #if !DEBUG
