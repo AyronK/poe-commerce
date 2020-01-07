@@ -10,6 +10,7 @@ using NLog.Web;
 using PoECommerce.Client.Cache.TradeService;
 using PoECommerce.Client.StartupExtensions.Electron;
 using PoECommerce.PathOfExile.Extensions;
+using PoECommerce.PathOfExile.Windows;
 using PoECommerce.TradeService.PathOfExile.Extensions;
 
 namespace PoECommerce.Client
@@ -42,6 +43,7 @@ namespace PoECommerce.Client
                 cfg.DataServiceSettings.Factory = factory => new CachedDataService(factory);
             });
             services.AddPathOfExileCoreServices();
+            services.AddPathOfExileWindowsSupport();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)
