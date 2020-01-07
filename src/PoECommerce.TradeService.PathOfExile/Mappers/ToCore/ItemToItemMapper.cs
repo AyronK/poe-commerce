@@ -80,6 +80,8 @@ namespace PoECommerce.TradeService.PathOfExile.Mappers.ToCore
                     return Core.Model.Data.ItemCategory.Essence;
                 case ItemCategory.Misc:
                     return Core.Model.Data.ItemCategory.Misc;
+                case ItemCategory.WatchStones:
+                    return Core.Model.Data.ItemCategory.WatchStones;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mapOperand), mapOperand, null);
             }

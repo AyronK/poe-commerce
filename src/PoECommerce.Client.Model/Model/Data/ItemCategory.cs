@@ -26,6 +26,7 @@
         Vial,
         Net,
         Essence,
-        Misc
+        Misc, 
+        WatchStones
     }
 }

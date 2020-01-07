@@ -7,7 +7,7 @@
 @inherits FiltersContainerBase
 <div style="user-select: none">
     <div style="display: flex; flex-direction: row">
-        <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange" ValuesMap="@Items.ToDictionary(i=>i.ToString(), i=>i.ToString())">
+        <Select @bind-Value="@SearchText" PlaceHolder="Search item..." Style="width: 60%" IsAutocomplete="@true" OnInput="@OnSearchTextChange" ValuesMap="@Items.Select(i=>i.ToString()).Distinct().ToDictionary(i=>i)">
             @foreach (Item value in SearchTooltipValues)
             {
                 <SelectOption Value="@value.ToString()" Text="@value.ToString()">

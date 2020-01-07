@@ -46,7 +46,7 @@ namespace PoECommerce.PathOfExile.Models.Enums
         [JsonEnumName("Prophecies")]
         Prophecy,
 
-        [JsonEnumName("Captured Beasts")]
+        [JsonEnumName("Captured Beasts", "Itemised Monsters")]
         CapturedBeast,
 
         [JsonEnumName("fragments")]
@@ -77,6 +77,9 @@ namespace PoECommerce.PathOfExile.Models.Enums
         Essence,
 
         [JsonEnumName("misc")]
-        Misc
+        Misc,
+
+        [JsonEnumName("")]
+        WatchStones
     }
 }

@@ -1,10 +1,12 @@
 ﻿@page "/"
+@using ElectronNET.API
+@using ElectronNET.API.Entities
 @using PoECommerce.Client.Shared.Display
 @inject IWindowManager WindowManager
 
-    <div class="task-bar">
-        <Button OnClick="@(async()=>await WindowManager.Show(2))" Value="Trade" ElementType="@ElementType.Primary"></Button>
-    </div>
+<div class="task-bar">
+    <Button OnClick="@(async()=>await WindowManager.Show(2))" Value="Trade" ElementType="@ElementType.Primary"></Button>
+</div>
 
 <style>
     body {
@@ -26,5 +28,10 @@
 {
     protected override async Task OnInitializedAsync()
     {
+        if (HybridSupport.IsElectronActive)
+        {
+            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () => await WindowManager.Show(1));
+            Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () => await WindowManager.Show(2));
+        }
     }
 }

@@ -78,7 +78,7 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     AlwaysOnTop = true,
                     HasShadow = false,
                     Resizable = false,
-                    Movable = false,
+                    Movable = true,
                     Closable = true,
                     Width = 800,
                     Height = 800,
