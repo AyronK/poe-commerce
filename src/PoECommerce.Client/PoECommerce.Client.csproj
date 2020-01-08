@@ -32,4 +32,8 @@
     <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="State\" />
+  </ItemGroup>
+
 </Project>

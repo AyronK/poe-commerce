@@ -6,8 +6,8 @@ namespace PoECommerce.PathOfExile.Windows
     {
         public static void AddPathOfExileWindowsSupport(this IServiceCollection services)
         {
-            services.AddScoped<IChat, Chat>();
-            services.AddScoped<IPathOfExileFacade, PathOfExileFacade>();
+            services.AddTransient<IChat, Chat>();
+            services.AddTransient<IPathOfExileFacade, PathOfExileFacade>();
         }
     }
 }

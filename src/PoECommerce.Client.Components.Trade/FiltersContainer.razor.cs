@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using PoECommerce.Client.Shared;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Data;
-using PoECommerce.Core.Model.Enums;
 using PoECommerce.Core.Model.Search;
+using PoECommerce.Core.Model.Trade;
 using Item = PoECommerce.Core.Model.Data.Item;
+using OnlineStatus = PoECommerce.Core.Model.Enums.OnlineStatus;
 
 namespace PoECommerce.Client.Components.Trade
 {
@@ -19,7 +21,7 @@ namespace PoECommerce.Client.Components.Trade
         private bool _isFiltersSectionOpen = false;
 
         [Inject]
-        public ITradeService TradeService { get; set; }
+        public IPoECommerceFacade PoECommerceFacade { get; set; }
 
         [Inject]
         public IStaticDataService DataService { get; set; }
@@ -27,7 +29,7 @@ namespace PoECommerce.Client.Components.Trade
         public League[] Leagues { get; set; } = new League[0];
 
         [Parameter]
-        public EventCallback<SearchResult> OnSearch { get; set; }
+        public EventCallback<TradeSession> OnSearch { get; set; }
 
         public Query Query { get; set; } = new Query();
 
@@ -91,11 +93,10 @@ namespace PoECommerce.Client.Components.Trade
             StateHasChanged();
         }
 
-        public async Task Search()
+        public void Search()
         {
             OnSearch.InvokeAsync(null).Wait();
-            SearchResult searchResult = await TradeService.Search(Query);
-            OnSearch.InvokeAsync(searchResult).Wait();
+            OnSearch.InvokeAsync(PoECommerceFacade.SearchItems(Query)).Wait();
         }
 
         public void OnSearchTextChange(ChangeEventArgs changeEventArgs)

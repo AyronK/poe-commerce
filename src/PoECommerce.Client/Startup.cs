@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
 using PoECommerce.Client.Cache.TradeService;
+using PoECommerce.Client.Shared;
 using PoECommerce.Client.StartupExtensions.Electron;
 using PoECommerce.PathOfExile.Extensions;
 using PoECommerce.PathOfExile.Windows;
@@ -44,6 +45,7 @@ namespace PoECommerce.Client
             });
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
+            services.AddSingleton<IPoECommerceFacade, PoECommerceFacade>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

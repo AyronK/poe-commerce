@@ -1,3 +1,4 @@
-﻿@inherits TradeContainerBase
-<FiltersContainer OnSearch="@(s => SearchResult = s)"></FiltersContainer>
-<ItemsContainer SearchResult="@SearchResult"></ItemsContainer>
+﻿@using PoECommerce.PathOfExile
+@inherits TradeContainerBase
+<FiltersContainer OnSearch="@(s => UpdateView(s))"></FiltersContainer>
+<ItemsContainer TradeSession="@TradeSession"></ItemsContainer>

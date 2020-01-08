@@ -51,8 +51,8 @@ namespace PoECommerce.TradeService.PathOfExile.Extensions
             services.AddSingleton<IModelMapper<ItemCategory, Core.Model.Data.ItemCategory>, ItemToItemMapper>();
             services.AddSingleton<IModelMapper<ModifierType, CoreDataModels.ModifierType>, ModifierToModifierMapper>();
             services.AddSingleton<IMapperFacade, MapperFacade>();
-            services.AddScoped<ITradeService, PathOfExileTradeService>();
-            services.AddScoped<IStaticDataService, PathOfExileStaticDataService>();
+            services.AddTransient<ITradeService, PathOfExileTradeService>();
+            services.AddTransient<IStaticDataService, PathOfExileStaticDataService>();
         }
     }
 }

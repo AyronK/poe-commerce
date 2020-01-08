@@ -25,12 +25,25 @@
 
 @functions
 {
+    [Inject]
+    public IPoECommerceFacade PoECommerceFacade { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         if (HybridSupport.IsElectronActive)
         {
-            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () => await WindowManager.Show(1));
-            Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () => await WindowManager.Show(2));
+            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () =>
+            {
+                PoECommerceFacade.ClearSession();
+                await WindowManager.Show(1);
+            });
+
+            Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () =>
+            {
+                PoECommerceFacade.ClearSession();
+                await WindowManager.Show(2);
+            });
+
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
         }
     }

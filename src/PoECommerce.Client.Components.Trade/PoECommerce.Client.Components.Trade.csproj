@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PoECommerce.Client.Components.Common\PoECommerce.Client.Components.Common.csproj" />
     <ProjectReference Include="..\PoECommerce.Client.Model\PoECommerce.Core.csproj" />
+    <ProjectReference Include="..\PoECommerce.Client.Shared\PoECommerce.Client.Shared.csproj" />
     <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
   </ItemGroup>
 

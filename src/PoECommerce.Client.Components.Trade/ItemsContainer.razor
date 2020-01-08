@@ -1,35 +1,40 @@
-﻿@using PoECommerce.Core.Model.Trade
+﻿@using PoECommerce.Client.Shared
+@using PoECommerce.Core.Model.Trade
 @inherits ItemsContainerBase
 
-@if (SearchResult != null)
+@if (TradeSession != null)
 {
-    if (ListedItems == null || ListedItems.Count == 0)
+    if (TradeSession.Result == null || TradeSession.Result.Count == 0)
     {
-        if (SearchResult?.ItemIds?.Any() == true)
+        if (TradeSession.State != TradeSession.TradeSessionState.New)
+        {
+            <span>Searching...</span>
+        }
+        else if (TradeSession.State != TradeSession.TradeSessionState.Pending)
         {
             <span>Loading...</span>
         }
-        else
+        else if (TradeSession.State == TradeSession.TradeSessionState.Closed)
         {
             <span>:No results found</span>
         }
     }
     else
     {
-        <span>Showing @SearchResult.ItemIds.Length results (@SearchResult.Total matched)</span>
+        <span>Showing @TradeSession.Result.Count results (@TradeSession.Total matched)</span>
 
         if (ShowSummary)
         {
             <hr />
             <span>
-                @(SearchResult.Query.Text)
-                @if (SearchResult.Query.OnlineStatus != null)
+                @(TradeSession.Query.Text ?? TradeSession.Query.Name + " " + TradeSession.Query.Type)
+                @if (TradeSession.Query.OnlineStatus != null)
                 {
-                    @:&nbsp;|&nbsp;@SearchResult.Query.OnlineStatus.Value
+                    @:&nbsp;|&nbsp;@TradeSession.Query.OnlineStatus.Value
                 }
-                @if (SearchResult.Query.League != null)
+                @if (TradeSession.Query.League != null)
                 {
-                    @:&nbsp;|&nbsp;@SearchResult.Query.League
+                    @:&nbsp;|&nbsp;@TradeSession.Query.League
                 }
             </span>
             <hr />
@@ -37,14 +42,14 @@
 
         if (IsCompact)
         {
-            foreach (ListedItem resultItem in ListedItems)
+            foreach (ListedItem resultItem in TradeSession.Result)
             {
                 <CompactListedItemContainer ListedItem="@resultItem"></CompactListedItemContainer>
             }
         }
         else
         {
-            foreach (ListedItem resultItem in ListedItems)
+            foreach (ListedItem resultItem in TradeSession.Result)
             {
                 <ListedItemContainer ListedItem="@resultItem"></ListedItemContainer>
             }

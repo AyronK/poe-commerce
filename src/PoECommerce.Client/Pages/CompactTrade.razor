@@ -2,8 +2,9 @@
 @using PoECommerce.Client.Shared.Display
 @using PoECommerce.Core
 @using PoECommerce.Core.Model.Data
-@using PoECommerce.Core.Model.Enums
 @using PoECommerce.Core.Model.Search
+@using PoECommerce.Core.Model.Trade
+@using OnlineStatus = PoECommerce.Core.Model.Enums.OnlineStatus
 
 @inject IWindowManager WindowManager
 
@@ -11,7 +12,7 @@
     <Button OnClick="@(() => WindowManager.Minimize(2))" ElementType="@ElementType.Secondary" Value="x"></Button>
 </div>
 <div class="window-content">
-    <ItemsContainer SearchResult="@SearchResult" IsCompact="@true" ShowSummary="@true"></ItemsContainer>
+    <ItemsContainer TradeSession="@TradeSession" IsCompact="@true" ShowSummary="@true"></ItemsContainer>
 </div>
 
 <style>
@@ -32,9 +33,11 @@
         flex-direction: row-reverse;
         -webkit-app-region: drag;
     }
-    .window-task-bar button{
-        -webkit-app-region:  no-drag;;
-    }
+
+        .window-task-bar button {
+            -webkit-app-region: no-drag;
+            ;
+        }
 
 
     .window-content {
@@ -59,16 +62,25 @@
 
 @functions
 {
-    public SearchResult SearchResult { get; set; }
-
     [Inject]
     public ITradeService TradeService { get; set; }
 
     [Inject]
+    public IPoECommerceFacade PoECommerceFacade { get; set; }
+
+    [Inject]
     public IStaticDataService DataService { get; set; }
+
+    public TradeSession TradeSession { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        if (PoECommerceFacade.CurrentTradeSession != null)
+        {
+            TradeSession = PoECommerceFacade.CurrentTradeSession;
+            return;
+        }
+
         League[] leagues = await DataService.GetLeagues();
 
         Query query = new Query
@@ -79,13 +91,14 @@
                 SaleType = SaleType.Priced
             },
             Sort = new Dictionary<string, SortType>
-        {
+{
                 { "price", SortType.Ascending }
             },
             League = leagues[0].Id,
             OnlineStatus = OnlineStatus.Online
         };
 
-        SearchResult = await TradeService.Search(query);
+        TradeSession = PoECommerceFacade.SearchItems(query);
+        PoECommerceFacade.ClearSession();
     }
 }
