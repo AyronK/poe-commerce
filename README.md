@@ -1,3 +1,9 @@
+# Status
+
+![](https://github.com/AyronK/poe-commerce/workflows/Build/badge.svg?branch=develop)
+![](https://github.com/AyronK/poe-commerce/workflows/Electron%20Build/badge.svg?branch=develop)
+![](https://github.com/AyronK/poe-commerce/workflows/Tests/badge.svg?branch=develop)
+
 # Requirements
 - .NET Core 3.1 preview
 - npm
