@@ -40,7 +40,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{9FFE4923-AF27-4351-AF64-A113CE127394}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		.gitlab-ci.yml = .gitlab-ci.yml
 		CHANGELOG.md = CHANGELOG.md
 		README.md = README.md
 	EndProjectSection
@@ -53,7 +52,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.TradeService.Pa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{DB356FAA-85FE-471D-A861-DF7B2568C1E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoECommerce.PathOfExile.Windows", "src\PoECommerce.PathOfExile.Windows\PoECommerce.PathOfExile.Windows.csproj", "{298B975C-59EC-47DB-A712-C9700252AB83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoECommerce.PathOfExile.Windows", "src\PoECommerce.PathOfExile.Windows\PoECommerce.PathOfExile.Windows.csproj", "{298B975C-59EC-47DB-A712-C9700252AB83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4C4549D0-845B-49B7-AE30-BEFE79F63F39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5A2415E7-78FA-4634-A73B-D9F9632AE06B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-electron.yml = .github\workflows\build-electron.yml
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\tests.yml = .github\workflows\tests.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -282,6 +290,8 @@ Global
 		{FEEF2F5D-E2FA-4607-9B3A-BF07AAF84245} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
 		{DB356FAA-85FE-471D-A861-DF7B2568C1E7} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
 		{298B975C-59EC-47DB-A712-C9700252AB83} = {4BC34EBD-4BD6-4D87-917E-23B37410AB3A}
+		{4C4549D0-845B-49B7-AE30-BEFE79F63F39} = {9FFE4923-AF27-4351-AF64-A113CE127394}
+		{5A2415E7-78FA-4634-A73B-D9F9632AE06B} = {4C4549D0-845B-49B7-AE30-BEFE79F63F39}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DECAB490-F8DC-49BD-84C4-7EB8C2793BA3}
