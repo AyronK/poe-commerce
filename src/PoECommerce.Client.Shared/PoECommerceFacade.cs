@@ -35,16 +35,14 @@ namespace PoECommerce.Client.Shared
             return tradeSession;
         }
 
-        public async Task OpenCompactResults(string tradeSessionId = null)
+        public Task OpenCompactResults(string tradeSessionId = null)
         {
-            await _windowManager.LoadUrl(2, $"/CompactTrade/{tradeSessionId}");
-            await _windowManager.Show(2);
+            return _windowManager.LoadUrl(2, $"/CompactTrade/{tradeSessionId}", true);
         }
 
-        public async Task OpenAdvancedResults(string tradeSessionId = null)
+        public Task OpenAdvancedResults(string tradeSessionId = null)
         {
-            await _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}");
-            await _windowManager.Show(1);
+            return _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}", true);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using ElectronNET.API.Entities;
 using PoECommerce.Client.Electron.Abstraction;
 using PoECommerce.Client.Electron.Decorators;
 using PoECommerce.Client.Shared.Display;
@@ -32,10 +33,17 @@ namespace PoECommerce.Client.Electron
 
         public IReadOnlyList<IWindow> Windows => new ReadOnlyCollection<IWindow>(_windows.Cast<IWindow>().ToList());
 
-        public async Task LoadUrl(int windowId, string url)
+        public async Task LoadUrl(int windowId, string url, bool openWhenReady)
         {
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
             window.LoadURL(_navigationManager.ToAbsoluteUri(url).AbsoluteUri);
+            window.WebContents.OnDidFinishLoad += ShowWhenReady;
+
+            void ShowWhenReady()
+            {
+                window.Show();
+                window.WebContents.OnDidFinishLoad -= ShowWhenReady;
+            }
         }
 
         public async Task Show(int windowId)
