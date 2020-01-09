@@ -1,7 +1,7 @@
 # Status
 
-![](https://github.com/AyronK/poe-commerce/workflows/Build/badge.svg)
-![](https://github.com/AyronK/poe-commerce/workflows/Tests/badge.svg)
+![](https://github.com/AyronK/poe-commerce/workflows/Build/badge.svg?branch=master)
+![](https://github.com/AyronK/poe-commerce/workflows/Tests/badge.svg?branch=master)
 
 # Requirements
 - .NET Core 3.1 preview
