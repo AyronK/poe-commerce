@@ -85,7 +85,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender)
+        if (TradeSession != null)
         {
             return;
         }
@@ -93,6 +93,7 @@
         if (SessionId != null && PoECommerceFacade.Sessions.TryGetValue(SessionId, out TradeSession session))
         {
             TradeSession = session;
+            StateHasChanged();
             return;
         }
 
