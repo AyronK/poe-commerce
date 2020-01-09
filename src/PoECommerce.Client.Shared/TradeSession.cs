@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Search;
 using PoECommerce.Core.Model.Trade;
@@ -16,7 +17,8 @@ namespace PoECommerce.Client.Shared
         {
             New,
             Pending,
-            Closed
+            Closed,
+            ServiceUnavailable
         }
 
         private readonly List<ListedItem> _result;
@@ -50,8 +52,20 @@ namespace PoECommerce.Client.Shared
                 throw new Exception($"Method '{nameof(Begin)}' was already called.");
             }
 
+
             State = TradeSessionState.Pending;
-            SearchResult searchResult = await _tradeService.Search(Query);
+            SearchResult searchResult;
+
+            try
+            {
+                searchResult = await _tradeService.Search(Query);
+            }
+            catch (HttpRequestException)
+            {
+                State = TradeSessionState.ServiceUnavailable;
+                yield break;
+            }
+
             Query.Id = searchResult.QueryId;
 
             Total = searchResult.Total;
@@ -66,7 +80,19 @@ namespace PoECommerce.Client.Shared
             {
                 string[] ids = searchResult.ItemIds.Skip(i).Take(MaximumItemsPerRequest).ToArray();
 
-                foreach (ListedItem item in await _tradeService.Fetch(searchResult.QueryId, ids))
+                ListedItem[] listedItems;
+
+                try
+                {
+                    listedItems = await _tradeService.Fetch(searchResult.QueryId, ids);
+                }
+                catch (HttpRequestException)
+                {
+                    State = TradeSessionState.ServiceUnavailable;
+                    yield break;
+                }
+
+                foreach (ListedItem item in listedItems)
                 {
                     _result.Add(item);
                     yield return item;

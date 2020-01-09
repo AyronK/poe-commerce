@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using PoECommerce.Client.Cache.TradeService;
 using PoECommerce.Client.Shared;
 using PoECommerce.Client.StartupExtensions.Electron;
 using PoECommerce.PathOfExile.Extensions;
+using PoECommerce.PathOfExile.Web.Abstractions;
 using PoECommerce.PathOfExile.Windows;
 using PoECommerce.TradeService.PathOfExile.Extensions;
 
@@ -75,6 +77,11 @@ namespace PoECommerce.Client
             });
 
             app.UseElectronHybrid(appLifetime, serviceProvider);
+            IPathOfExileDataService dataService = app.ApplicationServices.GetService<IPathOfExileDataService>();
+
+            Task[] loadingTasks = { dataService.GetItems(), dataService.GetLeagues(), dataService.GetModifiers() };
+            Task.WaitAll(loadingTasks);
+            //cachedDataService.GetStaticData();
         }
     }
 }

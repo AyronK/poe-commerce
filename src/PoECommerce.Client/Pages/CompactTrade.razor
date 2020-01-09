@@ -12,7 +12,14 @@
     <Button OnClick="@(() => WindowManager.Minimize(2))" ElementType="@ElementType.Secondary" Value="x"></Button>
 </div>
 <div class="window-content">
-    <ItemsContainer TradeSession="@TradeSession" IsCompact="@true" ShowSummary="@true"></ItemsContainer>
+    @if (TradeSession != null)
+    {
+        <ItemsContainer TradeSession="@TradeSession" IsCompact="@true" ShowSummary="@true"></ItemsContainer>
+    }
+    else
+    {
+        <span>Loading...</span>
+    }
 </div>
 
 <style>
@@ -76,8 +83,13 @@
     [Parameter]
     public string SessionId { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (!firstRender)
+        {
+            return;
+        }
+
         if (SessionId != null && PoECommerceFacade.Sessions.TryGetValue(SessionId, out TradeSession session))
         {
             TradeSession = session;
@@ -110,5 +122,6 @@
         };
 
         TradeSession = PoECommerceFacade.SearchItems(query);
+        StateHasChanged();
     }
 }

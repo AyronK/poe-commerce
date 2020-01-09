@@ -4,7 +4,7 @@
 
 @if (TradeSession != null)
 {
-    if (TradeSession.Result == null || TradeSession.Result.Count == 0)
+    if (TradeSession.Result == null || TradeSession.Result.Count == 0 || TradeSession.State == TradeSession.TradeSessionState.ServiceUnavailable)
     {
         if (TradeSession.State != TradeSession.TradeSessionState.New)
         {
@@ -16,7 +16,11 @@
         }
         else if (TradeSession.State == TradeSession.TradeSessionState.Closed)
         {
-            <span>:No results found</span>
+            <span>No results found</span>
+        }
+        else
+        {
+            <span>Service unavailable</span>
         }
     }
     else
