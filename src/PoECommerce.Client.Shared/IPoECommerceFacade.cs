@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using PoECommerce.Core.Model.Search;
-using PoECommerce.Core.Model.Trade;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Shared
@@ -10,10 +9,12 @@ namespace PoECommerce.Client.Shared
     {
         IPathOfExileFacade PathOfExile { get; }
 
-        void ClearSession();
-
-        TradeSession CurrentTradeSession { get; }
+        IReadOnlyDictionary<string, TradeSession> Sessions { get; }
 
         TradeSession SearchItems(Query query);
+
+        Task OpenCompactResults(string tradeSessionId = null);
+
+        Task OpenAdvancedResults(string tradeSessionId = null);
     }
 }

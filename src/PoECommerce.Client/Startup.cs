@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,7 +47,8 @@ namespace PoECommerce.Client
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
             services.AddPathOfExileGameClientServices();
-            services.AddSingleton<IPoECommerceFacade, PoECommerceFacade>();
+            services.AddSingleton<Dictionary<string, TradeSession>>();
+            services.AddScoped<IPoECommerceFacade, PoECommerceFacade>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

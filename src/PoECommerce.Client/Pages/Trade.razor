@@ -1,4 +1,5 @@
 ﻿@page "/Trade"
+@page "/Trade/{sessionId}"
 @using PoECommerce.Client.Shared.Display
 
 @inject IWindowManager WindowManager
@@ -7,7 +8,7 @@
     <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="-"></Button>
 </div>
 <div class="window-content">
-    <TradeContainer></TradeContainer>
+    <TradeContainer CurrentSessionId="@SessionId"></TradeContainer>
 </div>
 
 <style>
@@ -28,10 +29,11 @@
         -webkit-app-region: drag;
     }
 
-    .window-task-bar button{
-        -webkit-app-region:  no-drag;;
-    }
-    
+        .window-task-bar button {
+            -webkit-app-region: no-drag;
+            ;
+        }
+
     .window-content {
         margin-top: 35px;
         max-width: 800px;
@@ -51,3 +53,10 @@
         font-weight: bold;
     }
 </style>
+
+@functions
+{
+    [Parameter]
+    public string SessionId { get; set; }
+
+}

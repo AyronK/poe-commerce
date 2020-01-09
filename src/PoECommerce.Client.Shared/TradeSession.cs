@@ -7,9 +7,10 @@ using PoECommerce.Core.Model.Trade;
 
 namespace PoECommerce.Client.Shared
 {
-    public class TradeSession
+    public class TradeSession : IDisposable
     {
         private readonly ITradeService _tradeService;
+        private readonly Action<TradeSession> _onDispose;
 
         public enum TradeSessionState
         {
@@ -23,18 +24,23 @@ namespace PoECommerce.Client.Shared
 
         public Query Query { get; }
 
+        public string Id { get; }
+
         public IReadOnlyCollection<ListedItem> Result => _result;
 
         public uint Total { get; private set; }
 
         public TradeSessionState State { get; set; }
 
-        public TradeSession(Query query, ITradeService tradeService)
+        public TradeSession(Query query, ITradeService tradeService, Action<TradeSession> onDispose)
         {
             _tradeService = tradeService;
-            Query = query;
+            _onDispose = onDispose;
             _result = new List<ListedItem>();
+
+            Id = Guid.NewGuid().ToString("N");
             State = TradeSessionState.New;
+            Query = query;
         }
 
         public async IAsyncEnumerable<ListedItem> Begin()
@@ -68,6 +74,11 @@ namespace PoECommerce.Client.Shared
             }
 
             State = TradeSessionState.Closed;
+        }
+
+        public void Dispose()
+        {
+            _onDispose?.Invoke(this);
         }
     }
 }

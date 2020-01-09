@@ -16,7 +16,6 @@ namespace PoECommerce.Client.Components.Trade
     public class FiltersContainerBase : ComponentBase
     {
         private string _league;
-        private string _searchText;
         private string _status;
         private bool _isFiltersSectionOpen = false;
 
@@ -31,33 +30,14 @@ namespace PoECommerce.Client.Components.Trade
         [Parameter]
         public EventCallback<TradeSession> OnSearch { get; set; }
 
+        [Parameter]
         public Query Query { get; set; } = new Query();
 
         protected IEnumerable<Item> Items { get; set; } = new Item[0];
 
         public IEnumerable<Item> SearchTooltipValues { get; set; } = new Item[0];
 
-        public string SearchText
-        {
-            get => _searchText;
-            set
-            {
-                _searchText = value;
-
-                if (Items.FirstOrDefault(i => i.ToString().Equals(value, StringComparison.InvariantCultureIgnoreCase)) is Item matchedItem)
-                {
-                    Query.Type = matchedItem.Type;
-                    Query.Name = matchedItem.Name;
-                    Query.Text = null;
-                }
-                else
-                {
-                    Query.Type = null;
-                    Query.Name = null;
-                    Query.Text = value;
-                }
-            }
-        }
+        public string SearchText { get; set; }
 
         public string League
         {
@@ -86,8 +66,9 @@ namespace PoECommerce.Client.Components.Trade
 
         public void Clear()
         {
-            InitModels();
+            Query = null;
             SearchText = null;
+            InitModels();
             League = Leagues[0].Id;
             Status = OnlineStatus.Online.ToString();
             StateHasChanged();
@@ -95,6 +76,19 @@ namespace PoECommerce.Client.Components.Trade
 
         public void Search()
         {
+            if (Items.FirstOrDefault(i => i.ToString().Equals(SearchText, StringComparison.InvariantCultureIgnoreCase)) is Item matchedItem)
+            {
+                Query.Type = matchedItem.Type;
+                Query.Name = matchedItem.Name;
+                Query.Text = null;
+            }
+            else
+            {
+                Query.Type = null;
+                Query.Name = null;
+                Query.Text = SearchText;
+            }
+
             OnSearch.InvokeAsync(null).Wait();
             OnSearch.InvokeAsync(PoECommerceFacade.SearchItems(Query)).Wait();
         }
@@ -126,6 +120,7 @@ namespace PoECommerce.Client.Components.Trade
         {
             await base.OnInitializedAsync();
             InitModels();
+            SearchText = Query.Text ?? Query.Name + " " + Query.Type;
             Leagues = await DataService.GetLeagues();
             Items = (await DataService.GetItems()).SelectMany(m => m.Value).ToArray();
             Clear();
@@ -133,7 +128,7 @@ namespace PoECommerce.Client.Components.Trade
 
         private void InitModels()
         {
-            Query = new Query
+            Query ??= new Query
             {
                 TypeFilter = new TypeFilter(),
                 TradeFilter = new TradeFilter
@@ -150,10 +145,13 @@ namespace PoECommerce.Client.Components.Trade
                 Sort = new Dictionary<string, SortType>
                 {
                     { "price", SortType.Ascending }
-                }
+                },
             };
 
-            Query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
+            if (!Query.ModifiersFilter.GroupFilters.Any())
+            {
+                Query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
+            }
         }
     }
 }

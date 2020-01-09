@@ -1,9 +1,9 @@
 ﻿@page "/CompactTrade"
+@page "/CompactTrade/{sessionId}"
 @using PoECommerce.Client.Shared.Display
 @using PoECommerce.Core
 @using PoECommerce.Core.Model.Data
 @using PoECommerce.Core.Model.Search
-@using PoECommerce.Core.Model.Trade
 @using OnlineStatus = PoECommerce.Core.Model.Enums.OnlineStatus
 
 @inject IWindowManager WindowManager
@@ -73,11 +73,14 @@
 
     public TradeSession TradeSession { get; set; }
 
+    [Parameter]
+    public string SessionId { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        if (PoECommerceFacade.CurrentTradeSession != null)
+        if (SessionId != null && PoECommerceFacade.Sessions.TryGetValue(SessionId, out TradeSession session))
         {
-            TradeSession = PoECommerceFacade.CurrentTradeSession;
+            TradeSession = session;
             return;
         }
 
@@ -95,10 +98,17 @@
                 { "price", SortType.Ascending }
             },
             League = leagues[0].Id,
-            OnlineStatus = OnlineStatus.Online
+            OnlineStatus = OnlineStatus.Online,
+            ModifiersFilter = new ModifiersFilter(),
+            WeaponFilter = new WeaponsFilter(),
+            ArmourFilter = new ArmoursFilter(),
+            MapsFilter = new MapsFilter(),
+            RequirementsFilter = new RequirementsFilter(),
+            SocketFilter = new SocketsGroupFilter(),
+            MiscellaneousFilter = new MiscellaneousFilter(),
+            TypeFilter = new TypeFilter(),
         };
 
         TradeSession = PoECommerceFacade.SearchItems(query);
-        PoECommerceFacade.ClearSession();
     }
 }

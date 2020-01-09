@@ -1,4 +1,4 @@
-﻿@using PoECommerce.PathOfExile
+﻿@using PoECommerce.Core.Model.Search
 @inherits TradeContainerBase
-<FiltersContainer OnSearch="@(s => UpdateView(s))"></FiltersContainer>
+<FiltersContainer OnSearch="@(s => UpdateView(s))" Query="@(TradeSession?.Query)"></FiltersContainer>
 <ItemsContainer TradeSession="@TradeSession"></ItemsContainer>

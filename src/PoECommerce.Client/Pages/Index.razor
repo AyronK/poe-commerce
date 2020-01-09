@@ -2,7 +2,6 @@
 @using ElectronNET.API
 @using PoECommerce.Client.Shared.Display
 @inject IWindowManager WindowManager
-
 <div class="task-bar">
     <Button OnClick="@(async()=>await WindowManager.Show(2))" Value="Trade" ElementType="@ElementType.Primary"></Button>
 </div>
@@ -34,14 +33,12 @@
         {
             Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () =>
             {
-                PoECommerceFacade.ClearSession();
-                await WindowManager.Show(1);
+                await PoECommerceFacade.OpenAdvancedResults();
             });
 
             Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () =>
             {
-                PoECommerceFacade.ClearSession();
-                await WindowManager.Show(2);
+                await PoECommerceFacade.OpenCompactResults();
             });
 
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());

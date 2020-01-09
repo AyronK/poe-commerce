@@ -17,6 +17,14 @@ namespace PoECommerce.Client.Components.Trade
         [Parameter]
         public TradeSession TradeSession { get; set; }
 
+        [Inject]
+        public IPoECommerceFacade PoECommerceFacade { get; set; }
+
+        protected async Task OpenInAdvancedWindow()
+        {
+            await PoECommerceFacade.OpenAdvancedResults(TradeSession.Id);
+        }
+
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
