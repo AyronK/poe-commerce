@@ -1,39 +1,51 @@
 ﻿using System;
-using GregsStack.InputSimulatorStandard;
-using GregsStack.InputSimulatorStandard.Native;
+using PoECommerce.PathOfExile.GameClient.Abstractions;
 
-namespace PoECommerce.PathOfExile.Windows
+namespace PoECommerce.PathOfExile.GameClient
 {
     internal class Chat : IChat
     {
-        private const int MillisecondsTimeoutBeforeInput = 100;
-        private readonly IInputSimulator _inputSimulator;
+        private readonly IChatConsole _chatConsole;
+        private readonly IPathOfExileProcessHook _processHook;
 
-        public Chat(IInputSimulator inputSimulator)
+        public Chat(IChatConsole chatConsole, IPathOfExileProcessHook processHook)
         {
-            _inputSimulator = inputSimulator;
+            _chatConsole = chatConsole;
+            _processHook = processHook;
+        }
+
+        public bool CanWrite()
+        {
+            return _processHook.IsLaunched();
         }
 
         public void Write(string command)
         {
+
+            if (!_processHook.IsLaunched())
+            {
+                throw new InvalidOperationException("Path of Exile game client is not launched or cannot be accessed.");
+            }
+
+            if (!_processHook.FocusGameWindow())
+            {
+                throw new InvalidOperationException("Path of Exile game client is not launched or cannot be focused.");
+            }
+            
             Write(command, true);
         }
 
         private void Write(string command, bool submit)
         {
-            OpenChat();
-            Delay();
-            ClearChatInput();
-            Delay();
-            _inputSimulator.Keyboard.TextEntry(command);
+            _chatConsole.Open();
+            _chatConsole.ClearText();
+            _chatConsole.WriteText(command);
 
             if (submit)
             {
-                CloseChat();
-                Delay();
+                _chatConsole.Send();
             }
         }
-
 
         public void DoNotDisturb(string message = null)
         {
@@ -96,7 +108,7 @@ namespace PoECommerce.PathOfExile.Windows
                 throw new ArgumentNullException(nameof(characterName), "To start a conversation with a player provide it's character name.");
             }
 
-            Write("@ " + characterName, false);
+            Write("@ " + characterName + " ", false);
         }
 
         public void WritePrivateMessage(string characterName, string text)
@@ -106,30 +118,7 @@ namespace PoECommerce.PathOfExile.Windows
                 throw new ArgumentNullException(nameof(characterName), "To start a conversation with a player provide it's character name.");
             }
 
-            Write("@ " + characterName, true);
-        }
-
-        private void CloseChat()
-        {
-            _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-        }
-
-        private void OpenChat()
-        {
-            _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-        }
-
-        private void ClearChatInput()
-        {
-            _inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
-            Delay();
-
-            _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.DELETE);
-        }
-
-        private void Delay()
-        {
-            _inputSimulator.Keyboard.Sleep(MillisecondsTimeoutBeforeInput);
+            Write("@ " + characterName + " " + text, true);
         }
     }
 }

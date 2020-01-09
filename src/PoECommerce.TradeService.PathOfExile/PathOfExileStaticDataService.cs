@@ -6,6 +6,7 @@ using PoECommerce.Core;
 using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Web.Abstractions;
 using PoECommerce.TradeService.PathOfExile.Mappers;
 using CoreModels = PoECommerce.Core.Model.Data;
 

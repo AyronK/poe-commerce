@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using PoECommerce.PathOfExile.PathOfExile;
-using PoECommerce.PathOfExile.PathOfExile.Data;
-using PoECommerce.PathOfExile.PathOfExile.Trade;
+using PoECommerce.PathOfExile.GameClient;
+using PoECommerce.PathOfExile.GameClient.Abstractions;
+using PoECommerce.PathOfExile.Web;
+using PoECommerce.PathOfExile.Web.Data;
+using PoECommerce.PathOfExile.Web.Trade;
 
 namespace PoECommerce.PathOfExile.Extensions
 {
@@ -24,6 +27,25 @@ namespace PoECommerce.PathOfExile.Extensions
 
             AddPathOfExileTradeService(services, configuration);
             AddPathOfExileDataService(services, configuration);
+        }
+
+        /// <summary>
+        ///     Registers services for game client operations such as process attachment and input sending.
+        /// </summary>
+        public static void AddPathOfExileGameClientServices(this IServiceCollection services)
+        {
+            if (services.All(s => s.ServiceType != typeof(IChatConsole)))
+            {
+                throw new ArgumentException($"Collection services must contain service of type {typeof(IChatConsole)}.", nameof(services));
+            }
+
+            if (services.All(s => s.ServiceType != typeof(IPathOfExileProcessHook)))
+            {
+                throw new ArgumentException($"Collection services must contain service of type {typeof(IPathOfExileProcessHook)}.", nameof(services));
+            }
+
+            services.AddTransient<IChat, Chat>();
+            services.AddTransient<IPathOfExileFacade, PathOfExileFacade>();
         }
 
         private static void AddPathOfExileDataService(IServiceCollection services, RegistrationConfiguration configuration)

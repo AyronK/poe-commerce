@@ -214,7 +214,7 @@
         background-color: orangered; }
       .listed-item-container-listing .online-status__offline {
         background-color: darkred; }
-    .listed-item-container-listing .sent-whisper {
+    .listed-item-container-listing .sent-whisper, .listed-item-container-listing .failed-whisper {
       padding: 2px;
       font-size: 0.65rem;
       font-weight: bolder;

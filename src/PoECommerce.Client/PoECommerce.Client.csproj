@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="State\**" />
+    <Content Remove="State\**" />
+    <EmbeddedResource Remove="State\**" />
+    <None Remove="State\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -30,10 +37,6 @@
     <ProjectReference Include="..\PoECommerce.PathOfExile.Windows\PoECommerce.PathOfExile.Windows.csproj" />
     <ProjectReference Include="..\PoECommerce.TradeService.PathOfExile\PoECommerce.TradeService.PathOfExile.csproj" />
     <ProjectReference Include="..\PoECommerce.TradeService\PoECommerce.PathOfExile.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="State\" />
   </ItemGroup>
 
 </Project>

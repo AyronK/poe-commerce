@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Components;
 using NLog;
 using PoECommerce.Core.Model.Trade;
 using PoECommerce.PathOfExile;
+using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Components.Trade.Items
 {
     public class ListedItemContainerBase : ComponentBase
     {
         private bool _sentWhisper;
+        private bool _failedWhisper;
 
         [Parameter]
         public ListedItem ListedItem { get; set; }
@@ -28,6 +30,15 @@ namespace PoECommerce.Client.Components.Trade.Items
             set
             {
                 _sentWhisper = value;
+                StateHasChanged();
+            }
+        }
+        public bool FailedWhisper
+        {
+            get => _failedWhisper;
+            set
+            {
+                _failedWhisper = value;
                 StateHasChanged();
             }
         }
@@ -65,16 +76,25 @@ namespace PoECommerce.Client.Components.Trade.Items
 
         protected void InvokeInstantWhisper()
         {
-#if DEBUG // if PoE is turned off
-            SentWhisper = true;
-#endif
-            if (PathOfExileFacade.IsLaunched())
+            FailedWhisper = false;
+
+            if (PathOfExileFacade.Chat.CanWrite())
             {
-                PathOfExileFacade.Chat.Write(ListedItem.Listing.Whisper);
+                try
+                {
+                    PathOfExileFacade.Chat.Write(ListedItem.Listing.Whisper);
+                    SentWhisper = true;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Logger.Debug("Cannot send whisper because Path of Exile process is focused.", ex);
+                    FailedWhisper = true;
+                }
             }
             else
             {
                 Logger.Debug("Cannot send whisper because Path of Exile process is not attached.");
+                FailedWhisper = true;
             }
         }
     }

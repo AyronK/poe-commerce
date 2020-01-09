@@ -12,23 +12,26 @@
     <div style="width: 20%; text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">@((DateTime.Now - ListedItem.Listing.Indexed).Hours) h ago</div>
     <div style="width: 30%; text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
         @{
-            IGrouping<int, Socket>[] socketGroups = ListedItem.Item.Sockets.GroupBy(s => s.Group).OrderByDescending(s => s.Count()).ToArray();
+            if (ListedItem.Item.Sockets?.Any() == true)
+            {
+                IGrouping<int, Socket>[] socketGroups = ListedItem.Item.Sockets.GroupBy(s => s.Group).OrderByDescending(s => s.Count()).ToArray();
 
-            @if (socketGroups.Max(s => s.Count()) == 6)
-            {
-                <strong>6S 6L</strong>
-            }
-            else
-            {
-                @(ListedItem.Item.Sockets.Length)@:S&nbsp;@socketGroups.Max(s => s.Count())L&nbsp;
-            }
+                @if (socketGroups.Max(s => s.Count()) == 6)
+                {
+                    <strong>6S 6L</strong>
+                }
+                else
+                {
+                    @(ListedItem.Item.Sockets.Length)@:S&nbsp;@socketGroups.Max(s => s.Count())L&nbsp;
+                }
 
-            foreach (IGrouping<int, Socket> socketGroup in socketGroups)
-            {
-                string sockets = string.Join("", socketGroup.Select(s => s.Type.ToString()[0]));
-                <span>
-                    @(sockets)
-                </span>
+                foreach (IGrouping<int, Socket> socketGroup in socketGroups)
+                {
+                    string sockets = string.Join("", socketGroup.Select(s => s.Type.ToString()[0]));
+                    <span>
+                        @(sockets)
+                    </span>
+                }
             }
         }
     </div>

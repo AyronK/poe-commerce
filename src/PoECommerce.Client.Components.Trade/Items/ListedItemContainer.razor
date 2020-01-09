@@ -295,6 +295,12 @@
                         Whisper Sent
                     </div>
                 }
+                @if (FailedWhisper)
+                {
+                    <div class="failed-whisper">
+                        Failed whisper
+                    </div>
+                }
                 <div>
                     <Button ElementType="@ElementType.Primary" Value="@(SentWhisper ? "Redo Whisper" : "Whisper")" OnClick="@InvokeInstantWhisper" Style="width: 140px"></Button>
                 </div>

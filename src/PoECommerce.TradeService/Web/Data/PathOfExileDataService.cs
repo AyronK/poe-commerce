@@ -8,8 +8,9 @@ using PoECommerce.PathOfExile.Extensions.Internal;
 using PoECommerce.PathOfExile.Models;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
+using PoECommerce.PathOfExile.Web.Abstractions;
 
-namespace PoECommerce.PathOfExile.PathOfExile.Data
+namespace PoECommerce.PathOfExile.Web.Data
 {
     internal class PathOfExileDataService : PathOfExileHttpServiceBase, IPathOfExileDataService
     {

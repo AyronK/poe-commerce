@@ -6,6 +6,7 @@ using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
+using PoECommerce.PathOfExile.Web.Abstractions;
 using PoECommerce.TradeService.PathOfExile.Mappers;
 using CoreModels = PoECommerce.Core.Model.Search;
 

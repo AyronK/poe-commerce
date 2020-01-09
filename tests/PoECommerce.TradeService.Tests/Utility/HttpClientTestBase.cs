@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Moq.Protected;
-using PoECommerce.PathOfExile.PathOfExile;
+using PoECommerce.PathOfExile.Web;
 
 namespace PoECommerce.PathOfExile.Tests.Utility
 {

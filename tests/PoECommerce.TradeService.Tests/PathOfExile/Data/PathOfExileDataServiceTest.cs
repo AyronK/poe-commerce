@@ -5,8 +5,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
-using PoECommerce.PathOfExile.PathOfExile.Data;
 using PoECommerce.PathOfExile.Tests.Utility;
+using PoECommerce.PathOfExile.Web.Data;
 
 namespace PoECommerce.PathOfExile.Tests.PathOfExile.Data
 {

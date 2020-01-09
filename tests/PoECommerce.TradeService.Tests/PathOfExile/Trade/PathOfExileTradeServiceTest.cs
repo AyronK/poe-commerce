@@ -5,8 +5,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Trade;
-using PoECommerce.PathOfExile.PathOfExile.Trade;
 using PoECommerce.PathOfExile.Tests.Utility;
+using PoECommerce.PathOfExile.Web.Trade;
 
 namespace PoECommerce.PathOfExile.Tests.PathOfExile.Trade
 {

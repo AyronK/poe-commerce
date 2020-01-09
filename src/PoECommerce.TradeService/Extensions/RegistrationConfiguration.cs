@@ -1,4 +1,6 @@
-﻿namespace PoECommerce.PathOfExile.Extensions
+﻿using PoECommerce.PathOfExile.Web.Abstractions;
+
+namespace PoECommerce.PathOfExile.Extensions
 {
     public class RegistrationConfiguration
     {

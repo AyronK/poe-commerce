@@ -45,6 +45,7 @@ namespace PoECommerce.Client
             });
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
+            services.AddPathOfExileGameClientServices();
             services.AddSingleton<IPoECommerceFacade, PoECommerceFacade>();
         }
 

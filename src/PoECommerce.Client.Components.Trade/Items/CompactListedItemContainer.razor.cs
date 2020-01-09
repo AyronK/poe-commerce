@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Web;
 using NLog;
 using PoECommerce.Core.Model.Trade;
 using PoECommerce.PathOfExile;
+using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Components.Trade.Items
 {
@@ -48,9 +49,17 @@ namespace PoECommerce.Client.Components.Trade.Items
 #if DEBUG // if PoE is turned off
             SentWhisper = true;
 #endif
-            if (PathOfExileFacade.IsLaunched())
+            if (PathOfExileFacade.Chat.CanWrite())
             {
-                PathOfExileFacade.Chat.Write(ListedItem.Listing.Whisper);
+                try
+                {
+                    PathOfExileFacade.Chat.Write(ListedItem.Listing.Whisper);
+                    SentWhisper = true;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Logger.Debug("Cannot send whisper because Path of Exile process is not attached.", ex);
+                }
             }
             else
             {

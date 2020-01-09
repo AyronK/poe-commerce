@@ -4,7 +4,7 @@ using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
 
-namespace PoECommerce.PathOfExile
+namespace PoECommerce.PathOfExile.Web.Abstractions
 {
     public interface IPathOfExileTradeService
     {

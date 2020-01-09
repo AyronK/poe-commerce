@@ -10,8 +10,9 @@ using PoECommerce.PathOfExile.Models;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;
+using PoECommerce.PathOfExile.Web.Abstractions;
 
-namespace PoECommerce.PathOfExile.PathOfExile.Trade
+namespace PoECommerce.PathOfExile.Web.Trade
 {
     internal class PathOfExileTradeService : PathOfExileHttpServiceBase, IPathOfExileTradeService
     {

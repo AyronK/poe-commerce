@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 
-namespace PoECommerce.PathOfExile
+namespace PoECommerce.PathOfExile.Web.Abstractions
 {
     public interface IPathOfExileDataService
     {
