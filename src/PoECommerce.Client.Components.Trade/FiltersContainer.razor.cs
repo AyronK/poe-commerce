@@ -119,11 +119,14 @@ namespace PoECommerce.Client.Components.Trade
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            InitModels();
-            SearchText = Query.Text ?? Query.Name + " " + Query.Type;
             Leagues = await DataService.GetLeagues();
             Items = (await DataService.GetItems()).SelectMany(m => m.Value).ToArray();
-            Clear();
+        }
+
+        protected override void OnParametersSet()
+        {
+            InitModels();
+            SearchText = Query.Text ?? Query.Name + " " + Query.Type;
         }
 
         private void InitModels()

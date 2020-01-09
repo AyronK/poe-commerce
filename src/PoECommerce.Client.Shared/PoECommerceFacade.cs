@@ -44,5 +44,15 @@ namespace PoECommerce.Client.Shared
         {
             return _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}", true);
         }
+
+        public Task CloseCompactResults()
+        {
+            return _windowManager.Minimize(2);
+        }
+
+        public Task CloseAdvancedResults()
+        {
+            return _windowManager.Minimize(1);
+        }
     }
 }

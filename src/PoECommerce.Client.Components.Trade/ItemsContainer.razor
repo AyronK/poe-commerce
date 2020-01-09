@@ -54,6 +54,7 @@
         }
         else
         {
+            <Button ElementType="@ElementType.Secondary" OnClick="@OpenInCompactWindow" Value="->"></Button>
             foreach (ListedItem resultItem in TradeSession.Result)
             {
                 <ListedItemContainer ListedItem="@resultItem"></ListedItemContainer>

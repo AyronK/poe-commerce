@@ -16,5 +16,9 @@ namespace PoECommerce.Client.Shared
         Task OpenCompactResults(string tradeSessionId = null);
 
         Task OpenAdvancedResults(string tradeSessionId = null);
+
+        Task CloseCompactResults();
+
+        Task CloseAdvancedResults();
     }
 }

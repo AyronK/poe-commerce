@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Client.Shared;
@@ -22,17 +24,38 @@ namespace PoECommerce.Client.Components.Trade
 
         protected async Task OpenInAdvancedWindow()
         {
+            await PoECommerceFacade.CloseCompactResults();
             await PoECommerceFacade.OpenAdvancedResults(TradeSession.Id);
+        }
+        protected async Task OpenInCompactWindow()
+        {
+            await PoECommerceFacade.CloseAdvancedResults();
+            await PoECommerceFacade.OpenCompactResults(TradeSession.Id);
         }
 
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
 
-            if (TradeSession != null && TradeSession.State == TradeSession.TradeSessionState.New)
+            if (TradeSession == null)
+            {
+                return;
+            }
+
+            if (TradeSession.State == TradeSession.TradeSessionState.New)
             {
                 await foreach (ListedItem _ in TradeSession.Begin())
                 {
+                    StateHasChanged();
+                }
+            }
+            else if (TradeSession.State == TradeSession.TradeSessionState.Pending)
+            {
+                TradeSession.OnSessionClose += SessionClose;
+                
+                void SessionClose(object sender, EventArgs args)
+                {
+                    TradeSession.OnSessionClose -= SessionClose;
                     StateHasChanged();
                 }
             }

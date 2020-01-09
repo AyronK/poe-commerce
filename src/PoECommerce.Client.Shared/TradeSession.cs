@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using PoECommerce.Core;
@@ -20,7 +22,7 @@ namespace PoECommerce.Client.Shared
             Closed,
             ServiceUnavailable
         }
-
+    
         private readonly List<ListedItem> _result;
         private const int MaximumItemsPerRequest = 10;
 
@@ -29,6 +31,8 @@ namespace PoECommerce.Client.Shared
         public string Id { get; }
 
         public IReadOnlyCollection<ListedItem> Result => _result;
+
+        public event EventHandler OnSessionClose;
 
         public uint Total { get; private set; }
 
@@ -73,6 +77,7 @@ namespace PoECommerce.Client.Shared
             if (searchResult.ItemIds?.Any() != true)
             {
                 State = TradeSessionState.Closed;
+                OnSessionClose?.Invoke(this, EventArgs.Empty);
                 yield break;
             }
 
@@ -100,6 +105,7 @@ namespace PoECommerce.Client.Shared
             }
 
             State = TradeSessionState.Closed;
+            OnSessionClose?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()
