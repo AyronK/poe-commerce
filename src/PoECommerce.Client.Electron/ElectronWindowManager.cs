@@ -31,6 +31,25 @@ namespace PoECommerce.Client.Electron
             _windows = windows;
         }
 
+        public async Task ResizeAndPlaceOnCursor(int windowId, int width, int height)
+        {
+            IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
+            Point point = await ElectronNET.API.Electron.Screen.GetCursorScreenPointAsync();
+            window.SetResizable(true);
+            window.SetBounds(new Rectangle { X = point.X, Y = point.Y, Height = height, Width = width });
+            window.SetResizable(false);
+            window.Restore();
+        }
+
+        public async Task ResizeAndPosition(int windowId, int x, int y, int width, int height)
+        {
+            IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
+            window.SetResizable(true);
+            window.SetBounds(new Rectangle { X = x, Y = y, Height = height, Width = width }, true);
+            window.SetResizable(false);
+            window.Restore();
+        }
+
         public IReadOnlyList<IWindow> Windows => new ReadOnlyCollection<IWindow>(_windows.Cast<IWindow>().ToList());
 
         public async Task LoadUrl(int windowId, string url, bool openWhenReady)
@@ -51,6 +70,7 @@ namespace PoECommerce.Client.Electron
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
             window.Show();
         }
+
 
         public async Task Hide(int windowId)
         {
@@ -75,7 +95,6 @@ namespace PoECommerce.Client.Electron
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
             window.Maximize();
         }
-
         public void AddWindow(ElectronWindow window)
         {
             if (_windows.Any(w => w.Id == window.Id))

@@ -11,6 +11,8 @@ namespace PoECommerce.Client.Shared.Display
         Task Close(int windowId);
         Task Minimize(int windowId);
         Task Maximize(int windowId);
+        Task ResizeAndPosition(int windowId, int x, int y, int width, int height);
+        Task ResizeAndPlaceOnCursor(int windowId, int width, int height);
 
         IReadOnlyList<IWindow> Windows { get; }
     }

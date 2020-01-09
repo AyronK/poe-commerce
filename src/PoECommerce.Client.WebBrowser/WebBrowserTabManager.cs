@@ -21,6 +21,8 @@ namespace PoECommerce.Client.WebBrowser
             _navigationManager = navigationManager;
             _windows = windows;
         }
+        
+        public Task ResizeAndPlaceOnCursor(int windowId, int width, int height) => Task.CompletedTask;
 
         public IReadOnlyList<IWindow> Windows => new ReadOnlyCollection<IWindow>(_windows.Cast<IWindow>().ToList());
 
@@ -57,6 +59,8 @@ namespace PoECommerce.Client.WebBrowser
         public Task Minimize(int windowId) => Task.CompletedTask;
 
         public Task Maximize(int windowId) => Show(windowId);
+
+        public Task ResizeAndPosition(int windowId, int x, int y, int width, int height) => Task.CompletedTask;
 
         private WebBrowserWindow GetWindow(int windowId)
         {

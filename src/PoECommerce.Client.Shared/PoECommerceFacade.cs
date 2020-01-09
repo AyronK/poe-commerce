@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using PoECommerce.Client.Shared.Display;
 using PoECommerce.Core;
@@ -35,14 +36,18 @@ namespace PoECommerce.Client.Shared
             return tradeSession;
         }
 
-        public Task OpenCompactResults(string tradeSessionId = null)
+        public async Task OpenCompactResults(string tradeSessionId = null)
         {
-            return _windowManager.LoadUrl(2, $"/CompactTrade/{tradeSessionId}", true);
+            await _windowManager.ResizeAndPlaceOnCursor(1, 400, 200);
+            await _windowManager.Minimize(1);
+            await _windowManager.LoadUrl(1, $"/CompactTrade/{tradeSessionId}", true);
         }
 
-        public Task OpenAdvancedResults(string tradeSessionId = null)
+        public async Task OpenAdvancedResults(string tradeSessionId = null)
         {
-            return _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}", true);
+            await _windowManager.ResizeAndPlaceOnCursor(1, 800, 800);
+            await _windowManager.Minimize(1);
+            await _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}", true);
         }
 
         public Task CloseCompactResults()
