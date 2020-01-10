@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using PoECommerce.PathOfExile.Extensions.Internal;
 using PoECommerce.PathOfExile.Models;
@@ -19,26 +22,78 @@ namespace PoECommerce.PathOfExile.Web.Data
         private const string StaticEndpoint = "/api/trade/data/static";
         private const string StatsEndpoint = "/api/trade/data/stats";
 
+        private readonly string _rootDirectoryPath;
+
         internal PathOfExileDataService(IHttpClientFactory httpClient) : base(httpClient)
         {
+            _rootDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "The Wraeclast", "PoE Commerce", "data");
+
+            if (!Directory.Exists(_rootDirectoryPath))
+            {
+                Directory.CreateDirectory(_rootDirectoryPath);
+            }
+        }
+
+        private async Task<string> GetFromFile(string fileName)
+        {
+            string path = Path.Combine(_rootDirectoryPath, fileName);
+
+            try
+            {
+                if (!File.Exists(path))
+                {
+                    return null;
+                }
+
+                return await File.ReadAllTextAsync(path);
+            }
+            catch (Exception ex) when (ex is IOException || ex is JsonException)
+            {
+                return null;
+            }
+        }
+
+        private async Task SaveToFile(string fileName, string json)
+        {
+            string path = Path.Combine(_rootDirectoryPath, fileName);
+
+            try
+            {
+                await File.WriteAllTextAsync(path, json);
+            }
+            catch (Exception ex) when (ex is IOException || ex is JsonException)
+            {
+            }
         }
 
         public async Task<League[]> GetLeagues()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync(LeaguesEndpoint);
-            response.EnsureSuccessStatusCode();
+            if (!(await GetFromFile("leagues.json") is string json))
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync(LeaguesEndpoint);
+                response.EnsureSuccessStatusCode();
 
-            ResponseResult<League[]> responseResult = await response.DeserializeResponseBody<ResponseResult<League[]>>(JsonOptions);
+                json = await response.Content.ReadAsStringAsync();
+            }
+
+            await SaveToFile("leagues.json", json);
+            ResponseResult<League[]> responseResult = JsonSerializer.Deserialize<ResponseResult<League[]>>(json, JsonOptions);
 
             return responseResult.Result;
         }
 
         public async Task<IReadOnlyDictionary<ItemCategory, Item[]>> GetItems()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync(ItemsEndpoint);
-            response.EnsureSuccessStatusCode();
+            if (!(await GetFromFile("items.json") is string json))
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync(ItemsEndpoint);
+                response.EnsureSuccessStatusCode();
 
-            ResponseResult<ItemsDataResult[]> responseResult = await response.DeserializeResponseBody<ResponseResult<ItemsDataResult[]>>(JsonOptions);
+                json = await response.Content.ReadAsStringAsync();
+            }
+
+            await SaveToFile("items.json", json);
+            ResponseResult<ItemsDataResult[]> responseResult = JsonSerializer.Deserialize<ResponseResult<ItemsDataResult[]>>(json, JsonOptions);
             Dictionary<ItemCategory, Item[]> result = responseResult.Result.ToDictionary(r => r.Category, r => r.Items);
 
             return result;
@@ -46,10 +101,16 @@ namespace PoECommerce.PathOfExile.Web.Data
 
         public async Task<IReadOnlyDictionary<ModifierType, Modifier[]>> GetModifiers()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync(StatsEndpoint);
-            response.EnsureSuccessStatusCode();
+            if (!(await GetFromFile("modifiers.json") is string json))
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync(StatsEndpoint);
+                response.EnsureSuccessStatusCode();
 
-            ResponseResult<ModifiersDataResult[]> responseResult = await response.DeserializeResponseBody<ResponseResult<ModifiersDataResult[]>>(JsonOptions);
+                json = await response.Content.ReadAsStringAsync();
+            }
+
+            await SaveToFile("modifiers.json", json);
+            ResponseResult<ModifiersDataResult[]> responseResult = JsonSerializer.Deserialize<ResponseResult<ModifiersDataResult[]>>(json, JsonOptions);
             Dictionary<ModifierType, Modifier[]> result = responseResult.Result.ToDictionary(r => r.ModifierType, r => r.Modifiers);
 
             return result;
@@ -57,10 +118,16 @@ namespace PoECommerce.PathOfExile.Web.Data
 
         public async Task<IReadOnlyDictionary<ItemCategory, StaticData[]>> GetStaticData()
         {
-            HttpResponseMessage response = await HttpClient.GetAsync(StaticEndpoint);
-            response.EnsureSuccessStatusCode();
+            if (!(await GetFromFile("static.json") is string json))
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync(StaticEndpoint);
+                response.EnsureSuccessStatusCode();
 
-            StaticDataResponseResult responseResult = await response.DeserializeResponseBody<StaticDataResponseResult>(JsonOptions);
+                json = await response.Content.ReadAsStringAsync();
+            }
+
+            await SaveToFile("static.json", json);
+            StaticDataResponseResult responseResult = JsonSerializer.Deserialize<StaticDataResponseResult> (json, JsonOptions);
 
             foreach (KeyValuePair<ItemCategory, StaticData[]> keyValuePair in responseResult.Result)
             {
