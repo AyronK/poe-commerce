@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Client.Shared;
 using PoECommerce.Core.Model.Trade;
@@ -28,7 +30,7 @@ namespace PoECommerce.Client.Components.Trade
         {
             TradeState.IsCompact = true;
         }
-        
+
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
@@ -40,13 +42,24 @@ namespace PoECommerce.Client.Components.Trade
 
             if (TradeSession.State == TradeSession.TradeSessionState.New)
             {
+                await foreach (ListedItem _ in TradeSession.Begin())
+                {
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            else
+            {
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(5000);
+
                 await Task.Run(async () =>
-                 {
-                     await foreach (ListedItem _ in TradeSession.Begin())
-                     {
-                         await InvokeAsync(StateHasChanged);
-                     }
-                 });
+                {
+                    while (TradeSession.State != TradeSession.TradeSessionState.Closed)
+                    {
+                        await Task.Delay(100, cancellationTokenSource.Token);
+                        await InvokeAsync(StateHasChanged);
+                    }
+                }, cancellationTokenSource.Token);
             }
         }
     }
