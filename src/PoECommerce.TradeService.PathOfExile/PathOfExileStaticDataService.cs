@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using PoECommerce.Core;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Web.Abstractions;

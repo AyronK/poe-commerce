@@ -1,4 +1,3 @@
-﻿@using PoECommerce.Core.Model.Search
-@inherits TradeContainerBase
+﻿@inherits TradeContainerBase
 <FiltersContainer OnSearch="@(s => UpdateView(s))" Query="@(TradeSession?.Query)"></FiltersContainer>
 <ItemsContainer TradeSession="@TradeSession"></ItemsContainer>

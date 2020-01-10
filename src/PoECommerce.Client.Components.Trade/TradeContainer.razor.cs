@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PoECommerce.Client.Shared;
-using PoECommerce.Core.Model.Search;
 
 namespace PoECommerce.Client.Components.Trade
 {

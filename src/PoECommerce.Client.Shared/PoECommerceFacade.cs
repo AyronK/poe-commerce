@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using PoECommerce.Client.Shared.Display;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Search;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Shared

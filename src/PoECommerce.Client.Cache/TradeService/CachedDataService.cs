@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Web.Abstractions;

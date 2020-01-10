@@ -54,7 +54,7 @@ namespace PoECommerce.PathOfExile.Extensions
             services.AddTransient(provider =>
             {
                 IHttpClientFactory httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-                return new PathOfExileDataService(httpClientFactory);
+                return new PathOfExileDataService(httpClientFactory, configuration.LocalStorageDirectory);
             });
 
             // register interface with configurable scope and implementation decorator

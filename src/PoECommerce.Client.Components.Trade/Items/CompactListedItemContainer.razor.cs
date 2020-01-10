@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using NLog;
-using PoECommerce.Client.Shared;
 using PoECommerce.Core.Model.Trade;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Components.Trade.Items

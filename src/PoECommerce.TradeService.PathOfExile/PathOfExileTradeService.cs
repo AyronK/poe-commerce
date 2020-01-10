@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using PoECommerce.Core;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Search;
 using PoECommerce.PathOfExile.Models.Search.Enums;
 using PoECommerce.PathOfExile.Models.Trade;

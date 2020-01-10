@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
@@ -45,6 +46,7 @@ namespace PoECommerce.Client
             {
                 cfg.DataServiceSettings.Scope = RegistrationType.Singleton;
                 cfg.DataServiceSettings.Factory = factory => new CachedDataService(factory);
+                cfg.LocalStorageDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "The Wraeclast", "PoE Commerce", "data");
             });
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();

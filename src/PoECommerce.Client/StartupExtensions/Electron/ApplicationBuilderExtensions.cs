@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;

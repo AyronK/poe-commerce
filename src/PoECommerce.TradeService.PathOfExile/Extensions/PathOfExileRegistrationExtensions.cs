@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using PoECommerce.Core;
-using PoECommerce.PathOfExile;
 using PoECommerce.PathOfExile.Models.Data;
 using PoECommerce.PathOfExile.Models.Enums;
 using PoECommerce.PathOfExile.Models.Search;

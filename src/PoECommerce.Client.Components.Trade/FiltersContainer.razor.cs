@@ -7,7 +7,6 @@ using PoECommerce.Client.Shared;
 using PoECommerce.Core;
 using PoECommerce.Core.Model.Data;
 using PoECommerce.Core.Model.Search;
-using PoECommerce.Core.Model.Trade;
 using Item = PoECommerce.Core.Model.Data.Item;
 using OnlineStatus = PoECommerce.Core.Model.Enums.OnlineStatus;
 
