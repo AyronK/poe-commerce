@@ -4,6 +4,10 @@
     "inputFile": "Items/ListedItemContainer.razor.scss"
   },
   {
+    "outputFile": "wwwroot/css/items/compactlisted-item-container.css",
+    "inputFile": "Items/CompactListedItemContainer.razor.scss"
+  },
+  {
     "outputFile": "wwwroot/css/items/item-properties-container.css",
     "inputFile": "Items/ItemPropertiesContainer.razor.scss"
   },
