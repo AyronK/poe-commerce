@@ -5,4 +5,4 @@
     <FiltersContainer OnSearch="@(s => StateHasChanged())" Query="@(TradeState.CurrentTradeSession?.Query)"></FiltersContainer>
 }
 
-<ItemsContainer TradeSession="@TradeState.CurrentTradeSession" IsCompact="@IsCompact"></ItemsContainer>
+<ItemsContainer TradeSession="@TradeState.CurrentTradeSession" IsCompact="@IsCompact" ShowSummary="@IsCompact"></ItemsContainer>

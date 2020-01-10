@@ -29,7 +29,6 @@
 
         if (ShowSummary)
         {
-            <hr />
             <span>
                 @(TradeSession.Query.Text ?? TradeSession.Query.Name + " " + TradeSession.Query.Type)
                 @if (TradeSession.Query.OnlineStatus != null)

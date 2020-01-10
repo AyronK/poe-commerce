@@ -1,5 +1,4 @@
 ﻿@page "/Trade"
-
 @using PoECommerce.Client.Shared.Display
 @implements IDisposable
 @inject IWindowManager WindowManager
@@ -22,8 +21,7 @@
             -webkit-app-region: drag;
             background-color: black;
             display: flex;
-            flex-direction: row-reverse;
-            padding: 3px;
+            flex-direction: row;
             position: fixed;
             right: 0;
             top: 0;
@@ -45,6 +43,8 @@
         }
 
         .window-task-bar button {
+            border-radius: 20%;
+            font-family: consolas;
             height: 15px;
             line-height: 1px;
             max-height: 15px;
@@ -52,6 +52,10 @@
             min-height: 15px;
             min-width: 15px;
             width: 15px;
+        }
+        .window-task-bar .poec-button--primary span {
+            display: inline-block;
+            transform: rotate(45deg) translateX(1px) translateY(-1px);
         }
     </style>
 }
@@ -62,8 +66,8 @@ else
         body {
             @if (!TradeState.IsVisible)
             {
-                @:display: none;
-            }
+                @: display: none;
+                        }
             overflow: hidden;
             user-select: none;
         }
@@ -72,8 +76,7 @@ else
             -webkit-app-region: drag;
             background-color: black;
             display: flex;
-            flex-direction: row-reverse;
-            padding: 3px;
+            flex-direction: row;
             position: fixed;
             right: 0;
             top: 0;
@@ -94,6 +97,8 @@ else
         }
 
         .window-task-bar button {
+            border-radius: 20%;
+            font-family: consolas;
             height: 15px;
             line-height: 1px;
             max-height: 15px;
@@ -102,17 +107,21 @@ else
             min-width: 15px;
             width: 15px;
         }
+        .window-task-bar .poec-button--primary span {
+            display: inline-block;
+            transform: rotate(45deg) translateX(1px) translateY(-1px);
+        }
     </style>
 }
 
 @if (TradeState.IsVisible)
 {
-    <div class="window-task-bar">
-        <Button ElementType="@ElementType.Secondary" OnClick="@SwitchMode" Value="♂"></Button>
-        <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="_"></Button>
-    </div>
     <div class="window-content">
         <TradeContainer IsCompact="@TradeState.IsCompact"></TradeContainer>
+    </div>
+    <div class="window-task-bar">
+        <Button ElementType="@ElementType.Primary" OnClick="@SwitchMode" Value="@(IsCompact ? "←→" : "→←")"></Button>
+        <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="_"></Button>
     </div>
 }
 
