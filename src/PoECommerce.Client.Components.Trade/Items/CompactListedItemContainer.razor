@@ -2,29 +2,43 @@
 @using PoECommerce.Core.Model.Trade
 @inherits CompactListedItemContainerBase
 
-    <div class="compact-listed-item-container">
-        <div class="cell">
-            <Button Value="PM" OnClick="@InvokeInstantWhisper" ElementType="@ElementType.Secondary"></Button>
-        </div>
+<div class="compact-listed-item-container">
+    <div class="cell">
+        <Button Value="PM" OnClick="@InvokeInstantWhisper" ElementType="@ElementType.Secondary"></Button>
+    </div>
 
-        <div class="cell" style="width: 17%;">@ListedItem.Listing.Price.Amount @ListedItem.Listing.Price.Currency</div>
+    <div class="cell" style="width: 17%;">@ListedItem.Listing.Price.Amount @ListedItem.Listing.Price.Currency</div>
 
-        <div class="cell" style="width: 23%;" title="@(ListedItem.Listing.Account.LastCharacterName)">
-            @(ListedItem.Listing.Account.LastCharacterName)
-        </div>
+    <div class="cell" style="width: 23%;" title="@(ListedItem.Listing.Account.LastCharacterName)">
+        @(ListedItem.Listing.Account.LastCharacterName)
+    </div>
 
-        <div class="cell" style="width: 40%;">
-            @{
-                if (ListedItem.Item.ItemType == ItemType.Gem)
+    <div class="cell" style="width: 40%;">
+        @{
+            if (ListedItem.Item.ItemType == ItemType.Gem)
+            {
+                string level = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Level")?.Values.FirstOrDefault()?.Value ?? "0";
+                string quality = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Quality")?.Values.FirstOrDefault()?.Value ?? "0";
+
+                <span>@Regex.Match(level, @"\d+") lvl | @Regex.Match(quality, @"\d+")%</span>
+
+            }
+            else if (ListedItem.Item.ItemType == ItemType.Currency)
+            {
+            }
+            else if (ListedItem.Item.ItemType == ItemType.DivinationCard)
+            {
+            }
+            else if (ListedItem.Item.ItemType == ItemType.Prophecy)
+            {
+            }
+            else
+            {
+                <span>ilvl @ListedItem.Item.ItemLevel</span>
+                if (ListedItem.Item.Sockets?.Any() == true)
                 {
-                    string level = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Level")?.Values.FirstOrDefault()?.Value ?? "0";
-                    string quality = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Quality")?.Values.FirstOrDefault()?.Value ?? "0";
+                    <span> | </span>
 
-                    <span>@Regex.Match(level, @"\d+") lvl | @Regex.Match(quality, @"\d+")%</span>
-
-                }
-                else if (ListedItem.Item.Sockets?.Any() == true)
-                {
                     IGrouping<int, Socket>[] socketGroups = ListedItem.Item.Sockets.GroupBy(s => s.Group).OrderByDescending(s => s.Count()).ToArray();
 
                     @if (socketGroups.Max(s => s.Count()) == 6)
@@ -35,7 +49,7 @@
                     {
                         @(ListedItem.Item.Sockets.Length)@:S&nbsp;@socketGroups.Max(s => s.Count())L&nbsp;
                     }
-
+                    
                     foreach (IGrouping<int, Socket> socketGroup in socketGroups)
                     {
                         <span class="socket">[</span>
@@ -49,6 +63,7 @@
                     }
                 }
             }
-        </div>
-        <div class="cell" style="width: 20%;">@((DateTime.Now - ListedItem.Listing.Indexed).Hours) h ago</div>
+        }
     </div>
+    <div class="cell" style="width: 20%;">@((DateTime.Now - ListedItem.Listing.Indexed).Hours) h ago</div>
+</div>

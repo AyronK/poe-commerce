@@ -27,7 +27,7 @@
         margin: 0px;
         margin-right: 10px;
         line-height: 0;
-        font-size: smaller;
+        font-size: inherit;
     }
 
     .socket {
@@ -36,27 +36,27 @@
         height: 5px;
 
         &__green {
-            color: #4ab60c;
+            color: rgba(#4ab60c, 0.75);
         }
 
         &__red {
-            color: #b50c27;
+            color: rgba(#b50c27, 0.75);
         }
 
         &__blue {
-            color: #0c50b6;
+            color: rgba(#5c9dff, 0.75);
         }
 
         &__white {
-            color: #e3e3e3;
+            color: rgba(#e3e3e3, 0.75);
         }
 
         &__delve {
-            color: #dc751c;
+            color: rgba(#dc751c, 0.75);
         }
 
         &__abyss {
-            color: #1c1c1c;
+            color: rgba(#1c1c1c, 0.75);
         }
     }
 }

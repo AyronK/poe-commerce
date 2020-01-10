@@ -67,20 +67,20 @@
     margin: 0px;
     margin-right: 10px;
     line-height: 0;
-    font-size: smaller; }
+    font-size: inherit; }
   .compact-listed-item-container .socket {
     margin-right: -4px;
     width: 5px;
     height: 5px; }
     .compact-listed-item-container .socket__green {
-      color: #4ab60c; }
+      color: rgba(74, 182, 12, 0.75); }
     .compact-listed-item-container .socket__red {
-      color: #b50c27; }
+      color: rgba(181, 12, 39, 0.75); }
     .compact-listed-item-container .socket__blue {
-      color: #0c50b6; }
+      color: rgba(92, 157, 255, 0.75); }
     .compact-listed-item-container .socket__white {
-      color: #e3e3e3; }
+      color: rgba(227, 227, 227, 0.75); }
     .compact-listed-item-container .socket__delve {
-      color: #dc751c; }
+      color: rgba(220, 117, 28, 0.75); }
     .compact-listed-item-container .socket__abyss {
-      color: #1c1c1c; }
+      color: rgba(28, 28, 28, 0.75); }
