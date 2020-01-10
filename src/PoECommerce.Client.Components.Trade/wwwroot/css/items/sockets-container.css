@@ -44,14 +44,15 @@
   color: #AA9E82;
   font-weight: bolder; }
 
+.icon-wrapper .icon img:hover + .sockets-container, .sockets-container:hover {
+  opacity: 0; }
+
 .sockets-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 1; }
-  .sockets-container:hover {
-    opacity: 0; }
   .sockets-container.sockets-container__1x1.sockets-container__1s {
     width: 30px;
     height: 30px; }

@@ -1,6 +1,10 @@
 ﻿@import "Common/Variables";
 @import "Common/Common";
 
+.icon-wrapper .icon img:hover + .sockets-container, .sockets-container:hover {
+    opacity: 0;
+}
+
 .sockets-container {
 
     $socket-size: 30px;
@@ -13,10 +17,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
-
-    &:hover {
-        opacity: 0;
-    }
 
     &.sockets-container__1x1 {
         &.sockets-container__1s {
