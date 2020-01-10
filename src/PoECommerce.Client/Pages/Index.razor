@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using ElectronNET.API
 @using PoECommerce.Client.Shared.Display
+@implements IDisposable
 @inject IWindowManager WindowManager
 <div class="task-bar">
     <Button OnClick="@(async()=>await WindowManager.Show(1))" Value="Trade" ElementType="@ElementType.Primary"></Button>
@@ -25,23 +26,47 @@
 @functions
 {
     [Inject]
-    public IPoECommerceFacade PoECommerceFacade { get; set; }
+    public ITradeState TradeState { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
+        TradeState.OnIsCompactChanged += TradeStateOnIsCompactChanged;
+
         if (HybridSupport.IsElectronActive)
         {
-            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () =>
+            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", () =>
             {
-                await PoECommerceFacade.OpenAdvancedResults();
+                TradeState.IsCompact = false;
             });
 
-            Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () =>
+            Electron.GlobalShortcut.Register("Ctrl+Shift+F", () =>
             {
-                await PoECommerceFacade.OpenCompactResults();
+                TradeState.IsCompact = true;
             });
 
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
         }
+    }
+
+    private async void TradeStateOnIsCompactChanged(object sender, bool isCompact)
+    {
+        TradeState.IsVisible = false;
+        await WindowManager.Show(1);
+
+        if (isCompact)
+        {
+            await WindowManager.ResizeAndPlaceOnCursor(1, 400, 200);
+            TradeState.IsVisible = true;
+        }
+        else
+        {
+            await WindowManager.ResizeAndPlaceOnCursor(1, 800, 800);
+            TradeState.IsVisible = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        TradeState.OnIsCompactChanged -= TradeStateOnIsCompactChanged;
     }
 }

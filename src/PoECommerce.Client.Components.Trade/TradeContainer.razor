@@ -1,3 +1,8 @@
 ﻿@inherits TradeContainerBase
-<FiltersContainer OnSearch="@(s => UpdateView(s))" Query="@(TradeSession?.Query)"></FiltersContainer>
-<ItemsContainer TradeSession="@TradeSession"></ItemsContainer>
+
+@if (!IsCompact)
+{
+    <FiltersContainer OnSearch="@(s => StateHasChanged())" Query="@(TradeState.CurrentTradeSession?.Query)"></FiltersContainer>
+}
+
+<ItemsContainer TradeSession="@TradeState.CurrentTradeSession" IsCompact="@IsCompact"></ItemsContainer>

@@ -1,24 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using PoECommerce.Core.Model.Search;
-using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.Client.Shared
 {
-    public interface IPoECommerceFacade
+    public interface ITradeState
     {
-        IPathOfExileFacade PathOfExile { get; }
-
         IReadOnlyDictionary<string, TradeSession> Sessions { get; }
 
+        bool IsCompact { get; set; }
+        bool IsVisible { get; set; }
+
+        event EventHandler<bool> OnIsCompactChanged;
+        event EventHandler<bool> OnIsVisibleChanged;
         TradeSession SearchItems(Query query);
-
-        Task OpenCompactResults(string tradeSessionId = null);
-
-        Task OpenAdvancedResults(string tradeSessionId = null);
-
-        Task CloseCompactResults();
-
-        Task CloseAdvancedResults();
+        TradeSession CurrentTradeSession { get; }
     }
 }

@@ -30,8 +30,6 @@ namespace PoECommerce.Client.Shared
 
         public IReadOnlyCollection<ListedItem> Result => _result;
 
-        public event EventHandler OnSessionClose;
-
         public uint Total { get; private set; }
 
         public TradeSessionState State { get; set; }
@@ -75,7 +73,6 @@ namespace PoECommerce.Client.Shared
             if (searchResult.ItemIds?.Any() != true)
             {
                 State = TradeSessionState.Closed;
-                OnSessionClose?.Invoke(this, EventArgs.Empty);
                 yield break;
             }
 
@@ -103,7 +100,6 @@ namespace PoECommerce.Client.Shared
             }
 
             State = TradeSessionState.Closed;
-            OnSessionClose?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()

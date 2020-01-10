@@ -47,7 +47,7 @@ namespace PoECommerce.Client.WebBrowser
             window.IsMaximized = true;
         }
 
-        public async Task LoadUrl(int windowId, string url, Func<Task> onLoad = null)
+        public async Task LoadUrl(int windowId, string url)
         {
             await _jsRuntime.InvokeAsync<object>("open", new[] { _navigationManager.ToAbsoluteUri(url).AbsoluteUri, "_blank" });
         }

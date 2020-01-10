@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using PoECommerce.Client.Shared;
 using PoECommerce.Core.Model.Trade;
@@ -18,19 +17,18 @@ namespace PoECommerce.Client.Components.Trade
         public TradeSession TradeSession { get; set; }
 
         [Inject]
-        public IPoECommerceFacade PoECommerceFacade { get; set; }
+        public ITradeState TradeState { get; set; }
 
-        protected async Task OpenInAdvancedWindow()
+        protected void OpenInAdvancedWindow()
         {
-            await PoECommerceFacade.CloseCompactResults();
-            await PoECommerceFacade.OpenAdvancedResults(TradeSession.Id);
-        }
-        protected async Task OpenInCompactWindow()
-        {
-            await PoECommerceFacade.CloseAdvancedResults();
-            await PoECommerceFacade.OpenCompactResults(TradeSession.Id);
+            TradeState.IsCompact = false;
         }
 
+        protected void OpenInCompactWindow()
+        {
+            TradeState.IsCompact = true;
+        }
+        
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
@@ -42,20 +40,13 @@ namespace PoECommerce.Client.Components.Trade
 
             if (TradeSession.State == TradeSession.TradeSessionState.New)
             {
-                await foreach (ListedItem _ in TradeSession.Begin())
-                {
-                    StateHasChanged();
-                }
-            }
-            else if (TradeSession.State == TradeSession.TradeSessionState.Pending)
-            {
-                TradeSession.OnSessionClose += SessionClose;
-                
-                void SessionClose(object sender, EventArgs args)
-                {
-                    TradeSession.OnSessionClose -= SessionClose;
-                    StateHasChanged();
-                }
+                await Task.Run(async () =>
+                 {
+                     await foreach (ListedItem _ in TradeSession.Begin())
+                     {
+                         await InvokeAsync(StateHasChanged);
+                     }
+                 });
             }
         }
     }

@@ -18,9 +18,9 @@ namespace PoECommerce.Client.Components.Trade
         private string _status;
         private bool _isFiltersSectionOpen = false;
         private string _searchText;
-
+        
         [Inject]
-        public IPoECommerceFacade PoECommerceFacade { get; set; }
+        public ITradeState TradeState { get; set; }
 
         [Inject]
         public IStaticDataService DataService { get; set; }
@@ -40,7 +40,7 @@ namespace PoECommerce.Client.Components.Trade
         public string SearchText
         {
             get => _searchText;
-            set => _searchText = value.Trim();
+            set => _searchText = value?.Trim();
         }
 
         public string League
@@ -92,7 +92,7 @@ namespace PoECommerce.Client.Components.Trade
             }
 
             OnSearch.InvokeAsync(null).Wait();
-            OnSearch.InvokeAsync(PoECommerceFacade.SearchItems(Query)).Wait();
+            OnSearch.InvokeAsync(TradeState.SearchItems(Query)).Wait();
         }
 
         public void OnSearchTextChange(ChangeEventArgs changeEventArgs)

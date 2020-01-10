@@ -106,6 +106,8 @@ namespace PoECommerce.Client.StartupExtensions.Electron
                     SkipTaskbar = true,
                 }, "/CompactTrade"));
 
+                ElectronNET.API.Electron.IpcMain.On("uncaughtException", o => logger.Error(o.ToString));
+
 #if !DEBUG
                 ElectronNET.API.Electron.Menu.SetApplicationMenu(new MenuItem[0]);
 #endif

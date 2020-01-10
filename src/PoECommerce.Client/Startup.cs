@@ -13,6 +13,7 @@ using NLog.Web;
 using PoECommerce.Client.Cache.TradeService;
 using PoECommerce.Client.Shared;
 using PoECommerce.Client.StartupExtensions.Electron;
+using PoECommerce.Core;
 using PoECommerce.PathOfExile.Extensions;
 using PoECommerce.PathOfExile.Web.Abstractions;
 using PoECommerce.PathOfExile.Windows;
@@ -51,8 +52,7 @@ namespace PoECommerce.Client
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
             services.AddPathOfExileGameClientServices();
-            services.AddSingleton<Dictionary<string, TradeSession>>();
-            services.AddScoped<IPoECommerceFacade, PoECommerceFacade>();
+            services.AddSingleton<ITradeState, TradeState>(provider => new TradeState(provider.GetService<ITradeService>));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)

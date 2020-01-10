@@ -36,7 +36,6 @@ namespace PoECommerce.Client.Electron
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
             Point point = await ElectronNET.API.Electron.Screen.GetCursorScreenPointAsync();
             window.SetBounds(new Rectangle { X = point.X, Y = point.Y, Height = height, Width = width });
-            window.Show();
         }
 
         public async Task ResizeAndPosition(int windowId, int x, int y, int width, int height)
@@ -48,23 +47,10 @@ namespace PoECommerce.Client.Electron
 
         public IReadOnlyList<IWindow> Windows => new ReadOnlyCollection<IWindow>(_windows.Cast<IWindow>().ToList());
 
-        public async Task LoadUrl(int windowId, string url, Func<Task> onLoad = null)
+        public async Task LoadUrl(int windowId, string url)
         {
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
-            window.SetIgnoreMouseEvents(true);
             window.LoadURL(_navigationManager.ToAbsoluteUri(url).AbsoluteUri);
-            window.WebContents.OnDidFinishLoad += ShowWhenReadyAsync;
-
-            async void ShowWhenReadyAsync()
-            {
-                if (onLoad != null)
-                {
-                    await onLoad();
-                }
-
-                window.SetIgnoreMouseEvents(false);
-                window.WebContents.OnDidFinishLoad -= ShowWhenReadyAsync;
-            }
         }
 
         public async Task Show(int windowId)

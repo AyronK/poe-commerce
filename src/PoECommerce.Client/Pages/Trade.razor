@@ -1,18 +1,70 @@
 ﻿@page "/Trade"
-@page "/Trade/{sessionId}"
 @using PoECommerce.Client.Shared.Display
 
+@implements IDisposable
 @inject IWindowManager WindowManager
+@inject ITradeState TradeState
 
-<div class="window-task-bar">
-    <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="-"></Button>
-</div>
-<div class="window-content">
-    <TradeContainer CurrentSessionId="@SessionId"></TradeContainer>
-</div>
+@if (TradeState.IsCompact)
+{
+    <style>
+        body {
+            @if (!TradeState.IsVisible)
+{
+    @:display:none;
+}
+            overflow: hidden;
+            user-select: none;
+            font-size: smaller;
+        }
 
-<style>
+        .window-task-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            background-color: black;
+            padding: 3px;
+            display: flex;
+            flex-direction: row-reverse;
+            -webkit-app-region: drag;
+        }
+
+            .window-task-bar button {
+                -webkit-app-region: no-drag;
+                ;
+            }
+
+
+        .window-content {
+            margin-top: 35px;
+            max-width: 400px;
+            max-height: 200px;
+            overflow-x: hidden;
+            overflow-y: visible;
+        }
+
+        .window-task-bar button {
+            height: 15px;
+            width: 15px;
+            min-height: 15px;
+            min-width: 15px;
+            max-height: 15px;
+            max-width: 15px;
+            line-height: inherit;
+            font-weight: bold;
+        }
+    </style>
+}
+else
+{
+    <style>
+
     body {
+@if (!TradeState.IsVisible)
+{
+    @:display:none;
+}
         overflow: hidden;
         user-select: none;
     }
@@ -29,10 +81,10 @@
         -webkit-app-region: drag;
     }
 
-        .window-task-bar button {
-            -webkit-app-region: no-drag;
-            ;
-        }
+    .window-task-bar button {
+        -webkit-app-region: no-drag;
+        ;
+    }
 
     .window-content {
         margin-top: 35px;
@@ -52,11 +104,64 @@
         line-height: inherit;
         font-weight: bold;
     }
-</style>
+    </style>
+}
+
+@if (TradeState.IsVisible)
+{
+    <div class="window-task-bar">
+        <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="-"></Button>
+    </div>
+    <div class="window-content">
+        <TradeContainer IsCompact="@TradeState.IsCompact"></TradeContainer>
+    </div>
+}
 
 @functions
 {
-    [Parameter]
-    public string SessionId { get; set; }
 
+    public bool IsCompact
+    {
+        get => _isCompact;
+        set
+        {
+            _isCompact = value;
+        }
+    }
+
+    public bool IsVisible
+    {
+        get => _isVisible;
+        set
+        {
+            _isVisible = value;
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        TradeState.OnIsVisibleChanged += SetIsVisible;
+        TradeState.OnIsCompactChanged += SetIsCompact;
+    }
+
+    private async void SetIsVisible(object sender, bool b)
+    {
+        IsVisible = b;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void SetIsCompact(object sender, bool b)
+    {
+        IsCompact = b;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        TradeState.OnIsVisibleChanged -= SetIsVisible;
+        TradeState.OnIsCompactChanged -= SetIsCompact;
+    }
+
+    private bool _isVisible;
+    private bool _isCompact;
 }
