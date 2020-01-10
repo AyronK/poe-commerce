@@ -18,6 +18,7 @@ namespace PoECommerce.Client.Components.Trade
         private string _league;
         private string _status;
         private bool _isFiltersSectionOpen = false;
+        private string _searchText;
 
         [Inject]
         public IPoECommerceFacade PoECommerceFacade { get; set; }
@@ -37,7 +38,11 @@ namespace PoECommerce.Client.Components.Trade
 
         public IEnumerable<Item> SearchTooltipValues { get; set; } = new Item[0];
 
-        public string SearchText { get; set; }
+        public string SearchText
+        {
+            get => _searchText;
+            set => _searchText = value.Trim();
+        }
 
         public string League
         {
@@ -69,8 +74,6 @@ namespace PoECommerce.Client.Components.Trade
             Query = null;
             SearchText = null;
             InitModels();
-            League = Leagues[0].Id;
-            Status = OnlineStatus.Online.ToString();
             StateHasChanged();
         }
 
@@ -155,6 +158,9 @@ namespace PoECommerce.Client.Components.Trade
             {
                 Query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
             }
+
+            League = Leagues[0].Id;
+            Status = OnlineStatus.Online.ToString();
         }
     }
 }
