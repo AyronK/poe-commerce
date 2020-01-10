@@ -36,16 +36,20 @@ namespace PoECommerce.Client.Shared
 
         public async Task OpenCompactResults(string tradeSessionId = null)
         {
-            await _windowManager.ResizeAndPlaceOnCursor(1, 400, 200);
-            await _windowManager.Minimize(1);
-            await _windowManager.LoadUrl(1, $"/CompactTrade/{tradeSessionId}", true);
+            await _windowManager.LoadUrl(1, "_blank", async () =>
+            {
+                await _windowManager.ResizeAndPlaceOnCursor(1, 400, 200);
+                await _windowManager.LoadUrl(1, $"/CompactTrade/{tradeSessionId}");
+            });
         }
 
         public async Task OpenAdvancedResults(string tradeSessionId = null)
         {
-            await _windowManager.ResizeAndPlaceOnCursor(1, 800, 800);
-            await _windowManager.Minimize(1);
-            await _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}", true);
+            await _windowManager.LoadUrl(1, "_blank", async () =>
+            {
+                await _windowManager.ResizeAndPlaceOnCursor(1, 800, 800);
+                await _windowManager.LoadUrl(1, $"/Trade/{tradeSessionId}");
+            });
         }
 
         public Task CloseCompactResults()

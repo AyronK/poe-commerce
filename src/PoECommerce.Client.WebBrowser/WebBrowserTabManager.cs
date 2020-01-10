@@ -35,19 +35,19 @@ namespace PoECommerce.Client.WebBrowser
 
             _windows.Add(window);
         }
-
+        
         public async Task Show(int windowId)
         {
             WebBrowserWindow window = GetWindow(windowId);
 
-            await LoadUrl(window.Id, window.LoadPath, true);
+            await LoadUrl(window.Id, window.LoadPath);
 
             window.IsLoaded = true;
             window.IsOpen = true;
             window.IsMaximized = true;
         }
 
-        public async Task LoadUrl(int windowId, string url, bool openWhenReady)
+        public async Task LoadUrl(int windowId, string url, Func<Task> onLoad = null)
         {
             await _jsRuntime.InvokeAsync<object>("open", new[] { _navigationManager.ToAbsoluteUri(url).AbsoluteUri, "_blank" });
         }

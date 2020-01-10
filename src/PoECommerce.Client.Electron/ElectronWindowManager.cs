@@ -48,16 +48,22 @@ namespace PoECommerce.Client.Electron
 
         public IReadOnlyList<IWindow> Windows => new ReadOnlyCollection<IWindow>(_windows.Cast<IWindow>().ToList());
 
-        public async Task LoadUrl(int windowId, string url, bool openWhenReady)
+        public async Task LoadUrl(int windowId, string url, Func<Task> onLoad = null)
         {
             IBrowserWindow window = await GetBrowserWindow(GetWindow(windowId));
+            window.SetIgnoreMouseEvents(true);
             window.LoadURL(_navigationManager.ToAbsoluteUri(url).AbsoluteUri);
-            window.WebContents.OnDidFinishLoad += ShowWhenReady;
+            window.WebContents.OnDidFinishLoad += ShowWhenReadyAsync;
 
-            void ShowWhenReady()
+            async void ShowWhenReadyAsync()
             {
-                window.Show();
-                window.WebContents.OnDidFinishLoad -= ShowWhenReady;
+                if (onLoad != null)
+                {
+                    await onLoad();
+                }
+
+                window.SetIgnoreMouseEvents(false);
+                window.WebContents.OnDidFinishLoad -= ShowWhenReadyAsync;
             }
         }
 

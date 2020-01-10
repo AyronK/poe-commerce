@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PoECommerce.Client.Shared.Display
 {
     public interface IWindowManager
     {
-        Task LoadUrl(int windowId, string url, bool openWhenReady);
+        Task LoadUrl(int windowId, string url, Func<Task> onLoad = null);
         Task Show(int windowId);
         Task Hide(int windowId);
         Task Close(int windowId);
