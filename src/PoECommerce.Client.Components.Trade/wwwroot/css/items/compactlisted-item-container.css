@@ -50,7 +50,8 @@
   margin: 3px 0px;
   color: #c8c8c8;
   padding: 3px 3px;
-  background-color: #18181b; }
+  background-color: #18181b;
+  font-size: smaller; }
   .compact-listed-item-container .cell {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -69,18 +70,17 @@
     font-size: smaller; }
   .compact-listed-item-container .socket {
     margin-right: -4px;
-    border-radius: 50%;
     width: 5px;
     height: 5px; }
     .compact-listed-item-container .socket__green {
-      background: linear-gradient(45deg, black 5%, #4ab60c 40%, #d9fbc6 55%, #4ab60c 85%); }
+      color: #4ab60c; }
     .compact-listed-item-container .socket__red {
-      background: linear-gradient(45deg, black 5%, #b50c27 40%, #fbc5ce 55%, #b50c27 85%); }
+      color: #b50c27; }
     .compact-listed-item-container .socket__blue {
-      background: linear-gradient(45deg, black 5%, #0c50b6 40%, #c6dbfb 55%, #0c50b6 85%); }
+      color: #0c50b6; }
     .compact-listed-item-container .socket__white {
-      background: linear-gradient(45deg, black 5%, #e3e3e3 40%, white 55%, #e3e3e3 85%); }
+      color: #e3e3e3; }
     .compact-listed-item-container .socket__delve {
-      background: linear-gradient(45deg, black 5%, #dc751c 40%, #fefbf9 55%, #f27720 85%); }
+      color: #dc751c; }
     .compact-listed-item-container .socket__abyss {
-      background: linear-gradient(45deg, black 5%, #1c1c1c 40%, #9c9c9c 55%, #1c1c1c 85%); }
+      color: #1c1c1c; }

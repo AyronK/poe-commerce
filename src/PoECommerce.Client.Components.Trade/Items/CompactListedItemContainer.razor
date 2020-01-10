@@ -2,53 +2,53 @@
 @using PoECommerce.Core.Model.Trade
 @inherits CompactListedItemContainerBase
 
-<div class="compact-listed-item-container">
-    <div class="cell">
-        <Button Value="PM" OnClick="@InvokeInstantWhisper" ElementType="@ElementType.Secondary"></Button>
-    </div>
+    <div class="compact-listed-item-container">
+        <div class="cell">
+            <Button Value="PM" OnClick="@InvokeInstantWhisper" ElementType="@ElementType.Secondary"></Button>
+        </div>
 
-    <div class="cell" style="width: 30%;" title="@(ListedItem.Listing.Account.LastCharacterName)">
-        @(ListedItem.Listing.Account.LastCharacterName)
-    </div>
+        <div class="cell" style="width: 17%;">@ListedItem.Listing.Price.Amount @ListedItem.Listing.Price.Currency</div>
 
-    <div class="cell" style="width: 20%;">@ListedItem.Listing.Price.Amount @ListedItem.Listing.Price.Currency</div>
-    <div class="cell" style="width: 20%;">@((DateTime.Now - ListedItem.Listing.Indexed).Hours) h ago</div>
-    <div class="cell" style="width: 30%;">
-        @{
-            if (ListedItem.Item.ItemType == ItemType.Gem)
-            {
-                string level = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Level")?.Values.FirstOrDefault()?.Value ?? "0";
-                string quality = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Quality")?.Values.FirstOrDefault()?.Value ?? "0";
+        <div class="cell" style="width: 23%;" title="@(ListedItem.Listing.Account.LastCharacterName)">
+            @(ListedItem.Listing.Account.LastCharacterName)
+        </div>
 
-                <span>@Regex.Match(level, @"\d+") lvl | @Regex.Match(quality, @"\d+")%</span>
-
-            }
-            else if (ListedItem.Item.Sockets?.Any() == true)
-            {
-                IGrouping<int, Socket>[] socketGroups = ListedItem.Item.Sockets.GroupBy(s => s.Group).OrderByDescending(s => s.Count()).ToArray();
-
-                @if (socketGroups.Max(s => s.Count()) == 6)
+        <div class="cell" style="width: 40%;">
+            @{
+                if (ListedItem.Item.ItemType == ItemType.Gem)
                 {
-                    <strong>6S 6L</strong>
+                    string level = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Level")?.Values.FirstOrDefault()?.Value ?? "0";
+                    string quality = ListedItem.Item.Properties.FirstOrDefault(p => p.Name == "Quality")?.Values.FirstOrDefault()?.Value ?? "0";
+
+                    <span>@Regex.Match(level, @"\d+") lvl | @Regex.Match(quality, @"\d+")%</span>
+
                 }
-                else
+                else if (ListedItem.Item.Sockets?.Any() == true)
                 {
-                    @(ListedItem.Item.Sockets.Length)@:S&nbsp;@socketGroups.Max(s => s.Count())L&nbsp;
-                }
+                    IGrouping<int, Socket>[] socketGroups = ListedItem.Item.Sockets.GroupBy(s => s.Group).OrderByDescending(s => s.Count()).ToArray();
 
-                foreach (IGrouping<int, Socket> socketGroup in socketGroups)
-                {
-                    foreach (Socket socket in socketGroup.ToArray())
+                    @if (socketGroups.Max(s => s.Count()) == 6)
                     {
-                        <div class="socket socket__@socket.Type.ToString().ToLower()">
-                        </div>
+                        <strong>6S 6L</strong>
+                    }
+                    else
+                    {
+                        @(ListedItem.Item.Sockets.Length)@:S&nbsp;@socketGroups.Max(s => s.Count())L&nbsp;
+                    }
+
+                    foreach (IGrouping<int, Socket> socketGroup in socketGroups)
+                    {
+                        <span class="socket">[</span>
+                        foreach (Socket socket in socketGroup.ToArray())
+                        {
+                            <span class="socket socket__@socket.Type.ToString().ToLower()">
+                                @socket.Type.ToString()[0]
+                            </span>
+                        }
+                        <span class="socket">]</span>
                     }
                 }
             }
-            else
-            {
-                <span style="text-align:center">---</span>
-            }
-        }
+        </div>
+        <div class="cell" style="width: 20%;">@((DateTime.Now - ListedItem.Listing.Indexed).Hours) h ago</div>
     </div>
-</div>

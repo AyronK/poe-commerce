@@ -33,24 +33,29 @@ namespace PoECommerce.PathOfExile.Json.Serialization
 
                     string id = reader.GetString();
 
-                    if (reader.Read() && reader.TokenType != JsonTokenType.StartArray)
-                    {
-                        throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but starts with '{reader.TokenType}'.");
-                    }
-                    List<int> values = new List<int>();
+                    reader.Read();
 
-                    while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+                    if (reader.TokenType != JsonTokenType.Null)
                     {
-                        int value = reader.GetInt32();
-                        values.Add(value);
-                    }
+                        if (reader.TokenType != JsonTokenType.StartArray)
+                        {
+                            throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but starts with '{reader.TokenType}'.");
+                        }
+                        List<int> values = new List<int>();
 
-                    if (reader.TokenType != JsonTokenType.EndArray)
-                    {
-                        throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but after the last element there is '{reader.TokenType}'.");
-                    }
+                        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+                        {
+                            int value = reader.GetInt32();
+                            values.Add(value);
+                        }
 
-                    result.Add(new Hash { Id = id, Values = values.ToArray() });
+                        if (reader.TokenType != JsonTokenType.EndArray)
+                        {
+                            throw new JsonException($"Cannot convert to {nameof(Hash)} - second element in hash level array should be an array, but after the last element there is '{reader.TokenType}'.");
+                        }
+
+                        result.Add(new Hash { Id = id, Values = values.ToArray() });
+                    }
                 }
             }
 

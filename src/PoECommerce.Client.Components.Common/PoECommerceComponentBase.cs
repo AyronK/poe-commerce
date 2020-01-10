@@ -12,7 +12,14 @@ namespace PoECommerce.Client.Components.Common
         public string Id { get; set; } = "id_" + Guid.NewGuid();
 
         protected Dictionary<string, bool> States = new Dictionary<string, bool>();
-        
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            States = new Dictionary<string, bool>();
+        }
+
         public string GetStateClass(string className)
         {
             StringBuilder classBuilder = new StringBuilder();

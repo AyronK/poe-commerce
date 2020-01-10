@@ -8,6 +8,7 @@
     color: $poec-item-normal;
     padding: 3px 3px;
     background-color: $poec-theme-surface;
+    font-size: smaller;
 
     .cell {
         text-overflow: ellipsis;
@@ -31,32 +32,31 @@
 
     .socket {
         margin-right: -4px;
-        border-radius: 50%;
         width: 5px;
         height: 5px;
 
         &__green {
-            background: linear-gradient(45deg, black 5%, #4ab60c 40%, lighten(#4ab60c, 50%) 55%, #4ab60c 85%);
+            color: #4ab60c;
         }
 
         &__red {
-            background: linear-gradient(45deg, black 5%, #b50c27 40%, lighten(#b50c27, 50%) 55%, #b50c27 85%);
+            color: #b50c27;
         }
 
         &__blue {
-            background: linear-gradient(45deg, black 5%, #0c50b6 40%, lighten(#0c50b6, 50%) 55%, #0c50b6 85%);
+            color: #0c50b6;
         }
 
         &__white {
-            background: linear-gradient(45deg, black 5%, #e3e3e3 40%, lighten(#e3e3e3, 50%) 55%, #e3e3e3 85%);
+            color: #e3e3e3;
         }
 
         &__delve {
-            background: linear-gradient(45deg, black 5%, #dc751c 40%, lighten(#dc751c, 50%) 55%, #f27720 85%);
+            color: #dc751c;
         }
 
         &__abyss {
-            background: linear-gradient(45deg, black 5%, #1c1c1c 40%, lighten(#1c1c1c, 50%) 55%, #1c1c1c 85%);
+            color: #1c1c1c;
         }
     }
 }
