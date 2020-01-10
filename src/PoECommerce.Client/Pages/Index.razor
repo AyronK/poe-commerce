@@ -34,13 +34,15 @@
 
         if (HybridSupport.IsElectronActive)
         {
-            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", () =>
+            Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () =>
             {
+                await WindowManager.Show(1);
                 TradeState.IsCompact = false;
             });
 
-            Electron.GlobalShortcut.Register("Ctrl+Shift+F", () =>
+            Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () =>
             {
+                await WindowManager.Show(1);
                 TradeState.IsCompact = true;
             });
 
@@ -51,7 +53,6 @@
     private async void TradeStateOnIsCompactChanged(object sender, bool isCompact)
     {
         TradeState.IsVisible = false;
-        await WindowManager.Show(1);
 
         if (isCompact)
         {
