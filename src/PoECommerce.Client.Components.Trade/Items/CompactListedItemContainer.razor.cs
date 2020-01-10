@@ -14,9 +14,6 @@ namespace PoECommerce.Client.Components.Trade.Items
         [Parameter]
         public ListedItem ListedItem { get; set; }
 
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnClick { get; set; }
-
         [Inject]
         public ILogger Logger { get; set; }
 
@@ -36,8 +33,6 @@ namespace PoECommerce.Client.Components.Trade.Items
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            OnClick = new EventCallbackFactory().Create<MouseEventArgs>(this, InvokeInstantWhisper);
         }
 
         protected void InvokeInstantWhisper()

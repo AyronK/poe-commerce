@@ -1,6 +1,6 @@
 ﻿@page "/Trade"
-@using PoECommerce.Client.Shared.Display
 
+@using PoECommerce.Client.Shared.Display
 @implements IDisposable
 @inject IWindowManager WindowManager
 @inject ITradeState TradeState
@@ -10,49 +10,48 @@
     <style>
         body {
             @if (!TradeState.IsVisible)
-{
-    @:display:none;
-}
+            {
+                @:display: none;
+            }
+            font-size: smaller;
             overflow: hidden;
             user-select: none;
-            font-size: smaller;
         }
 
         .window-task-bar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
+            -webkit-app-region: drag;
             background-color: black;
-            padding: 3px;
             display: flex;
             flex-direction: row-reverse;
-            -webkit-app-region: drag;
+            padding: 3px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 100%;
         }
 
-            .window-task-bar button {
-                -webkit-app-region: no-drag;
-                ;
-            }
+        .window-task-bar button {
+            -webkit-app-region: no-drag;
+            ;
+        }
 
 
         .window-content {
             margin-top: 35px;
-            max-width: 400px;
             max-height: 200px;
+            max-width: 400px;
             overflow-x: hidden;
             overflow-y: visible;
         }
 
         .window-task-bar button {
             height: 15px;
-            width: 15px;
-            min-height: 15px;
-            min-width: 15px;
+            line-height: 1px;
             max-height: 15px;
             max-width: 15px;
-            line-height: inherit;
-            font-weight: bold;
+            min-height: 15px;
+            min-width: 15px;
+            width: 15px;
         }
     </style>
 }
@@ -60,57 +59,57 @@ else
 {
     <style>
 
-    body {
-@if (!TradeState.IsVisible)
-{
-    @:display:none;
-}
-        overflow: hidden;
-        user-select: none;
-    }
+        body {
+            @if (!TradeState.IsVisible)
+            {
+                @:display: none;
+            }
+            overflow: hidden;
+            user-select: none;
+        }
 
-    .window-task-bar {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        background-color: black;
-        padding: 3px;
-        display: flex;
-        flex-direction: row-reverse;
-        -webkit-app-region: drag;
-    }
+        .window-task-bar {
+            -webkit-app-region: drag;
+            background-color: black;
+            display: flex;
+            flex-direction: row-reverse;
+            padding: 3px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 100%;
+        }
 
-    .window-task-bar button {
-        -webkit-app-region: no-drag;
-        ;
-    }
+        .window-task-bar button {
+            -webkit-app-region: no-drag;
+            ;
+        }
 
-    .window-content {
-        margin-top: 35px;
-        max-width: 800px;
-        max-height: 800px;
-        overflow-x: hidden;
-        overflow-y: visible;
-    }
+        .window-content {
+            margin-top: 35px;
+            max-height: 800px;
+            max-width: 800px;
+            overflow-x: hidden;
+            overflow-y: visible;
+        }
 
-    .window-task-bar button {
-        height: 15px;
-        width: 15px;
-        min-height: 15px;
-        min-width: 15px;
-        max-height: 15px;
-        max-width: 15px;
-        line-height: inherit;
-        font-weight: bold;
-    }
+        .window-task-bar button {
+            height: 15px;
+            line-height: 1px;
+            max-height: 15px;
+            max-width: 15px;
+            min-height: 15px;
+            min-width: 15px;
+            width: 15px;
+        }
     </style>
 }
 
 @if (TradeState.IsVisible)
 {
     <div class="window-task-bar">
-        <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="-"></Button>
+        <Button ElementType="@ElementType.Secondary" OnClick="@SwitchMode" Value="♂"></Button>
+        <Button OnClick="@(() => WindowManager.Minimize(1))" ElementType="@ElementType.Secondary" Value="_"></Button>
     </div>
     <div class="window-content">
         <TradeContainer IsCompact="@TradeState.IsCompact"></TradeContainer>
@@ -120,22 +119,13 @@ else
 @functions
 {
 
-    public bool IsCompact
-    {
-        get => _isCompact;
-        set
-        {
-            _isCompact = value;
-        }
-    }
+    public bool IsCompact { get; set; }
 
-    public bool IsVisible
+    public bool IsVisible { get; set; }
+
+    protected void SwitchMode()
     {
-        get => _isVisible;
-        set
-        {
-            _isVisible = value;
-        }
+        TradeState.IsCompact = !TradeState.IsCompact;
     }
 
     protected override void OnInitialized()
@@ -162,6 +152,4 @@ else
         TradeState.OnIsCompactChanged -= SetIsCompact;
     }
 
-    private bool _isVisible;
-    private bool _isCompact;
 }

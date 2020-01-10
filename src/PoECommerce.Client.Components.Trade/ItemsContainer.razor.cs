@@ -20,17 +20,7 @@ namespace PoECommerce.Client.Components.Trade
 
         [Inject]
         public ITradeState TradeState { get; set; }
-
-        protected void OpenInAdvancedWindow()
-        {
-            TradeState.IsCompact = false;
-        }
-
-        protected void OpenInCompactWindow()
-        {
-            TradeState.IsCompact = true;
-        }
-
+        
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();

@@ -46,7 +46,6 @@
 
         if (IsCompact)
         {
-            <Button ElementType="@ElementType.Secondary" OnClick="@OpenInAdvancedWindow" Value="->"></Button>
             foreach (ListedItem resultItem in TradeSession.Result)
             {
                 <CompactListedItemContainer ListedItem="@resultItem"></CompactListedItemContainer>
@@ -54,7 +53,6 @@
         }
         else
         {
-            <Button ElementType="@ElementType.Secondary" OnClick="@OpenInCompactWindow" Value="->"></Button>
             foreach (ListedItem resultItem in TradeSession.Result)
             {
                 <ListedItemContainer ListedItem="@resultItem"></ListedItemContainer>
