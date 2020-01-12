@@ -45,6 +45,7 @@ namespace PoECommerce.Client.Shared
 
         public event EventHandler<bool> OnIsCompactChanged;
         public event EventHandler<bool> OnIsVisibleChanged;
+        public event EventHandler<TradeSession> OnNewSession;
 
         public TradeSession SearchItems(Query query)
         {
@@ -58,6 +59,7 @@ namespace PoECommerce.Client.Shared
             });
             _sessions.Add(tradeSession.Id, tradeSession);
             CurrentTradeSession = tradeSession;
+            OnNewSession?.Invoke(this, CurrentTradeSession);
             return tradeSession;
         }
     }

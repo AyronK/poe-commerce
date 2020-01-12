@@ -61,6 +61,10 @@ namespace PoECommerce.Client
             {
                 try
                 {
+#if DEBUG
+                    return "Rarity: Unique\r\nKaom's Sign\r\nCoral Ring\r\n--------\r\nItem Level: 78\r\n--------\r\n+27 to maximum Life (implicit)\r\n--------\r\n+11 to Strength\r\n+4 Life gained for each Enemy hit by your Attacks\r\n+1 to Maximum Endurance Charges\r\n--------\r\nA token from the sea\r\nA sign for Kaom\r\nto lead his Karui to Wraeclast.\r\n";
+#endif
+
                     return await ElectronNET.API.Electron.Clipboard.ReadTextAsync();
                 }
                 catch

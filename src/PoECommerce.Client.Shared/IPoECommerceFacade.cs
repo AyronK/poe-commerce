@@ -13,6 +13,7 @@ namespace PoECommerce.Client.Shared
 
         event EventHandler<bool> OnIsCompactChanged;
         event EventHandler<bool> OnIsVisibleChanged;
+        event EventHandler<TradeSession> OnNewSession;
         TradeSession SearchItems(Query query);
         TradeSession CurrentTradeSession { get; }
     }

@@ -6,11 +6,11 @@
 {
     if (TradeSession.Result == null || TradeSession.Result.Count == 0 || TradeSession.State == TradeSession.TradeSessionState.ServiceUnavailable)
     {
-        if (TradeSession.State != TradeSession.TradeSessionState.New)
+        if (TradeSession.State == TradeSession.TradeSessionState.New)
         {
             <span>Searching...</span>
         }
-        else if (TradeSession.State != TradeSession.TradeSessionState.Pending)
+        else if (TradeSession.State == TradeSession.TradeSessionState.Pending)
         {
             <span>Loading...</span>
         }

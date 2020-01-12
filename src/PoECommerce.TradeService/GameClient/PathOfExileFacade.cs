@@ -22,6 +22,8 @@ namespace PoECommerce.PathOfExile.GameClient
 
         public async Task<Item> GetItemOnCursor()
         {
+#if !DEBUG
+
             if (!_pathOfExileProcessHook.IsLaunched())
             {
                 return null;
@@ -31,7 +33,7 @@ namespace PoECommerce.PathOfExile.GameClient
             {
                 return null;
             }
-
+#endif
             _pathOfExileInput.CopyItemToClipboard();
 
             try

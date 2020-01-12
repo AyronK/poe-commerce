@@ -10,11 +10,12 @@
 @using PoECommerce.PathOfExile.Models.Trade.Items
 @inherits PoECommerce.Client.Pages.Common.ErrorHandlingComponentBase
 <div class="task-bar">
-    <Button OnClick="@(async () =>
+    @*<Button OnClick="@(async () =>
                        {
                            TradeState.IsCompact = false;
                            await WindowManager.Show(1);
-                       })" Value="Trade" ElementType="@ElementType.Primary"></Button>
+                       })" Value="Trade" ElementType="@ElementType.Primary"></Button>*@
+    <Button OnClick="@QuickSearch" Value="Trade" ElementType="@ElementType.Primary"></Button>
 </div>
 
 <style>
@@ -71,56 +72,50 @@
                 }
             });
 
-            Electron.GlobalShortcut.Register("Ctrl+Shift+D", async () =>
-            {
-                try
-                {
-                    Item item = await PathOfExileFacade.GetItemOnCursor();
-
-                if (item != null)
-                {
-                    Query query = new Query
-                    {
-                        TypeFilter = new TypeFilter(),
-                        TradeFilter = new TradeFilter
-                        {
-                            SaleType = SaleType.Priced
-                        },
-                        WeaponFilter = new WeaponsFilter(),
-                        ModifiersFilter = new ModifiersFilter(),
-                        ArmourFilter = new ArmoursFilter(),
-                        MapsFilter = new MapsFilter(),
-                        RequirementsFilter = new RequirementsFilter(),
-                        SocketFilter = new SocketsGroupFilter(),
-                        MiscellaneousFilter = new MiscellaneousFilter(),
-                        Sort = new Dictionary<string, SortType>
-                        {
-                            {"price", SortType.Ascending}
-                        },
-                        OnlineStatus = OnlineStatus.Online
-                    };
-
-                    if (!query.ModifiersFilter.GroupFilters.Any())
-                    {
-                        query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
-                    }
-
-                    query.Name = item.Name;
-                    query.Type = item.TypeName;
-                 
-                    TradeState.SearchItems(query);
-
-                    await WindowManager.Show(1);
-                    TradeState.IsCompact = true;
-                }
-                }
-                catch (Exception ex)
-                {
-                    OnException(ex);
-                }
-            });
+            Electron.GlobalShortcut.Register("Ctrl+Shift+D", QuickSearch);
 
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
+        }
+    }
+
+    private async void QuickSearch()
+    {
+        try
+        {
+            Item item = await PathOfExileFacade.GetItemOnCursor();
+
+            if (item != null)
+            {
+                Query query = new Query
+                {
+                    TypeFilter = new TypeFilter(), TradeFilter = new TradeFilter
+                    {
+                        SaleType = SaleType.Priced
+                    },
+                    WeaponFilter = new WeaponsFilter(), ModifiersFilter = new ModifiersFilter(), ArmourFilter = new ArmoursFilter(), MapsFilter = new MapsFilter(), RequirementsFilter = new RequirementsFilter(), SocketFilter = new SocketsGroupFilter(), MiscellaneousFilter = new MiscellaneousFilter(), Sort = new Dictionary<string, SortType>
+                    {
+                        {"price", SortType.Ascending}
+                    },
+                    OnlineStatus = OnlineStatus.Online,
+                    League = "Metamorph"
+                };
+
+                if (!query.ModifiersFilter.GroupFilters.Any())
+                {
+                    query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
+                }
+
+                query.Name = item.Name;
+                query.Type = item.TypeName;
+                
+                TradeState.IsCompact = true;
+                await WindowManager.Show(1);
+                TradeState.SearchItems(query);
+            }
+        }
+        catch (Exception ex)
+        {
+            OnException(ex);
         }
     }
 
