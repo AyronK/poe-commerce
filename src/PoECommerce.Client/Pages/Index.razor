@@ -4,10 +4,17 @@
 @inject IPathOfExileFacade PathOfExileFacade
 @using ElectronNET.API
 @using PoECommerce.Client.Shared.Display
+@using PoECommerce.Core.Model.Enums
+@using PoECommerce.Core.Model.Search
 @using PoECommerce.PathOfExile.GameClient.Abstractions
+@using PoECommerce.PathOfExile.Models.Trade.Items
 @inherits PoECommerce.Client.Pages.Common.ErrorHandlingComponentBase
 <div class="task-bar">
-    <Button OnClick="@(async () => await WindowManager.Show(1))" Value="Trade" ElementType="@ElementType.Primary"></Button>
+    <Button OnClick="@(async () =>
+                       {
+                           TradeState.IsCompact = false;
+                           await WindowManager.Show(1);
+                       })" Value="Trade" ElementType="@ElementType.Primary"></Button>
 </div>
 
 <style>
@@ -42,8 +49,8 @@
             {
                 try
                 {
-                    await WindowManager.Show(1);
                     TradeState.IsCompact = false;
+                    await WindowManager.Show(1);
                 }
                 catch (Exception ex)
                 {
@@ -55,8 +62,8 @@
             {
                 try
                 {
-                    await WindowManager.Show(1);
                     TradeState.IsCompact = true;
+                    await WindowManager.Show(1);
                 }
                 catch (Exception ex)
                 {
@@ -64,47 +71,54 @@
                 }
             });
 
-    //Electron.GlobalShortcut.Register("Ctrl+Shift+D", async () =>
-    //{
-    //    Item item = PathOfExileFacade.GetItemOnCursor();
+            Electron.GlobalShortcut.Register("Ctrl+Shift+D", async () =>
+            {
+                try
+                {
+                    Item item = await PathOfExileFacade.GetItemOnCursor();
 
-    //    if (item != null)
-    //    {
-    //        Query query = new Query
-    //        {
-    //            TypeFilter = new TypeFilter(),
-    //            TradeFilter = new TradeFilter
-    //            {
-    //                SaleType = SaleType.Priced
-    //            },
-    //            WeaponFilter = new WeaponsFilter(),
-    //            ModifiersFilter = new ModifiersFilter(),
-    //            ArmourFilter = new ArmoursFilter(),
-    //            MapsFilter = new MapsFilter(),
-    //            RequirementsFilter = new RequirementsFilter(),
-    //            SocketFilter = new SocketsGroupFilter(),
-    //            MiscellaneousFilter = new MiscellaneousFilter(),
-    //            Sort = new Dictionary<string, SortType>
-    //            {
-    //                { "price", SortType.Ascending }
-    //                },
-    //            OnlineStatus = OnlineStatus.Online
-    //        };
+                if (item != null)
+                {
+                    Query query = new Query
+                    {
+                        TypeFilter = new TypeFilter(),
+                        TradeFilter = new TradeFilter
+                        {
+                            SaleType = SaleType.Priced
+                        },
+                        WeaponFilter = new WeaponsFilter(),
+                        ModifiersFilter = new ModifiersFilter(),
+                        ArmourFilter = new ArmoursFilter(),
+                        MapsFilter = new MapsFilter(),
+                        RequirementsFilter = new RequirementsFilter(),
+                        SocketFilter = new SocketsGroupFilter(),
+                        MiscellaneousFilter = new MiscellaneousFilter(),
+                        Sort = new Dictionary<string, SortType>
+                        {
+                            {"price", SortType.Ascending}
+                        },
+                        OnlineStatus = OnlineStatus.Online
+                    };
 
-    //        if (!query.ModifiersFilter.GroupFilters.Any())
-    //        {
-    //            query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
-    //        }
+                    if (!query.ModifiersFilter.GroupFilters.Any())
+                    {
+                        query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
+                    }
 
-    //        query.Name = item.Name;
-    //        query.Type = item.TypeName;
+                    query.Name = item.Name;
+                    query.Type = item.TypeName;
+                 
+                    TradeState.SearchItems(query);
 
-    //        TradeState.SearchItems(query);
-
-    //        await WindowManager.Maximize(1);
-    //        TradeState.IsCompact = true;
-    //    }
-    //});
+                    await WindowManager.Show(1);
+                    TradeState.IsCompact = true;
+                }
+                }
+                catch (Exception ex)
+                {
+                    OnException(ex);
+                }
+            });
 
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
         }

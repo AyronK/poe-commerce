@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using PoECommerce.PathOfExile.GameClient;
 using PoECommerce.PathOfExile.GameClient.Abstractions;
@@ -32,7 +33,7 @@ namespace PoECommerce.PathOfExile.Extensions
         /// <summary>
         ///     Registers services for game client operations such as process attachment and input sending.
         /// </summary>
-        public static void AddPathOfExileGameClientServices(this IServiceCollection services, Func<string> copyFromClipboard)
+        public static void AddPathOfExileGameClientServices(this IServiceCollection services, Func<Task<string>> copyFromClipboard)
         {
             if (services.All(s => s.ServiceType != typeof(IPathOfExileInput)))
             {
@@ -47,7 +48,7 @@ namespace PoECommerce.PathOfExile.Extensions
             services.AddTransient<IChat, Chat>();
             services.AddTransient<IPathOfExileFacade, PathOfExileFacade>(provider =>
             {
-                return new PathOfExileFacade(provider.GetService<IChat>(), provider.GetService<IPathOfExileInput>(), copyFromClipboard);
+                return new PathOfExileFacade(provider.GetService<IChat>(), provider.GetService<IPathOfExileInput>(), provider.GetService<IPathOfExileProcessHook>(), copyFromClipboard);
             });
         }
 

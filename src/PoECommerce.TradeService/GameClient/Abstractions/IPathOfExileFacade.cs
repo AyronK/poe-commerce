@@ -1,4 +1,5 @@
-﻿using PoECommerce.PathOfExile.Models.Trade.Items;
+﻿using System.Threading.Tasks;
+using PoECommerce.PathOfExile.Models.Trade.Items;
 
 namespace PoECommerce.PathOfExile.GameClient.Abstractions
 {
@@ -9,6 +10,6 @@ namespace PoECommerce.PathOfExile.GameClient.Abstractions
         /// </summary>
         IChat Chat { get; }
 
-        Item GetItemOnCursor();
+        Task<Item> GetItemOnCursor();
     }
 }

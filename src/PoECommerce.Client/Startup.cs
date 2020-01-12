@@ -57,11 +57,11 @@ namespace PoECommerce.Client
             });
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
-            services.AddPathOfExileGameClientServices(() =>
+            services.AddPathOfExileGameClientServices(async () =>
             {
                 try
                 {
-                    return ElectronNET.API.Electron.Clipboard.ReadTextAsync().Result;
+                    return await ElectronNET.API.Electron.Clipboard.ReadTextAsync();
                 }
                 catch
                 {
