@@ -1,8 +1,11 @@
 ﻿@page "/"
+@using ElectronNET.API
 @using NLog
+@using PoECommerce.Client.Components.Common
+@using App = PoECommerce.Client.App
 @namespace PoECommerce.Client.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@inject ILogger Logger;
+@inject ILogger Logger
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,26 +18,25 @@
     <link href="css/site.css" rel="stylesheet" />
 </head>
 <body>
-<app>
-    @{
-        try
-        {
-            @:@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+    <app>
+        @{
+            try
+            {
+                @:@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, "An unhandled exception was caught.");
+
+                @if (HybridSupport.IsElectronActive)
+                {
+                    Electron.App.Quit();
+                }
+
+                throw;
+            }
         }
-        catch (Exception e)
-        {
-            Logger.Error(e, "An unhandled exception was caught.");
-
-            @if (ElectronNET.API.HybridSupport.IsElectronActive)
-             {
-                 ElectronNET.API.Electron.App.Quit();
-             }
-
-            throw;
-        }
-    }
-</app>
-
-<script src="_framework/blazor.server.js"></script>
+    </app>
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>

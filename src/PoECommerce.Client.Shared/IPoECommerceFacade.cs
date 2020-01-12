@@ -7,7 +7,7 @@ namespace PoECommerce.Client.Shared
     public interface ITradeState
     {
         IReadOnlyDictionary<string, TradeSession> Sessions { get; }
-
+        
         bool IsCompact { get; set; }
         bool IsVisible { get; set; }
 

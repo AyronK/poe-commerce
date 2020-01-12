@@ -1,7 +1,36 @@
-﻿@inherits LayoutComponentBase
+﻿@using ElectronNET.API
+@inherits LayoutComponentBase
 
 <div class="main">
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+<div id="blazor-error-ui">
+    <div>
+        <strong> An unhandled error has occurred</strong>
+        <br />
+        <Button ElementType="@ElementType.Primary" OnClick="@CloseApp" Value="Close App"></Button>
+        <a onclick="window.location.reload()" class="poec-button poec-button--secondary">Reload</a>
+    </div>
+</div>
+<div id="components-reconnect-modal" class="components-reconnect-hide">
+    <div class="show">
+        <strong> An unhandled error has occurred. Reloading...</strong>
+    </div>
+    <div class="failed">
+        <strong> Application has failed.</strong>
+    </div>
+</div>
+@functions
+{
+
+    void CloseApp()
+    {
+        if (HybridSupport.IsElectronActive)
+        {
+            Electron.App.Quit();
+        }
+    }
+}

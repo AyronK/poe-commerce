@@ -1,14 +1,15 @@
 ﻿@page "/Trade"
 @using PoECommerce.Client.Shared.Display
-@implements IDisposable
 @inject IWindowManager WindowManager
 @inject ITradeState TradeState
+@implements IHandleEvent
+@inherits PoECommerce.Client.Pages.Common.ErrorHandlingComponentBase
 
-@if (TradeState.IsCompact)
+@if (IsCompact)
 {
     <style>
         body {
-            @if (!TradeState.IsVisible)
+            @if (!IsVisible)
             {
                 @:display: none;
             }
@@ -64,7 +65,7 @@ else
     <style>
 
         body {
-            @if (!TradeState.IsVisible)
+            @if (!IsVisible)
             {
                 @: display: none;
                         }
@@ -114,10 +115,10 @@ else
     </style>
 }
 
-@if (TradeState.IsVisible)
+@if (IsVisible)
 {
     <div class="window-content">
-        <TradeContainer IsCompact="@TradeState.IsCompact"></TradeContainer>
+        <TradeContainer IsCompact="@IsCompact"></TradeContainer>
     </div>
     <div class="window-task-bar">
         <Button ElementType="@ElementType.Primary" OnClick="@SwitchMode" Value="@(IsCompact ? "←→" : "→←")"></Button>
@@ -139,26 +140,27 @@ else
 
     protected override void OnInitialized()
     {
+        IsVisible = true;
         TradeState.OnIsVisibleChanged += SetIsVisible;
         TradeState.OnIsCompactChanged += SetIsCompact;
     }
 
-    private async void SetIsVisible(object sender, bool b)
+    private void SetIsVisible(object sender, bool b)
     {
         IsVisible = b;
-        await InvokeAsync(StateHasChanged);
+        StateHasChanged();
     }
 
-    private async void SetIsCompact(object sender, bool b)
+    private void SetIsCompact(object sender, bool b)
     {
         IsCompact = b;
-        await InvokeAsync(StateHasChanged);
+        StateHasChanged();
     }
-
-    public void Dispose()
+    
+    protected override void OnException(Exception ex)
     {
-        TradeState.OnIsVisibleChanged -= SetIsVisible;
-        TradeState.OnIsCompactChanged -= SetIsCompact;
-    }
+        base.OnException(ex);
 
+        TradeState.CurrentTradeSession?.Dispose();
+    }
 }

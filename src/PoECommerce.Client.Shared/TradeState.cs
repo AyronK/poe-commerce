@@ -48,7 +48,14 @@ namespace PoECommerce.Client.Shared
 
         public TradeSession SearchItems(Query query)
         {
-            TradeSession tradeSession = new TradeSession(query, _getTradeService(), s => _sessions.Remove(s.Id));
+            TradeSession tradeSession = new TradeSession(query, _getTradeService(), s =>
+            {
+                _sessions.Remove(s.Id);
+                if (CurrentTradeSession == s)
+                {
+                    CurrentTradeSession = null;
+                }
+            });
             _sessions.Add(tradeSession.Id, tradeSession);
             CurrentTradeSession = tradeSession;
             return tradeSession;

@@ -5,12 +5,12 @@ namespace PoECommerce.PathOfExile.GameClient
 {
     internal class Chat : IChat
     {
-        private readonly IChatConsole _chatConsole;
+        private readonly IPathOfExileInput _pathOfExileInput;
         private readonly IPathOfExileProcessHook _processHook;
 
-        public Chat(IChatConsole chatConsole, IPathOfExileProcessHook processHook)
+        public Chat(IPathOfExileInput pathOfExileInput, IPathOfExileProcessHook processHook)
         {
-            _chatConsole = chatConsole;
+            _pathOfExileInput = pathOfExileInput;
             _processHook = processHook;
         }
 
@@ -37,13 +37,13 @@ namespace PoECommerce.PathOfExile.GameClient
 
         private void Write(string command, bool submit)
         {
-            _chatConsole.Open();
-            _chatConsole.ClearText();
-            _chatConsole.WriteText(command);
+            _pathOfExileInput.OpenChat();
+            _pathOfExileInput.ClearChatInput();
+            _pathOfExileInput.WriteChatInput(command);
 
             if (submit)
             {
-                _chatConsole.Send();
+                _pathOfExileInput.SendChatInput();
             }
         }
 

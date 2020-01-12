@@ -48,6 +48,7 @@ namespace PoECommerce.Client
                 {
                     ElectronNET.API.Electron.App.Exit();
                 }
+                logger.Debug( "PoE Commerce has stopped.");
             }
         }
     }

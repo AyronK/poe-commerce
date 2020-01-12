@@ -1,4 +1,6 @@
-﻿namespace PoECommerce.PathOfExile.GameClient.Abstractions
+﻿using PoECommerce.PathOfExile.Models.Trade.Items;
+
+namespace PoECommerce.PathOfExile.GameClient.Abstractions
 {
     public interface IPathOfExileFacade
     {
@@ -6,5 +8,7 @@
         ///     Path of Exile's in-game chat instance hook.
         /// </summary>
         IChat Chat { get; }
+
+        Item GetItemOnCursor();
     }
 }

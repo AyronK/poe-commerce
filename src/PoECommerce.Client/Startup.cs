@@ -1,10 +1,16 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GregsStack.InputSimulatorStandard;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -51,22 +57,24 @@ namespace PoECommerce.Client
             });
             services.AddPathOfExileCoreServices();
             services.AddPathOfExileWindowsSupport();
-            services.AddPathOfExileGameClientServices();
+            services.AddPathOfExileGameClientServices(() =>
+            {
+                try
+                {
+                    return ElectronNET.API.Electron.Clipboard.ReadTextAsync().Result;
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            });
             services.AddSingleton<ITradeState, TradeState>(provider => new TradeState(provider.GetService<ITradeService>));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, IServiceProvider serviceProvider)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts(); // The default HSTS value is 30 days. See https://aka.ms/aspnetcore-hsts.
-            }
-
+            app.UseHsts(); // The default HSTS value is 30 days. See https://aka.ms/aspnetcore-hsts.
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

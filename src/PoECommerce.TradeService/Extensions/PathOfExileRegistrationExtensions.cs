@@ -32,11 +32,11 @@ namespace PoECommerce.PathOfExile.Extensions
         /// <summary>
         ///     Registers services for game client operations such as process attachment and input sending.
         /// </summary>
-        public static void AddPathOfExileGameClientServices(this IServiceCollection services)
+        public static void AddPathOfExileGameClientServices(this IServiceCollection services, Func<string> copyFromClipboard)
         {
-            if (services.All(s => s.ServiceType != typeof(IChatConsole)))
+            if (services.All(s => s.ServiceType != typeof(IPathOfExileInput)))
             {
-                throw new ArgumentException($"Collection services must contain service of type {typeof(IChatConsole)}.", nameof(services));
+                throw new ArgumentException($"Collection services must contain service of type {typeof(IPathOfExileInput)}.", nameof(services));
             }
 
             if (services.All(s => s.ServiceType != typeof(IPathOfExileProcessHook)))
@@ -45,7 +45,10 @@ namespace PoECommerce.PathOfExile.Extensions
             }
 
             services.AddTransient<IChat, Chat>();
-            services.AddTransient<IPathOfExileFacade, PathOfExileFacade>();
+            services.AddTransient<IPathOfExileFacade, PathOfExileFacade>(provider =>
+            {
+                return new PathOfExileFacade(provider.GetService<IChat>(), provider.GetService<IPathOfExileInput>(), copyFromClipboard);
+            });
         }
 
         private static void AddPathOfExileDataService(IServiceCollection services, RegistrationConfiguration configuration)

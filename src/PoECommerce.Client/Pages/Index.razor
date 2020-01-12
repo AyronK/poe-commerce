@@ -1,10 +1,13 @@
 ﻿@page "/"
-@using ElectronNET.API
-@using PoECommerce.Client.Shared.Display
 @implements IDisposable
 @inject IWindowManager WindowManager
+@inject IPathOfExileFacade PathOfExileFacade
+@using ElectronNET.API
+@using PoECommerce.Client.Shared.Display
+@using PoECommerce.PathOfExile.GameClient.Abstractions
+@inherits PoECommerce.Client.Pages.Common.ErrorHandlingComponentBase
 <div class="task-bar">
-    <Button OnClick="@(async()=>await WindowManager.Show(1))" Value="Trade" ElementType="@ElementType.Primary"></Button>
+    <Button OnClick="@(async () => await WindowManager.Show(1))" Value="Trade" ElementType="@ElementType.Primary"></Button>
 </div>
 
 <style>
@@ -13,18 +16,19 @@
     }
 
     .task-bar {
-        position: fixed;
         bottom: 0;
+        position: fixed;
         right: 0;
     }
 
-        .task-bar button {
-            margin: 5px;
-        }
+    .task-bar button {
+        margin: 5px;
+    }
 </style>
 
 @functions
 {
+
     [Inject]
     public ITradeState TradeState { get; set; }
 
@@ -36,15 +40,71 @@
         {
             Electron.GlobalShortcut.Register("Ctrl+Alt+Shift+F", async () =>
             {
-                await WindowManager.Show(1);
-                TradeState.IsCompact = false;
+                try
+                {
+                    await WindowManager.Show(1);
+                    TradeState.IsCompact = false;
+                }
+                catch (Exception ex)
+                {
+                    OnException(ex);
+                }
             });
 
             Electron.GlobalShortcut.Register("Ctrl+Shift+F", async () =>
             {
-                await WindowManager.Show(1);
-                TradeState.IsCompact = true;
+                try
+                {
+                    await WindowManager.Show(1);
+                    TradeState.IsCompact = true;
+                }
+                catch (Exception ex)
+                {
+                    OnException(ex);
+                }
             });
+
+    //Electron.GlobalShortcut.Register("Ctrl+Shift+D", async () =>
+    //{
+    //    Item item = PathOfExileFacade.GetItemOnCursor();
+
+    //    if (item != null)
+    //    {
+    //        Query query = new Query
+    //        {
+    //            TypeFilter = new TypeFilter(),
+    //            TradeFilter = new TradeFilter
+    //            {
+    //                SaleType = SaleType.Priced
+    //            },
+    //            WeaponFilter = new WeaponsFilter(),
+    //            ModifiersFilter = new ModifiersFilter(),
+    //            ArmourFilter = new ArmoursFilter(),
+    //            MapsFilter = new MapsFilter(),
+    //            RequirementsFilter = new RequirementsFilter(),
+    //            SocketFilter = new SocketsGroupFilter(),
+    //            MiscellaneousFilter = new MiscellaneousFilter(),
+    //            Sort = new Dictionary<string, SortType>
+    //            {
+    //                { "price", SortType.Ascending }
+    //                },
+    //            OnlineStatus = OnlineStatus.Online
+    //        };
+
+    //        if (!query.ModifiersFilter.GroupFilters.Any())
+    //        {
+    //            query.ModifiersFilter.GroupFilters.Add(new ModifierGroupFilter());
+    //        }
+
+    //        query.Name = item.Name;
+    //        query.Type = item.TypeName;
+
+    //        TradeState.SearchItems(query);
+
+    //        await WindowManager.Maximize(1);
+    //        TradeState.IsCompact = true;
+    //    }
+    //});
 
             Electron.GlobalShortcut.Register("Shift+Esc", () => Electron.App.Quit());
         }
@@ -70,4 +130,5 @@
     {
         TradeState.OnIsCompactChanged -= TradeStateOnIsCompactChanged;
     }
+
 }

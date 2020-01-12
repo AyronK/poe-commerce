@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -43,6 +44,15 @@ namespace PoECommerce.Client.StartupExtensions.Electron
 
             if (HybridSupport.IsElectronActive)
             {
+                ElectronNET.API.Electron.IpcMain.On("uncaughtException", o =>
+                {
+                    logger.Error("Electron error");
+                });
+
+                ElectronNET.API.Electron.App.BeforeQuit += args => Task.Run(() => logger.Debug("PoE Commerce will close."));
+                ElectronNET.API.Electron.App.WillQuit += args => Task.Run(() => logger.Debug("PoE Commerce is closing."));
+                ElectronNET.API.Electron.App.Quitting += () => Task.Run(() => logger.Debug("PoE Commerce has closed."));
+
                 ElectronWindowManager manager = serviceProvider.GetService<ElectronWindowManager>();
 
                 Display display = ElectronNET.API.Electron.Screen.GetPrimaryDisplayAsync().Result;

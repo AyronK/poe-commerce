@@ -4,42 +4,49 @@ using PoECommerce.PathOfExile.GameClient.Abstractions;
 
 namespace PoECommerce.PathOfExile.Windows
 {
-    internal class ChatConsole : IChatConsole
+    internal class PathOfExileInput : IPathOfExileInput
     {
         private const int MillisecondsTimeoutBeforeInput = 100;
 
         private readonly IInputSimulator _inputSimulator;
 
-        public ChatConsole(IInputSimulator inputSimulator)
+        public PathOfExileInput(IInputSimulator inputSimulator)
         {
             _inputSimulator = inputSimulator;
         }
 
-        public void Open()
+        public void OpenChat()
         {
             _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
             Delay();
         }
 
-        public void Send()
+        public void SendChatInput()
         {
             _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
             Delay();
         }
 
-        public void WriteText(string text)
+        public void WriteChatInput(string text)
         {
             _inputSimulator.Keyboard.TextEntry(text);
             Delay();
         }
 
-        public void ClearText()
+        public void ClearChatInput()
         {
             _inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
 
             Delay();
 
             _inputSimulator.Keyboard.KeyPress(VirtualKeyCode.DELETE);
+
+            Delay();
+        }
+
+        public void CopyItemToClipboard()
+        {
+            _inputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_C);
 
             Delay();
         }

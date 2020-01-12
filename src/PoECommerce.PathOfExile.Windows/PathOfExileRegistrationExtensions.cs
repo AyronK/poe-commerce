@@ -11,7 +11,7 @@ namespace PoECommerce.PathOfExile.Windows
         /// <param name="services"></param>
         public static void AddPathOfExileWindowsSupport(this IServiceCollection services)
         {
-            services.AddTransient<IChatConsole, ChatConsole>();
+            services.AddTransient<IPathOfExileInput, PathOfExileInput>();
             services.AddTransient<IPathOfExileProcessHook, PathOfExileProcessHook>();
         }
     }

@@ -1,4 +1,5 @@
-﻿using PoECommerce.PathOfExile.Web.Abstractions;
+﻿using System;
+using PoECommerce.PathOfExile.Web.Abstractions;
 
 namespace PoECommerce.PathOfExile.Extensions
 {
